@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【收银台文件数据】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.finance.FinanceCheckstandDao">
+
+	<resultMap id="financeCheckstandResultMap" type="com.bluemobi.po.finance.FinanceCheckstand">
+		<id property="id" column="id" />
+       <result property="batchNo" column="batch_no" />
+       <result property="appid" column="appId" />
+       <result property="channelNo" column="channel_no" />
+       <result property="sno" column="sno" />
+       <result property="mrchSno" column="mrch_sno" />
+       <result property="receiptType" column="receipt_type" />
+       <result property="impeachType" column="impeach_type" />
+       <result property="integral" column="integral" />
+       <result property="cur" column="cur" />
+       <result property="transAmt" column="trans_amt" />
+       <result property="payTime" column="pay_time" />
+       <result property="receiptTime" column="receipt_time" />
+       <result property="createTime" column="create_time" />
+       <result property="fileName" column="file_name" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="financeCheckstandResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="financeCheckstandResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.finance.FinanceCheckstand" useGeneratedKeys="true" keyProperty="id" >
+	   insert into finance_checkstand (
+	     id,
+	     batch_no,
+	     appId,
+	     channel_no,
+	     sno,
+	     mrch_sno,
+	     receipt_type,
+	     impeach_type,
+	     integral,
+	     cur,
+	     trans_amt,
+	     pay_time,
+	     receipt_time,
+	     create_time,
+	     file_name
+	   )values (
+	     #{id},
+	     #{batchNo},
+	     #{appid},
+	     #{channelNo},
+	     #{sno},
+	     #{mrchSno},
+	     #{receiptType},
+	     #{impeachType},
+	     #{integral},
+	     #{cur},
+	     #{transAmt},
+	     #{payTime},
+	     #{receiptTime},
+	     #{createTime},
+	     #{fileName}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.finance.FinanceCheckstand">
+		update finance_checkstand
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="batchNo != null">
+				batch_no=#{batchNo},
+			</if>
+			<if test="appid != null">
+				appId=#{appid},
+			</if>
+			<if test="channelNo != null">
+				channel_no=#{channelNo},
+			</if>
+			<if test="sno != null">
+				sno=#{sno},
+			</if>
+			<if test="mrchSno != null">
+				mrch_sno=#{mrchSno},
+			</if>
+			<if test="receiptType != null">
+				receipt_type=#{receiptType},
+			</if>
+			<if test="impeachType != null">
+				impeach_type=#{impeachType},
+			</if>
+			<if test="integral != null">
+				integral=#{integral},
+			</if>
+			<if test="cur != null">
+				cur=#{cur},
+			</if>
+			<if test="transAmt != null">
+				trans_amt=#{transAmt},
+			</if>
+			<if test="payTime != null">
+				pay_time=#{payTime},
+			</if>
+			<if test="receiptTime != null">
+				receipt_time=#{receiptTime},
+			</if>
+			<if test="createTime != null">
+				create_time=#{createTime},
+			</if>
+			<if test="fileName != null">
+				file_name=#{fileName},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     finance_checkstand 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="financeCheckstandResultMap">
+	   select 
+	    id,
+	    batch_no,
+	    appId,
+	    channel_no,
+	    sno,
+	    mrch_sno,
+	    receipt_type,
+	    impeach_type,
+	    integral,
+	    cur,
+	    trans_amt,
+	    pay_time,
+	    receipt_time,
+	    create_time,
+	    file_name
+	   from finance_checkstand
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="financeCheckstandResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     appId,
+	     channel_no,
+	     sno,
+	     mrch_sno,
+	     receipt_type,
+	     impeach_type,
+	     integral,
+	     cur,
+	     trans_amt,
+	     pay_time,
+	     receipt_time,
+	     create_time,
+	     file_name
+	   from finance_checkstand
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="appid != null">
+	        and appId=#{appid}
+	     </if>
+	     <if test="channelNo != null">
+	        and channel_no=#{channelNo}
+	     </if>
+	     <if test="sno != null">
+	        and sno=#{sno}
+	     </if>
+	     <if test="mrchSno != null">
+	        and mrch_sno=#{mrchSno}
+	     </if>
+	     <if test="receiptType != null">
+	        and receipt_type=#{receiptType}
+	     </if>
+	     <if test="impeachType != null">
+	        and impeach_type=#{impeachType}
+	     </if>
+	     <if test="integral != null">
+	        and integral=#{integral}
+	     </if>
+	     <if test="cur != null">
+	        and cur=#{cur}
+	     </if>
+	     <if test="transAmt != null">
+	        and trans_amt=#{transAmt}
+	     </if>
+	     <if test="payTime != null">
+	        and pay_time=#{payTime}
+	     </if>
+	     <if test="receiptTime != null">
+	        and receipt_time=#{receiptTime}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	     <if test="fileName != null">
+	        and file_name=#{fileName}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    batch_no,
+	    appId,
+	    channel_no,
+	    sno,
+	    mrch_sno,
+	    receipt_type,
+	    impeach_type,
+	    integral,
+	    cur,
+	    trans_amt,
+	    pay_time,
+	    receipt_time,
+	    create_time,
+	    file_name
+	   from finance_checkstand
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     appId,
+	     channel_no,
+	     sno,
+	     mrch_sno,
+	     receipt_type,
+	     impeach_type,
+	     integral,
+	     cur,
+	     trans_amt,
+	     pay_time,
+	     receipt_time,
+	     create_time,
+	     file_name
+	   from finance_checkstand
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="appid != null">
+	        and appId=#{appid}
+	     </if>
+	     <if test="channelNo != null">
+	        and channel_no=#{channelNo}
+	     </if>
+	     <if test="sno != null">
+	        and sno=#{sno}
+	     </if>
+	     <if test="mrchSno != null">
+	        and mrch_sno=#{mrchSno}
+	     </if>
+	     <if test="receiptType != null">
+	        and receipt_type=#{receiptType}
+	     </if>
+	     <if test="impeachType != null">
+	        and impeach_type=#{impeachType}
+	     </if>
+	     <if test="integral != null">
+	        and integral=#{integral}
+	     </if>
+	     <if test="cur != null">
+	        and cur=#{cur}
+	     </if>
+	     <if test="transAmt != null">
+	        and trans_amt=#{transAmt}
+	     </if>
+	     <if test="payTime != null">
+	        and pay_time=#{payTime}
+	     </if>
+	     <if test="receiptTime != null">
+	        and receipt_time=#{receiptTime}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	     <if test="fileName != null">
+	        and file_name=#{fileName}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     appId,
+	     channel_no,
+	     sno,
+	     mrch_sno,
+	     receipt_type,
+	     impeach_type,
+	     integral,
+	     cur,
+	     trans_amt,
+	     pay_time,
+	     receipt_time,
+	     create_time,
+	     file_name
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from finance_checkstand
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="appid != null">
+	        and appId=#{appid}
+	     </if>
+	     <if test="channelNo != null">
+	        and channel_no=#{channelNo}
+	     </if>
+	     <if test="sno != null">
+	        and sno=#{sno}
+	     </if>
+	     <if test="mrchSno != null">
+	        and mrch_sno=#{mrchSno}
+	     </if>
+	     <if test="receiptType != null">
+	        and receipt_type=#{receiptType}
+	     </if>
+	     <if test="impeachType != null">
+	        and impeach_type=#{impeachType}
+	     </if>
+	     <if test="integral != null">
+	        and integral=#{integral}
+	     </if>
+	     <if test="cur != null">
+	        and cur=#{cur}
+	     </if>
+	     <if test="transAmt != null">
+	        and trans_amt=#{transAmt}
+	     </if>
+	     <if test="payTime != null">
+	        and pay_time=#{payTime}
+	     </if>
+	     <if test="receiptTime != null">
+	        and receipt_time=#{receiptTime}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	     <if test="fileName != null">
+	        and file_name=#{fileName}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+        
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource" />  
+
+		<property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml"></property> 
+	    <property name="mapperLocations" value="classpath:mybatis/mapper/*/*Mapper.xml"></property>
+	    
+		<!-- <property name="configLocation" value="/conf/mybatis/sqlMapConfig.xml"></property>
+		<property name="mapperLocations" value="/conf/mybatis/mapper/*/*Mapper.xml"></property>  -->
+		
+    </bean>  
+    
+    <!-- 1、配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<property name="dataSource" ref="dataSource"/>
+    </bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>  
+        <property name="basePackage" value="com.bluemobi.dao" />
+    </bean>
+    
+</beans>

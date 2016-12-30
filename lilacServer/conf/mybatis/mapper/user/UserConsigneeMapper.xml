@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【收货人】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.user.UserConsigneeDao">
+
+	<resultMap id="userConsigneeResultMap" type="com.bluemobi.po.user.UserConsignee">
+		<id property="id" column="id" />
+       <result property="userId" column="user_id" />
+       <result property="regionId" column="region_id" />
+       <result property="regionName" column="region_name" />
+       <result property="address" column="address" />
+       <result property="name" column="name" />
+       <result property="email" column="email" />
+       <result property="zipcode" column="zipcode" />
+       <result property="mobileNo" column="mobile_no" />
+       <result property="isDefault" column="is_default" />
+       <result property="ctime" column="ctime" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="userConsigneeResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="userConsigneeResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.user.UserConsignee" useGeneratedKeys="true" keyProperty="id" >
+	   insert into user_consignee (
+	     id,
+	     user_id,
+	     region_id,
+	     region_name,
+	     address,
+	     name,
+	     email,
+	     zipcode,
+	     mobile_no,
+	     is_default,
+	     ctime,
+	     mtime
+	   )values (
+	     #{id},
+	     #{userId},
+	     #{regionId},
+	     #{regionName},
+	     #{address},
+	     #{name},
+	     #{email},
+	     #{zipcode},
+	     #{mobileNo},
+	     #{isDefault},
+	     #{ctime},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.user.UserConsignee">
+		update user_consignee
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="userId != null">
+				user_id=#{userId},
+			</if>
+			<if test="regionId != null">
+				region_id=#{regionId},
+			</if>
+			<if test="regionName != null">
+				region_name=#{regionName},
+			</if>
+			<if test="address != null">
+				address=#{address},
+			</if>
+			<if test="name != null">
+				name=#{name},
+			</if>
+			<if test="email != null">
+				email=#{email},
+			</if>
+			<if test="zipcode != null">
+				zipcode=#{zipcode},
+			</if>
+			<if test="mobileNo != null">
+				mobile_no=#{mobileNo},
+			</if>
+			<if test="isDefault != null">
+				is_default=#{isDefault},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     user_consignee 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="userConsigneeResultMap">
+	   select 
+	    id,
+	    user_id,
+	    region_id,
+	    region_name,
+	    address,
+	    name,
+	    email,
+	    zipcode,
+	    mobile_no,
+	    is_default,
+	    ctime,
+	    mtime
+	   from user_consignee
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="userConsigneeResultMap">
+	   select 
+	     id,
+	     user_id,
+	     region_id,
+	     region_name,
+	     address,
+	     name,
+	     email,
+	     zipcode,
+	     mobile_no,
+	     is_default,
+	     ctime,
+	     mtime
+	   from user_consignee
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="regionId != null">
+	        and region_id=#{regionId}
+	     </if>
+	     <if test="regionName != null">
+	        and region_name=#{regionName}
+	     </if>
+	     <if test="address != null">
+	        and address=#{address}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="email != null">
+	        and email=#{email}
+	     </if>
+	     <if test="zipcode != null">
+	        and zipcode=#{zipcode}
+	     </if>
+	     <if test="mobileNo != null">
+	        and mobile_no=#{mobileNo}
+	     </if>
+	     <if test="isDefault != null">
+	        and is_default=#{isDefault}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    user_id,
+	    region_id,
+	    region_name,
+	    address,
+	    name,
+	    email,
+	    zipcode,
+	    mobile_no,
+	    is_default,
+	    ctime,
+	    mtime
+	   from user_consignee
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     user_id,
+	     region_id,
+	     region_name,
+	     address,
+	     name,
+	     email,
+	     zipcode,
+	     mobile_no,
+	     is_default,
+	     ctime,
+	     mtime
+	   from user_consignee
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="regionId != null">
+	        and region_id=#{regionId}
+	     </if>
+	     <if test="regionName != null">
+	        and region_name=#{regionName}
+	     </if>
+	     <if test="address != null">
+	        and address=#{address}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="email != null">
+	        and email=#{email}
+	     </if>
+	     <if test="zipcode != null">
+	        and zipcode=#{zipcode}
+	     </if>
+	     <if test="mobileNo != null">
+	        and mobile_no=#{mobileNo}
+	     </if>
+	     <if test="isDefault != null">
+	        and is_default=#{isDefault}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     user_id,
+	     region_id,
+	     region_name,
+	     address,
+	     name,
+	     email,
+	     zipcode,
+	     mobile_no,
+	     is_default,
+	     ctime,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from user_consignee
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="regionId != null">
+	        and region_id=#{regionId}
+	     </if>
+	     <if test="regionName != null">
+	        and region_name=#{regionName}
+	     </if>
+	     <if test="address != null">
+	        and address=#{address}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="email != null">
+	        and email=#{email}
+	     </if>
+	     <if test="zipcode != null">
+	        and zipcode=#{zipcode}
+	     </if>
+	     <if test="mobileNo != null">
+	        and mobile_no=#{mobileNo}
+	     </if>
+	     <if test="isDefault != null">
+	        and is_default=#{isDefault}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

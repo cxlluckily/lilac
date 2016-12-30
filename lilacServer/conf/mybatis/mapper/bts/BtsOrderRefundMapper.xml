@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【退货单表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-11
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.bts.BtsOrderRefundDao">
+
+	<resultMap id="btsOrderRefundResultMap" type="com.bluemobi.po.bts.BtsOrderRefund">
+		<id property="id" column="id" />
+       <result property="userId" column="user_id" />
+       <result property="merchantId" column="merchant_id" />
+       <result property="refundNo" column="refund_no" />
+       <result property="orderItemsId" column="order_items_id" />
+       <result property="quantity" column="quantity" />
+       <result property="reason" column="reason" />
+       <result property="description" column="description" />
+       <result property="pics" column="pics" />
+       <result property="status" column="status" />
+       <result property="payType" column="pay_type" />
+       <result property="refundPointAmount" column="refund_point_amount" />
+       <result property="refundAmount" column="refund_amount" />
+       <result property="refundAddress" column="refund_address" />
+       <result property="refundLinkman" column="refund_linkman" />
+       <result property="refundPhone" column="refund_phone" />
+       <result property="expressType" column="express_type" />
+       <result property="expressNo" column="express_no" />
+       <result property="isComment" column="is_comment" />
+       <result property="source" column="source" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="btsOrderRefundResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="btsOrderRefundResultMap"></resultMap>
+	
+	<!-- 退货单列表 -->
+	<resultMap id="refundPageResultMap" type="com.bluemobi.to.RefundTO">
+		<result property="id" column="id" />
+		<result property="refundNo" column="refund_no" />
+		<result property="itemId" column="order_items_id" />
+		<result property="skuId" column="sku_id" />
+		<result property="goodsName" column="goods_name" />
+		<result property="goodsPic" column="goods_pic" />
+		<result property="propertys" column="propertys" />
+		<result property="price" column="goods_price" />
+		<result property="pointPrice" column="point_price" />
+		<result property="originalPrice" column="goods_original_price" />
+		<result property="refundQuantity" column="refund_quantity" />
+		<result property="refundAmount" column="refund_amount" />
+		<result property="refundPointAmount" column="refund_point_amount" />
+		<result property="status" column="status" />
+		<result property="reason" column="reason"/>
+		<result property="description" column="description"/>
+	</resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.bts.BtsOrderRefund" useGeneratedKeys="true" keyProperty="id" >
+	   insert into bts_order_refund (
+	     id,
+	     user_id,
+	     merchant_id,
+	     refund_no,
+	     order_items_id,
+	     quantity,
+	     reason,
+	     description,
+	     pics,
+	     status,
+	     pay_type,
+	     refund_point_amount,
+	     refund_amount,
+	     refund_address,
+	     refund_linkman,
+	     refund_phone,
+	     express_type,
+	     express_no,
+	     is_comment,
+	     source,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{id},
+	     #{userId},
+	     #{merchantId},
+	     #{refundNo},
+	     #{orderItemsId},
+	     #{quantity},
+	     #{reason},
+	     #{description},
+	     #{pics},
+	     #{status},
+	     #{payType},
+	     #{refundPointAmount},
+	     #{refundAmount},
+	     #{refundAddress},
+	     #{refundLinkman},
+	     #{refundPhone},
+	     #{expressType},
+	     #{expressNo},
+	     #{isComment},
+	     #{source},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.bts.BtsOrderRefund">
+		update bts_order_refund
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="userId != null">
+				user_id=#{userId},
+			</if>
+			<if test="merchantId != null">
+				merchant_id=#{merchantId},
+			</if>
+			<if test="refundNo != null">
+				refund_no=#{refundNo},
+			</if>
+			<if test="orderItemsId != null">
+				order_items_id=#{orderItemsId},
+			</if>
+			<if test="quantity != null">
+				quantity=#{quantity},
+			</if>
+			<if test="reason != null">
+				reason=#{reason},
+			</if>
+			<if test="description != null">
+				description=#{description},
+			</if>
+			<if test="pics != null">
+				pics=#{pics},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+			<if test="payType != null">
+				pay_type=#{payType},
+			</if>
+			<if test="refundPointAmount != null">
+				refund_point_amount=#{refundPointAmount},
+			</if>
+			<if test="refundAmount != null">
+				refund_amount=#{refundAmount},
+			</if>
+			<if test="refundAddress != null">
+				refund_address=#{refundAddress},
+			</if>
+			<if test="refundLinkman != null">
+				refund_linkman=#{refundLinkman},
+			</if>
+			<if test="refundPhone != null">
+				refund_phone=#{refundPhone},
+			</if>
+			<if test="expressType != null">
+				express_type=#{expressType},
+			</if>
+			<if test="expressNo != null">
+				express_no=#{expressNo},
+			</if>
+			<if test="isComment != null">
+				is_comment=#{isComment},
+			</if>
+			<if test="source != null">
+				source=#{source},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     bts_order_refund 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="btsOrderRefundResultMap">
+	   select 
+	    id,
+	    user_id,
+	    merchant_id,
+	    refund_no,
+	    order_items_id,
+	    quantity,
+	    reason,
+	    description,
+	    pics,
+	    status,
+	    pay_type,
+	    refund_point_amount,
+	    refund_amount,
+	    refund_address,
+	    refund_linkman,
+	    refund_phone,
+	    express_type,
+	    express_no,
+	    is_comment,
+	    source,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from bts_order_refund
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="btsOrderRefundResultMap">
+	   select 
+	     id,
+	     user_id,
+	     merchant_id,
+	     refund_no,
+	     order_items_id,
+	     quantity,
+	     reason,
+	     description,
+	     pics,
+	     status,
+	     pay_type,
+	     refund_point_amount,
+	     refund_amount,
+	     refund_address,
+	     refund_linkman,
+	     refund_phone,
+	     express_type,
+	     express_no,
+	     is_comment,
+	     source,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from bts_order_refund
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="refundNo != null">
+	        and refund_no=#{refundNo}
+	     </if>
+	     <if test="orderItemsId != null">
+	        and order_items_id=#{orderItemsId}
+	     </if>
+	     <if test="quantity != null">
+	        and quantity=#{quantity}
+	     </if>
+	     <if test="reason != null">
+	        and reason=#{reason}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="pics != null">
+	        and pics=#{pics}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="payType != null">
+	        and pay_type=#{payType}
+	     </if>
+	     <if test="refundPointAmount != null">
+	        and refund_point_amount=#{refundPointAmount}
+	     </if>
+	     <if test="refundAmount != null">
+	        and refund_amount=#{refundAmount}
+	     </if>
+	     <if test="refundAddress != null">
+	        and refund_address=#{refundAddress}
+	     </if>
+	     <if test="refundLinkman != null">
+	        and refund_linkman=#{refundLinkman}
+	     </if>
+	     <if test="refundPhone != null">
+	        and refund_phone=#{refundPhone}
+	     </if>
+	     <if test="expressType != null">
+	        and express_type=#{expressType}
+	     </if>
+	     <if test="expressNo != null">
+	        and express_no=#{expressNo}
+	     </if>
+	     <if test="isComment != null">
+	        and is_comment=#{isComment}
+	     </if>
+	     <if test="source != null">
+	        and source=#{source}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    user_id,
+	    merchant_id,
+	    refund_no,
+	    order_items_id,
+	    quantity,
+	    reason,
+	    description,
+	    pics,
+	    status,
+	    pay_type,
+	    refund_point_amount,
+	    refund_amount,
+	    refund_address,
+	    refund_linkman,
+	    refund_phone,
+	    express_type,
+	    express_no,
+	    is_comment,
+	    source,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from bts_order_refund
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     user_id,
+	     merchant_id,
+	     refund_no,
+	     order_items_id,
+	     quantity,
+	     reason,
+	     description,
+	     pics,
+	     status,
+	     pay_type,
+	     refund_point_amount,
+	     refund_amount,
+	     refund_address,
+	     refund_linkman,
+	     refund_phone,
+	     express_type,
+	     express_no,
+	     is_comment,
+	     source,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from bts_order_refund
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="refundNo != null">
+	        and refund_no=#{refundNo}
+	     </if>
+	     <if test="orderItemsId != null">
+	        and order_items_id=#{orderItemsId}
+	     </if>
+	     <if test="quantity != null">
+	        and quantity=#{quantity}
+	     </if>
+	     <if test="reason != null">
+	        and reason=#{reason}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="pics != null">
+	        and pics=#{pics}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="payType != null">
+	        and pay_type=#{payType}
+	     </if>
+	     <if test="refundPointAmount != null">
+	        and refund_point_amount=#{refundPointAmount}
+	     </if>
+	     <if test="refundAmount != null">
+	        and refund_amount=#{refundAmount}
+	     </if>
+	     <if test="refundAddress != null">
+	        and refund_address=#{refundAddress}
+	     </if>
+	     <if test="refundLinkman != null">
+	        and refund_linkman=#{refundLinkman}
+	     </if>
+	     <if test="refundPhone != null">
+	        and refund_phone=#{refundPhone}
+	     </if>
+	     <if test="expressType != null">
+	        and express_type=#{expressType}
+	     </if>
+	     <if test="expressNo != null">
+	        and express_no=#{expressNo}
+	     </if>
+	     <if test="isComment != null">
+	        and is_comment=#{isComment}
+	     </if>
+	     <if test="source != null">
+	        and source=#{source}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     user_id,
+	     merchant_id,
+	     refund_no,
+	     order_items_id,
+	     quantity,
+	     reason,
+	     description,
+	     pics,
+	     status,
+	     pay_type,
+	     refund_point_amount,
+	     refund_amount,
+	     refund_address,
+	     refund_linkman,
+	     refund_phone,
+	     express_type,
+	     express_no,
+	     is_comment,
+	     source,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from bts_order_refund
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="refundNo != null">
+	        and refund_no=#{refundNo}
+	     </if>
+	     <if test="orderItemsId != null">
+	        and order_items_id=#{orderItemsId}
+	     </if>
+	     <if test="quantity != null">
+	        and quantity=#{quantity}
+	     </if>
+	     <if test="reason != null">
+	        and reason=#{reason}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="pics != null">
+	        and pics=#{pics}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="payType != null">
+	        and pay_type=#{payType}
+	     </if>
+	     <if test="refundPointAmount != null">
+	        and refund_point_amount=#{refundPointAmount}
+	     </if>
+	     <if test="refundAmount != null">
+	        and refund_amount=#{refundAmount}
+	     </if>
+	     <if test="refundAddress != null">
+	        and refund_address=#{refundAddress}
+	     </if>
+	     <if test="refundLinkman != null">
+	        and refund_linkman=#{refundLinkman}
+	     </if>
+	     <if test="refundPhone != null">
+	        and refund_phone=#{refundPhone}
+	     </if>
+	     <if test="expressType != null">
+	        and express_type=#{expressType}
+	     </if>
+	     <if test="expressNo != null">
+	        and express_no=#{expressNo}
+	     </if>
+	     <if test="isComment != null">
+	        and is_comment=#{isComment}
+	     </if>
+	     <if test="source != null">
+	        and source=#{source}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+
+	<select id="selectRefundListPage" parameterType="map" resultMap="refundPageResultMap">
+	SELECT
+		refund.id,
+		refund.refund_no,
+		refund.order_items_id,
+		items.sku_id,
+		items.goods_name,
+		items.goods_pic,
+		items.propertys,
+		items.goods_price,
+		items.point_price,
+		items.goods_original_price AS goods_original_price,
+		refund.quantity AS refund_quantity,
+	    (items.pay_amount/items.quantity) * refund.quantity as refund_amount,
+	    (items.point_amount/items.quantity) * refund.quantity as refund_point_amount,
+		refund. status,
+		refund.reason,
+		refund.description
+	<include refid="selectRefundListPageCountCondition" />
+		limit #{offset},#{rows}
+	</select>
+	<select id="selectRefundListPageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="selectRefundListPageCountCondition" />
+	</select>
+	<sql id="selectRefundListPageCountCondition">
+	   FROM
+			bts_order_refund refund
+	   LEFT JOIN bts_order_items items ON refund.order_items_id = items.id
+	   <where>
+	     1=1
+		<if test="refundNo != null">
+			and refund.refund_no = #{refundNo}
+		</if>
+		<if test="userId != null">
+			and refund.user_id = #{userId}
+		</if>
+	   </where>
+	</sql>
+	
+</mapper> 

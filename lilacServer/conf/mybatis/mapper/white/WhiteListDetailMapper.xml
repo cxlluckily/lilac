@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【白名单明细表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.white.WhiteListDetailDao">
+
+	<resultMap id="whiteListDetailResultMap" type="com.bluemobi.po.white.WhiteListDetail">
+		<id property="id" column="id" />
+       <result property="whiteListId" column="white_list_id" />
+       <result property="uuid" column="uuid" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="whiteListDetailResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="whiteListDetailResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.white.WhiteListDetail" useGeneratedKeys="true" keyProperty="id" >
+	   insert into white_list_detail (
+	     id,
+	     white_list_id,
+	     uuid
+	   )values (
+	     #{id},
+	     #{whiteListId},
+	     #{uuid}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.white.WhiteListDetail">
+		update white_list_detail
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="whiteListId != null">
+				white_list_id=#{whiteListId},
+			</if>
+			<if test="uuid != null">
+				uuid=#{uuid},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     white_list_detail 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="whiteListDetailResultMap">
+	   select 
+	    id,
+	    white_list_id,
+	    uuid
+	   from white_list_detail
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="whiteListDetailResultMap">
+	   select 
+	     id,
+	     white_list_id,
+	     uuid
+	   from white_list_detail
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="whiteListId != null">
+	        and white_list_id=#{whiteListId}
+	     </if>
+	     <if test="uuid != null">
+	        and uuid=#{uuid}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    white_list_id,
+	    uuid
+	   from white_list_detail
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     white_list_id,
+	     uuid
+	   from white_list_detail
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="whiteListId != null">
+	        and white_list_id=#{whiteListId}
+	     </if>
+	     <if test="uuid != null">
+	        and uuid=#{uuid}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     white_list_id,
+	     uuid
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from white_list_detail
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="whiteListId != null">
+	        and white_list_id=#{whiteListId}
+	     </if>
+	     <if test="uuid != null">
+	        and uuid=#{uuid}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

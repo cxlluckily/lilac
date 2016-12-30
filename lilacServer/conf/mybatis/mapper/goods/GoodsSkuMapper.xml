@@ -1,0 +1,1250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【商品sku】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.goods.GoodsSkuDao">
+
+	<resultMap id="goodsSkuResultMap" type="com.bluemobi.po.goods.GoodsSku">
+		<id property="skuId" column="sku_id" />
+       <result property="merchantId" column="merchant_id" />
+       <result property="spuId" column="spu_id" />
+       <result property="sku" column="sku" />
+       <result property="propertys" column="propertys" />
+       <result property="pics" column="pics" />
+       <result property="stock" column="stock" />
+       <result property="totalStock" column="total_stock" />
+       <result property="stockWarn" column="stock_warn" />
+       <result property="originalPrice" column="original_price" />
+       <result property="price" column="price" />
+       <result property="pointPrice" column="point_price" />
+       <result property="mixPrice" column="mix_price" />
+       <result property="mixPointPrice" column="mix_point_price" />
+       <result property="chargeRate" column="charge_rate" />
+       <result property="settlementPrice" column="settlement_price" />
+       <result property="monthSalesQuantity" column="month_sales_quantity" />
+       <result property="monthSalesAmount" column="month_sales_amount" />
+       <result property="salesQuantity" column="sales_quantity" />
+       <result property="salesAmount" column="sales_amount" />
+       <result property="collectCount" column="collect_count" />
+       <result property="commentCount" column="comment_count" />
+       <result property="weight" column="weight" />
+       <result property="sortOrder" column="sort_order" />
+       <result property="status" column="status" />
+       <result property="isShow" column="is_show" />
+       <result property="isDel" column="is_del" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="goodsSkuResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="goodsSkuResultMap"></resultMap>
+	
+	<resultMap id="goodsSkuTOResultMap" type="com.bluemobi.to.GoodsSkuTO">
+		<id property="skuId" column="sku_id" />
+       <result property="spuId" column="spu_id" />
+       <result property="goodsType" column="goods_type" />
+       <result property="name" column="name" />
+       <result property="pics" column="pics" />
+       <result property="isMoneyPay" column="is_money_pay" />
+       <result property="price" column="price" />
+       <result property="isPointPay" column="is_point_pay" />
+       <result property="pointPrice" column="point_price" />
+       <result property="originalPrice" column="original_price" />
+       <result property="stock" column="stock" />
+       <result property="maxBuyCount" column="max_buy_count" />
+       <result property="propertys" column="propertys" />
+       <result property="seckillBeginTime" column="seckill_begin_time" />
+       <result property="seckillEndTime" column="seckill_end_time" />
+       <result property="isSeckill" column="is_seckill" />
+       
+       <result property="grouponJoinUserCount" column="groupon_join_user_count" />
+       <result property="grouponUserCount" column="groupon_user_count" />
+       <result property="grouponBeginTime" column="groupon_begin_time" />
+       <result property="grouponEndTime" column="groupon_end_time" />
+       <result property="isJoinGroupon" column="is_join_groupon" />
+       
+       <result property="discountBeginTime" column="discount_begin_time" />
+       <result property="discountEndTime" column="discount_end_time" />
+       <result property="promotion" column="promotion" />
+       
+       <result property="status" column="status" />
+   		
+	</resultMap>
+	<insert id="insert" parameterType="com.bluemobi.po.goods.GoodsSku" useGeneratedKeys="true" keyProperty="skuId" >
+	   insert into goods_sku (
+	     sku_id,
+	     merchant_id,
+	     spu_id,
+	     sku,
+	     propertys,
+	     pics,
+	     stock,
+	     total_stock,
+	     stock_warn,
+	     original_price,
+	     price,
+	     point_price,
+	     mix_price,
+	     mix_point_price,
+	     charge_rate,
+	     settlement_price,
+	     month_sales_quantity,
+	     month_sales_amount,
+	     sales_quantity,
+	     sales_amount,
+	     collect_count,
+	     comment_count,
+	     weight,
+	     sort_order,
+	     status,
+	     is_show,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{skuId},
+	     #{merchantId},
+	     #{spuId},
+	     #{sku},
+	     #{propertys},
+	     #{pics},
+	     #{stock},
+	     #{totalStock},
+	     #{stockWarn},
+	     #{originalPrice},
+	     #{price},
+	     #{pointPrice},
+	     #{mixPrice},
+	     #{mixPointPrice},
+	     #{chargeRate},
+	     #{settlementPrice},
+	     #{monthSalesQuantity},
+	     #{monthSalesAmount},
+	     #{salesQuantity},
+	     #{salesAmount},
+	     #{collectCount},
+	     #{commentCount},
+	     #{weight},
+	     #{sortOrder},
+	     #{status},
+	     #{isShow},
+	     #{isDel},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.goods.GoodsSku">
+		update goods_sku
+		<set>
+			<if test="skuId != null">
+				sku_id=#{skuId},
+			</if>
+			<if test="merchantId != null">
+				merchant_id=#{merchantId},
+			</if>
+			<if test="spuId != null">
+				spu_id=#{spuId},
+			</if>
+			<if test="sku != null">
+				sku=#{sku},
+			</if>
+			<if test="propertys != null">
+				propertys=#{propertys},
+			</if>
+			<if test="pics != null">
+				pics=#{pics},
+			</if>
+			<if test="stock != null">
+				stock=#{stock},
+			</if>
+			<if test="totalStock != null">
+				total_stock=#{totalStock},
+			</if>
+			<if test="stockWarn != null">
+				stock_warn=#{stockWarn},
+			</if>
+			<if test="originalPrice != null">
+				original_price=#{originalPrice},
+			</if>
+			<if test="price != null">
+				price=#{price},
+			</if>
+			<if test="pointPrice != null">
+				point_price=#{pointPrice},
+			</if>
+			<if test="mixPrice != null">
+				mix_price=#{mixPrice},
+			</if>
+			<if test="mixPointPrice != null">
+				mix_point_price=#{mixPointPrice},
+			</if>
+			<if test="chargeRate != null">
+				charge_rate=#{chargeRate},
+			</if>
+			<if test="settlementPrice != null">
+				settlement_price=#{settlementPrice},
+			</if>
+			<if test="monthSalesQuantity != null">
+				month_sales_quantity=#{monthSalesQuantity},
+			</if>
+			<if test="monthSalesAmount != null">
+				month_sales_amount=#{monthSalesAmount},
+			</if>
+			<if test="salesQuantity != null">
+				sales_quantity=#{salesQuantity},
+			</if>
+			<if test="salesAmount != null">
+				sales_amount=#{salesAmount},
+			</if>
+			<if test="collectCount != null">
+				collect_count=#{collectCount},
+			</if>
+			<if test="commentCount != null">
+				comment_count=#{commentCount},
+			</if>
+			<if test="weight != null">
+				weight=#{weight},
+			</if>
+			<if test="sortOrder != null">
+				sort_order=#{sortOrder},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+			<if test="isShow != null">
+				is_show=#{isShow},
+			</if>
+			<if test="isDel != null">
+				is_del=#{isDel},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			sku_id=#{skuId} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     goods_sku 
+	   where 
+	    sku_id=#{skuId} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="goodsSkuResultMap">
+	   select 
+	    sku_id,
+	    merchant_id,
+	    spu_id,
+	    sku,
+	    propertys,
+	    pics,
+	    stock,
+	    total_stock,
+	    stock_warn,
+	    original_price,
+	    price,
+	    point_price,
+	    mix_price,
+	    mix_point_price,
+	    charge_rate,
+	    settlement_price,
+	    month_sales_quantity,
+	    month_sales_amount,
+	    sales_quantity,
+	    sales_amount,
+	    collect_count,
+	    comment_count,
+	    weight,
+	    sort_order,
+	    status,
+	    is_show,
+	    is_del,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from goods_sku
+	   where 
+	    sku_id=#{skuId} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="goodsSkuResultMap">
+	   select 
+	     sku_id,
+	     merchant_id,
+	     spu_id,
+	     sku,
+	     propertys,
+	     pics,
+	     stock,
+	     total_stock,
+	     stock_warn,
+	     original_price,
+	     price,
+	     point_price,
+	     mix_price,
+	     mix_point_price,
+	     charge_rate,
+	     settlement_price,
+	     month_sales_quantity,
+	     month_sales_amount,
+	     sales_quantity,
+	     sales_amount,
+	     collect_count,
+	     comment_count,
+	     weight,
+	     sort_order,
+	     status,
+	     is_show,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from goods_sku
+	   <where>
+	     <if test="skuId != null">
+	        sku_id=#{skuId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="spuId != null">
+	        and spu_id=#{spuId}
+	     </if>
+	     <if test="sku != null">
+	        and sku=#{sku}
+	     </if>
+	     <if test="propertys != null">
+	        and propertys=#{propertys}
+	     </if>
+	     <if test="pics != null">
+	        and pics=#{pics}
+	     </if>
+	     <if test="stock != null">
+	        and stock=#{stock}
+	     </if>
+	     <if test="totalStock != null">
+	        and total_stock=#{totalStock}
+	     </if>
+	     <if test="stockWarn != null">
+	        and stock_warn=#{stockWarn}
+	     </if>
+	     <if test="originalPrice != null">
+	        and original_price=#{originalPrice}
+	     </if>
+	     <if test="price != null">
+	        and price=#{price}
+	     </if>
+	     <if test="pointPrice != null">
+	        and point_price=#{pointPrice}
+	     </if>
+	     <if test="mixPrice != null">
+	        and mix_price=#{mixPrice}
+	     </if>
+	     <if test="mixPointPrice != null">
+	        and mix_point_price=#{mixPointPrice}
+	     </if>
+	     <if test="chargeRate != null">
+	        and charge_rate=#{chargeRate}
+	     </if>
+	     <if test="settlementPrice != null">
+	        and settlement_price=#{settlementPrice}
+	     </if>
+	     <if test="monthSalesQuantity != null">
+	        and month_sales_quantity=#{monthSalesQuantity}
+	     </if>
+	     <if test="monthSalesAmount != null">
+	        and month_sales_amount=#{monthSalesAmount}
+	     </if>
+	     <if test="salesQuantity != null">
+	        and sales_quantity=#{salesQuantity}
+	     </if>
+	     <if test="salesAmount != null">
+	        and sales_amount=#{salesAmount}
+	     </if>
+	     <if test="collectCount != null">
+	        and collect_count=#{collectCount}
+	     </if>
+	     <if test="commentCount != null">
+	        and comment_count=#{commentCount}
+	     </if>
+	     <if test="weight != null">
+	        and weight=#{weight}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="isShow != null">
+	        and is_show=#{isShow}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    sku_id,
+	    merchant_id,
+	    spu_id,
+	    sku,
+	    propertys,
+	    pics,
+	    stock,
+	    total_stock,
+	    stock_warn,
+	    original_price,
+	    price,
+	    point_price,
+	    mix_price,
+	    mix_point_price,
+	    charge_rate,
+	    settlement_price,
+	    month_sales_quantity,
+	    month_sales_amount,
+	    sales_quantity,
+	    sales_amount,
+	    collect_count,
+	    comment_count,
+	    weight,
+	    sort_order,
+	    status,
+	    is_show,
+	    is_del,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from goods_sku
+	   where 
+	    sku_id=#{skuId} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     sku_id,
+	     merchant_id,
+	     spu_id,
+	     sku,
+	     propertys,
+	     pics,
+	     stock,
+	     total_stock,
+	     stock_warn,
+	     original_price,
+	     price,
+	     point_price,
+	     mix_price,
+	     mix_point_price,
+	     charge_rate,
+	     settlement_price,
+	     month_sales_quantity,
+	     month_sales_amount,
+	     sales_quantity,
+	     sales_amount,
+	     collect_count,
+	     comment_count,
+	     weight,
+	     sort_order,
+	     status,
+	     is_show,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from goods_sku
+	   <where>
+	     <if test="skuId != null">
+	        sku_id=#{skuId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="spuId != null">
+	        and spu_id=#{spuId}
+	     </if>
+	     <if test="sku != null">
+	        and sku=#{sku}
+	     </if>
+	     <if test="propertys != null">
+	        and propertys=#{propertys}
+	     </if>
+	     <if test="pics != null">
+	        and pics=#{pics}
+	     </if>
+	     <if test="stock != null">
+	        and stock=#{stock}
+	     </if>
+	     <if test="totalStock != null">
+	        and total_stock=#{totalStock}
+	     </if>
+	     <if test="stockWarn != null">
+	        and stock_warn=#{stockWarn}
+	     </if>
+	     <if test="originalPrice != null">
+	        and original_price=#{originalPrice}
+	     </if>
+	     <if test="price != null">
+	        and price=#{price}
+	     </if>
+	     <if test="pointPrice != null">
+	        and point_price=#{pointPrice}
+	     </if>
+	     <if test="mixPrice != null">
+	        and mix_price=#{mixPrice}
+	     </if>
+	     <if test="mixPointPrice != null">
+	        and mix_point_price=#{mixPointPrice}
+	     </if>
+	     <if test="chargeRate != null">
+	        and charge_rate=#{chargeRate}
+	     </if>
+	     <if test="settlementPrice != null">
+	        and settlement_price=#{settlementPrice}
+	     </if>
+	     <if test="monthSalesQuantity != null">
+	        and month_sales_quantity=#{monthSalesQuantity}
+	     </if>
+	     <if test="monthSalesAmount != null">
+	        and month_sales_amount=#{monthSalesAmount}
+	     </if>
+	     <if test="salesQuantity != null">
+	        and sales_quantity=#{salesQuantity}
+	     </if>
+	     <if test="salesAmount != null">
+	        and sales_amount=#{salesAmount}
+	     </if>
+	     <if test="collectCount != null">
+	        and collect_count=#{collectCount}
+	     </if>
+	     <if test="commentCount != null">
+	        and comment_count=#{commentCount}
+	     </if>
+	     <if test="weight != null">
+	        and weight=#{weight}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="isShow != null">
+	        and is_show=#{isShow}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     sku_id,
+	     merchant_id,
+	     spu_id,
+	     sku,
+	     propertys,
+	     pics,
+	     stock,
+	     total_stock,
+	     stock_warn,
+	     original_price,
+	     price,
+	     point_price,
+	     mix_price,
+	     mix_point_price,
+	     charge_rate,
+	     settlement_price,
+	     month_sales_quantity,
+	     month_sales_amount,
+	     sales_quantity,
+	     sales_amount,
+	     collect_count,
+	     comment_count,
+	     weight,
+	     sort_order,
+	     status,
+	     is_show,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from goods_sku
+	   <where>
+	     <if test="skuId != null">
+	        sku_id=#{skuId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="spuId != null">
+	        and spu_id=#{spuId}
+	     </if>
+	     <if test="sku != null">
+	        and sku=#{sku}
+	     </if>
+	     <if test="propertys != null">
+	        and propertys=#{propertys}
+	     </if>
+	     <if test="pics != null">
+	        and pics=#{pics}
+	     </if>
+	     <if test="stock != null">
+	        and stock=#{stock}
+	     </if>
+	     <if test="totalStock != null">
+	        and total_stock=#{totalStock}
+	     </if>
+	     <if test="stockWarn != null">
+	        and stock_warn=#{stockWarn}
+	     </if>
+	     <if test="originalPrice != null">
+	        and original_price=#{originalPrice}
+	     </if>
+	     <if test="price != null">
+	        and price=#{price}
+	     </if>
+	     <if test="pointPrice != null">
+	        and point_price=#{pointPrice}
+	     </if>
+	     <if test="mixPrice != null">
+	        and mix_price=#{mixPrice}
+	     </if>
+	     <if test="mixPointPrice != null">
+	        and mix_point_price=#{mixPointPrice}
+	     </if>
+	     <if test="chargeRate != null">
+	        and charge_rate=#{chargeRate}
+	     </if>
+	     <if test="settlementPrice != null">
+	        and settlement_price=#{settlementPrice}
+	     </if>
+	     <if test="monthSalesQuantity != null">
+	        and month_sales_quantity=#{monthSalesQuantity}
+	     </if>
+	     <if test="monthSalesAmount != null">
+	        and month_sales_amount=#{monthSalesAmount}
+	     </if>
+	     <if test="salesQuantity != null">
+	        and sales_quantity=#{salesQuantity}
+	     </if>
+	     <if test="salesAmount != null">
+	        and sales_amount=#{salesAmount}
+	     </if>
+	     <if test="collectCount != null">
+	        and collect_count=#{collectCount}
+	     </if>
+	     <if test="commentCount != null">
+	        and comment_count=#{commentCount}
+	     </if>
+	     <if test="weight != null">
+	        and weight=#{weight}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="isShow != null">
+	        and is_show=#{isShow}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+	<select id="selectGoodsSkuTOList" parameterType="map" resultMap="goodsSkuTOResultMap">
+		select 
+			sku.sku_id, 
+			sku.spu_id, 
+			spu.goods_type,
+			spu.name,
+			sku.pics,
+			sku.stock,
+			spu.is_money_pay,
+			sku.price,
+			spu.is_point_pay,
+			sku.point_price,
+			sku.original_price,
+			sku.propertys,
+			spu.status
+			
+		from goods_sku sku
+		INNER JOIN goods_spu spu on sku.spu_id = spu.spu_id
+		
+		<where>
+	     <if test="skuId != null">
+	        sku.sku_id=#{skuId}
+	     </if>
+	     <if test="merchantId != null">
+	        and sku.merchant_id=#{merchantId}
+	     </if>
+	     <if test="spuId != null">
+	        and sku.spu_id=#{spuId}
+	     </if>
+	     <if test="sku != null">
+	        and sku.sku=#{sku}
+	     </if>
+	     <if test="spu != null">
+	        and spu.spu=#{spu}
+	     </if>
+	     <if test="status != null">
+	        and spu.status=#{status}
+	     </if>
+	    </where>
+	</select>
+	
+	
+	<select id="pageGoodsSku" parameterType="map" resultMap="goodsSkuTOResultMap">
+		select 
+			sku.sku_id, 
+			sku.spu_id, 
+			spu.goods_type,
+			spu.name,
+			sku.pics,
+			spu.is_money_pay,
+			sku.price,
+			spu.is_point_pay,
+			sku.point_price,
+			sku.original_price
+		<include refid="pageGoodsSkuCondition" />
+		
+		order by 
+	     <if test="sortType == 1">
+	        sku.price asc, sku.point_price asc, sku.original_price asc,
+	     </if>
+	     <if test="sortType == 2">
+	        sku.price desc, sku.point_price desc, sku.original_price desc,
+	     </if>
+	     <if test="sortType == 3">
+	        sku.ctime desc,
+	     </if>
+	     <if test="sortType==5">
+	     	spu.goods_comment_rate desc,
+	     </if>
+	     spu.sales_quantity desc
+	     
+		limit #{offset},#{rows}
+	</select>
+	
+	<select id="pageGoodsSkuCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageGoodsSkuCondition" />
+	</select>
+
+	<sql id="pageGoodsSkuCondition">
+		from goods_sku sku
+		INNER JOIN goods_spu spu on sku.spu_id = spu.spu_id
+		
+	   <where>
+	   		spu.audit_status = 1
+			and spu.status=1
+			and spu.is_show = 1
+			and sku.is_show = 1
+	   
+	     <if test="goodsType != null">
+	        and spu.goods_type = #{goodsType}
+	     </if>
+	     <if test="price != null">
+	        and price=#{price}
+	     </if>
+	     <if test="searchKeywords != null">
+	        and spu.search_keywords like CONCAT('%',#{searchKeywords},'%')
+	     </if>
+	     
+	     <if test="grade == 1">
+	        and spu.category_id1 = #{categoryId}
+	     </if>
+	     <if test="grade == 2">
+	        and spu.category_id2 = #{categoryId}
+	     </if>
+	     <if test="grade == 3">
+	        and spu.category_id3 = #{categoryId}
+	     </if>
+	     
+	     <if test="brandId != null">
+	        and spu.brand_id = #{brandId}
+	     </if>
+	     
+	     <if test="minPointPrice != null">
+	        <![CDATA[ and sku.point_price >= #{minPointPrice} ]]>
+	     </if>
+	     <if test="maxPointPrice != null">
+	        <![CDATA[ and sku.point_price <= #{maxPointPrice} ]]>
+	     </if>
+	     
+	     <if test="minPrice != null">
+	        <![CDATA[ and sku.price >= #{minPrice} ]]>
+	     </if>
+	     <if test="maxPrice != null">
+	        <![CDATA[ and sku.price <= #{maxPrice} ]]>
+	     </if>
+	     
+	     <if test="vipType != null">
+	        <![CDATA[ and spu.vip_type = #{vipType} ]]>
+	     </if>
+	     <if test="isPromotion==1">
+	     <![CDATA[
+	     	and spu.promotion_begin_time <=now() 
+	     	and spu.promotion_end_time>=now()
+	     ]]>
+	     </if>
+			
+	   </where>
+	</sql>
+	
+	
+	
+	<select id="pageSeckillGoods" parameterType="map" resultMap="goodsSkuTOResultMap">
+		select 
+			sku.sku_id, 
+			sku.spu_id, 
+			spu.goods_type,
+			spu.name,
+			sku.pics,
+			sku.original_price,
+		  	s.stock,
+			s.price point_price,
+		  	s.begin_time seckill_begin_time,
+		  	s.end_time seckill_end_time
+		<include refid="pageSeckillGoodsCondition" />
+		order by s.begin_time desc
+		limit #{offset},#{rows}
+	</select>
+	
+	<select id="pageSeckillGoodsCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageSeckillGoodsCondition" />
+	</select>
+
+	<sql id="pageSeckillGoodsCondition">
+		<![CDATA[
+	   from activity_seckill s
+			INNER JOIN goods_sku sku on s.sku_id= sku.sku_id 
+			INNER JOIN goods_spu spu on sku.spu_id = spu.spu_id
+		where
+			s.audit_status = 1 
+			and s.show_time <= now() 
+			and s.end_time >= now()
+        ]]>
+	</sql>
+	
+	
+	
+	<select id="pageGrouponGoods" parameterType="map" resultMap="goodsSkuTOResultMap">
+		select 
+			sku.sku_id, 
+			sku.spu_id, 
+			spu.goods_type,
+			spu.name,
+			sku.pics,
+			sku.original_price,
+			sku.stock,
+			sku.price,
+			g.begin_time groupon_begin_time,
+			g.end_time groupon_end_time
+		<include refid="pageGrouponGoodsCondition" />
+		order by g.begin_time desc
+		limit #{offset},#{rows}
+	</select>
+	
+	<select id="pageGrouponGoodsCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageGrouponGoodsCondition" />
+	</select>
+
+	<sql id="pageGrouponGoodsCondition">
+		<![CDATA[
+		from activity_groupon g
+			INNER JOIN goods_sku sku on g.sku_id= sku.sku_id 
+			INNER JOIN goods_spu spu on sku.spu_id = spu.spu_id
+		where
+			g.audit_status = 1 
+			and g.begin_time <= now() 
+			and g.end_time >= now() 
+        ]]>
+	</sql>
+	
+	
+	
+	<select id="pageDiscountGoods" parameterType="map" resultMap="goodsSkuTOResultMap">
+		select 
+			sku.sku_id, 
+			sku.spu_id, 
+			spu.goods_type,
+			spu.name,
+			sku.pics,
+			sku.original_price,
+			sku.stock,
+			d.price,
+			d.begin_time discount_begin_time,
+			d.end_time discount_end_time
+		<include refid="pageDiscountGoodsCondition" />
+		order by d.begin_time desc
+		limit #{offset},#{rows}
+	</select>
+	
+	<select id="pageDiscountGoodsCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageDiscountGoodsCondition" />
+	</select>
+
+	<sql id="pageDiscountGoodsCondition">
+		<![CDATA[
+		from activity_discount d
+			INNER JOIN goods_sku sku on d.sku_id= sku.sku_id 
+			INNER JOIN goods_spu spu on sku.spu_id = spu.spu_id
+		where
+			d.begin_time <= now() 
+			and d.end_time >= now()  
+        ]]>
+	</sql>
+	
+	
+	
+	<select id="pageAdvertGoods" parameterType="map" resultMap="goodsSkuTOResultMap">
+		select 
+			sku.sku_id, 
+			sku.spu_id, 
+			spu.goods_type,
+			spu.name,
+			sku.pics,
+			spu.is_money_pay,
+			sku.price,
+			spu.is_point_pay,
+			sku.point_price,
+			sku.original_price,
+			spu.max_buy_count
+		<include refid="pageAdvertGoodsCondition" />
+		order by a.sort_order
+		limit #{offset},#{rows}
+	</select>
+	
+	<select id="pageAdvertGoodsCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageAdvertGoodsCondition" />
+	</select>
+
+	<sql id="pageAdvertGoodsCondition">
+		<![CDATA[
+		from advert a 
+		INNER JOIN goods_sku sku on a.link_type = 3 and sku.sku_id in (a.link)
+		INNER JOIN goods_spu spu on sku.spu_id = spu.spu_id
+		
+		where 
+			spu.audit_status = 1
+			and spu.status=1
+			
+		    and a.position = #{position}
+		    and a.status = 1
+		    and a.begin_time <= now()
+		    and a.end_time >= now()
+	
+        ]]>
+	</sql>
+	
+	
+	
+	<select id="pageHotSellGoods" parameterType="map" resultMap="goodsSkuTOResultMap">
+		select 
+			sku.sku_id, 
+			sku.spu_id, 
+			spu.goods_type,
+			spu.name,
+			sku.pics,
+			spu.is_money_pay,
+			sku.price,
+			spu.is_point_pay,
+			sku.point_price,
+			sku.original_price
+		<include refid="pageHotSellGoodsCondition" />
+		order by spu.sales_quantity desc
+		limit #{offset},#{rows}
+	</select>
+	
+	<select id="pageHotSellGoodsCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageHotSellGoodsCondition" />
+	</select>
+
+	<sql id="pageHotSellGoodsCondition">
+		from goods_sku sku
+		INNER JOIN goods_spu spu on sku.spu_id = spu.spu_id
+		
+		where 
+			spu.audit_status = 1
+			and spu.status=1
+			and spu.is_show = 1
+			and sku.is_show = 1
+			
+	     <if test="goodsType != null">
+	        and spu.goods_type=#{goodsType}
+	     </if>
+	     
+	</sql>
+	
+	
+	
+	<select id="pagePraiseGoods" parameterType="map" resultMap="goodsSkuTOResultMap">
+		select 
+			sku.sku_id, 
+			sku.spu_id, 
+			spu.goods_type,
+			spu.name,
+			sku.pics,
+			spu.is_money_pay,
+			sku.price,
+			spu.is_point_pay,
+			sku.point_price,
+			sku.original_price
+		<include refid="pagePraiseGoodsCondition" />
+		order by spu.goods_comment_rate desc ,spu.goods_comment_count desc
+		limit #{offset},#{rows}
+	</select>
+	
+	<select id="pagePraiseGoodsCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pagePraiseGoodsCondition" />
+	</select>
+
+	<sql id="pagePraiseGoodsCondition">
+		from goods_sku sku
+		INNER JOIN goods_spu spu on sku.spu_id = spu.spu_id
+		where 
+			spu.audit_status = 1
+			and spu.status=1
+			and spu.is_show = 1
+			and sku.is_show = 1
+	</sql>
+	
+	
+	
+	<select id="pageYourMaybeLikeGoods" parameterType="map" resultMap="goodsSkuTOResultMap">
+		select 
+			sku.sku_id, 
+			sku.spu_id, 
+			spu.goods_type,
+			spu.name,
+			sku.pics,
+			spu.is_money_pay,
+			sku.price,
+			spu.is_point_pay,
+			sku.point_price,
+			sku.original_price
+		<include refid="pageYourMaybeLikeGoodsCondition" />
+		order by spu.sales_quantity
+		limit #{offset},#{rows}
+	</select>
+	
+	<select id="pageYourMaybeLikeGoodsCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageYourMaybeLikeGoodsCondition" />
+	</select>
+
+	<sql id="pageYourMaybeLikeGoodsCondition">
+		from goods_sku sku
+		INNER JOIN goods_spu spu on sku.spu_id = spu.spu_id
+		INNER JOIN goods_spu spu2 on spu.category_id3 = spu2.category_id3
+		INNER JOIN goods_sku sku2 on sku2.spu_id = spu2.spu_id
+		LEFT JOIN user_browse b on b.sku_id = sku2.sku_id and b.user_id = #{userId}
+		
+		where 
+			spu.audit_status = 1
+			and spu.status=1
+			and spu.is_show = 1
+			and sku.is_show = 1
+			and spu2.audit_status = 1
+			and spu2.status=1
+			and spu2.is_show = 1
+			and sku2.is_show = 1
+			and spu.spu_id != spu2.spu_id
+			
+	</sql>
+	
+	
+	<select id="pageBrowseGoods" parameterType="map" resultMap="goodsSkuTOResultMap">
+		select 
+			sku.sku_id, 
+			sku.spu_id, 
+			spu.goods_type,
+			spu.name,
+			sku.pics,
+			sku.original_price
+		<include refid="pageBrowseGoodsCondition" />
+		order by b.ctime desc  
+		limit #{offset},#{rows}
+	</select>
+	
+	<select id="pageBrowseGoodsCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageBrowseGoodsCondition" />
+	</select>
+
+	<sql id="pageBrowseGoodsCondition">
+		<![CDATA[
+		from user_browse b
+			INNER JOIN goods_sku sku on b.sku_id= sku.sku_id 
+			INNER JOIN goods_spu spu on sku.spu_id = spu.spu_id
+		where
+			b.user_id = #{userId}
+        ]]>
+	</sql>
+	
+    
+	<select id="hasEnoughStock" parameterType="map" resultType="int">
+        select 
+            sku.sku_id
+        from
+            goods_sku sku
+        inner join bts_cart c on c.sku_id = sku.sku_id
+		where
+			sku.stock <![CDATA[ < ]]> c.quantity 
+			and c.id in 
+	        <foreach collection="cartIds" item="cartId" open="(" close=")" separator=",">
+	      		#{cartId}
+	        </foreach>
+    </select>
+    
+	<select id="getStock" parameterType="int" resultType="int">
+        select 
+            stock
+        from
+            goods_sku
+        where
+            sku_id=#{skuId} 
+    </select>
+	
+    <update id="addStock" parameterType="map" >
+        update 
+            goods_sku
+        set
+            stock = stock + #{stock}
+        where
+            sku_id=#{skuId} 
+    </update>
+    
+    <update id="minusStock" parameterType="map" >
+        update 
+            goods_sku
+        set
+            stock = stock - #{stock}
+        where
+            sku_id=#{skuId} 
+    </update>
+    
+    <select id="pageMyFavorites" parameterType="map" resultMap="goodsSkuTOResultMap"> 
+		SELECT
+			k.sku_id,
+			k.spu_id,
+			p.goods_type,
+			p.name,
+			k.pics,
+			k.propertys,
+			p.is_money_pay,
+			k.price,
+			p.is_point_pay,
+			k.point_price,
+			k.original_price,
+			k.status
+		<include refid="pageMyFavoritesCondition" />
+			order by u.ctime desc  
+			limit #{offset},#{rows}	
+    </select>
+    
+    <select id="pageMyFavoritesCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageMyFavoritesCondition" />
+	</select>
+    
+    <sql id="pageMyFavoritesCondition">
+		<![CDATA[
+		FROM user_favorite u
+		LEFT JOIN goods_sku k ON u.sku_id=k.sku_id
+		LEFT JOIN goods_spu p ON k.spu_id=p.spu_id
+		WHERE
+			u.user_id=#{userId}
+        ]]>
+	</sql>
+	
+	
+</mapper> 

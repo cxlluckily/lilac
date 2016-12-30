@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【权益绑定商户表，一个权益商品下面可以有多个商户，商户下面可以有多个机构，机构需审核】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.equity.EquityMerchantDao">
+
+	<resultMap id="equityMerchantResultMap" type="com.bluemobi.po.equity.EquityMerchant">
+		<id property="id" column="id" />
+       <result property="spuId" column="spu_id" />
+       <result property="merchantId" column="merchant_id" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="equityMerchantResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="equityMerchantResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.equity.EquityMerchant" useGeneratedKeys="true" keyProperty="id" >
+	   insert into equity_merchant (
+	     id,
+	     spu_id,
+	     merchant_id,
+	     creator,
+	     ctime
+	   )values (
+	     #{id},
+	     #{spuId},
+	     #{merchantId},
+	     #{creator},
+	     #{ctime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.equity.EquityMerchant">
+		update equity_merchant
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="spuId != null">
+				spu_id=#{spuId},
+			</if>
+			<if test="merchantId != null">
+				merchant_id=#{merchantId},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     equity_merchant 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="equityMerchantResultMap">
+	   select 
+	    id,
+	    spu_id,
+	    merchant_id,
+	    creator,
+	    ctime
+	   from equity_merchant
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="equityMerchantResultMap">
+	   select 
+	     id,
+	     spu_id,
+	     merchant_id,
+	     creator,
+	     ctime
+	   from equity_merchant
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="spuId != null">
+	        and spu_id=#{spuId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    spu_id,
+	    merchant_id,
+	    creator,
+	    ctime
+	   from equity_merchant
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     spu_id,
+	     merchant_id,
+	     creator,
+	     ctime
+	   from equity_merchant
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="spuId != null">
+	        and spu_id=#{spuId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     spu_id,
+	     merchant_id,
+	     creator,
+	     ctime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from equity_merchant
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="spuId != null">
+	        and spu_id=#{spuId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

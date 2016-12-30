@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【广告表，存放广告位信息、banner信息等】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.advert.AdvertDao">
+
+	<resultMap id="advertResultMap" type="com.bluemobi.po.advert.Advert">
+		<id property="id" column="id" />
+       <result property="name" column="name" />
+       <result property="pic" column="pic" />
+       <result property="position" column="position" />
+       <result property="linkType" column="link_type" />
+       <result property="link" column="link" />
+       <result property="sortOrder" column="sort_order" />
+       <result property="description" column="description" />
+       <result property="beginTime" column="begin_time" />
+       <result property="endTime" column="end_time" />
+       <result property="status" column="status" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="advertResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="advertResultMap"></resultMap>
+	
+	
+	<resultMap id="advertTOResultMap" type="com.bluemobi.to.AdvertTO">
+       <result property="pic" column="pic" />
+       <result property="linkType" column="link_type" />
+       <result property="link" column="link" />
+	</resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.advert.Advert" useGeneratedKeys="true" keyProperty="id" >
+	   insert into advert (
+	     id,
+	     name,
+	     pic,
+	     position,
+	     link_type,
+	     link,
+	     sort_order,
+	     description,
+	     begin_time,
+	     end_time,
+	     status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{id},
+	     #{name},
+	     #{pic},
+	     #{position},
+	     #{linkType},
+	     #{link},
+	     #{sortOrder},
+	     #{description},
+	     #{beginTime},
+	     #{endTime},
+	     #{status},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.advert.Advert">
+		update advert
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="name != null">
+				name=#{name},
+			</if>
+			<if test="pic != null">
+				pic=#{pic},
+			</if>
+			<if test="position != null">
+				position=#{position},
+			</if>
+			<if test="linkType != null">
+				link_type=#{linkType},
+			</if>
+			<if test="link != null">
+				link=#{link},
+			</if>
+			<if test="sortOrder != null">
+				sort_order=#{sortOrder},
+			</if>
+			<if test="description != null">
+				description=#{description},
+			</if>
+			<if test="beginTime != null">
+				begin_time=#{beginTime},
+			</if>
+			<if test="endTime != null">
+				end_time=#{endTime},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     advert 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="advertResultMap">
+	   select 
+	    id,
+	    name,
+	    pic,
+	    position,
+	    link_type,
+	    link,
+	    sort_order,
+	    description,
+	    begin_time,
+	    end_time,
+	    status,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from advert
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="advertResultMap">
+	   select 
+	     id,
+	     name,
+	     pic,
+	     position,
+	     link_type,
+	     link,
+	     sort_order,
+	     description,
+	     begin_time,
+	     end_time,
+	     status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from advert
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="position != null">
+	        and position=#{position}
+	     </if>
+	     <if test="linkType != null">
+	        and link_type=#{linkType}
+	     </if>
+	     <if test="link != null">
+	        and link=#{link}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    name,
+	    pic,
+	    position,
+	    link_type,
+	    link,
+	    sort_order,
+	    description,
+	    begin_time,
+	    end_time,
+	    status,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from advert
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     name,
+	     pic,
+	     position,
+	     link_type,
+	     link,
+	     sort_order,
+	     description,
+	     begin_time,
+	     end_time,
+	     status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from advert
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="position != null">
+	        and position=#{position}
+	     </if>
+	     <if test="linkType != null">
+	        and link_type=#{linkType}
+	     </if>
+	     <if test="link != null">
+	        and link=#{link}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     name,
+	     pic,
+	     position,
+	     link_type,
+	     link,
+	     sort_order,
+	     description,
+	     begin_time,
+	     end_time,
+	     status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from advert
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="position != null">
+	        and position=#{position}
+	     </if>
+	     <if test="linkType != null">
+	        and link_type=#{linkType}
+	     </if>
+	     <if test="link != null">
+	        and link=#{link}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+	
+	<select id="selectAdvertTOList" parameterType="map" resultMap="advertTOResultMap">
+		<![CDATA[  
+		select
+			a.pic,
+			a.link_type,
+			a.link
+		from advert a 
+		where 
+			 a.status = 1
+		     and a.position = #{position}
+		     and a.begin_time <= now()
+		     and a.end_time >= now()
+		     order by a.sort_order
+		     limit #{size};
+        ]]>
+	</select>
+
+	
+</mapper> 

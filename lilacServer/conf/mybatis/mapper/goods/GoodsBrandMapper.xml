@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【商品品牌表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.goods.GoodsBrandDao">
+
+	<resultMap id="goodsBrandResultMap" type="com.bluemobi.po.goods.GoodsBrand">
+		<id property="id" column="id" />
+       <result property="name" column="name" />
+       <result property="enName" column="en_name" />
+       <result property="initial" column="initial" />
+       <result property="description" column="description" />
+       <result property="pic" column="pic" />
+       <result property="sortOrder" column="sort_order" />
+       <result property="status" column="status" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="goodsBrandResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="goodsBrandResultMap"></resultMap>
+	
+	
+	<resultMap id="goodsBrandTOResultMap" type="com.bluemobi.to.GoodsBrandTO">
+		<id property="id" column="id" />
+       <result property="name" column="name" />
+       <result property="pic" column="pic" />
+       <result property="initial" column="initial" />
+	</resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.goods.GoodsBrand" useGeneratedKeys="true" keyProperty="id" >
+	   insert into goods_brand (
+	     id,
+	     name,
+	     en_name,
+	     initial,
+	     description,
+	     pic,
+	     sort_order,
+	     status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{id},
+	     #{name},
+	     #{enName},
+	     #{initial},
+	     #{description},
+	     #{pic},
+	     #{sortOrder},
+	     #{status},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.goods.GoodsBrand">
+		update goods_brand
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="name != null">
+				name=#{name},
+			</if>
+			<if test="enName != null">
+				en_name=#{enName},
+			</if>
+			<if test="initial != null">
+				initial=#{initial},
+			</if>
+			<if test="description != null">
+				description=#{description},
+			</if>
+			<if test="pic != null">
+				pic=#{pic},
+			</if>
+			<if test="sortOrder != null">
+				sort_order=#{sortOrder},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     goods_brand 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="goodsBrandResultMap">
+	   select 
+	    id,
+	    name,
+	    en_name,
+	    initial,
+	    description,
+	    pic,
+	    sort_order,
+	    status,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from goods_brand
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="goodsBrandResultMap">
+	   select 
+	     id,
+	     name,
+	     en_name,
+	     initial,
+	     description,
+	     pic,
+	     sort_order,
+	     status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from goods_brand
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="enName != null">
+	        and en_name=#{enName}
+	     </if>
+	     <if test="initial != null">
+	        and initial=#{initial}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    name,
+	    en_name,
+	    initial,
+	    description,
+	    pic,
+	    sort_order,
+	    status,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from goods_brand
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     name,
+	     en_name,
+	     initial,
+	     description,
+	     pic,
+	     sort_order,
+	     status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from goods_brand
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="enName != null">
+	        and en_name=#{enName}
+	     </if>
+	     <if test="initial != null">
+	        and initial=#{initial}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     name,
+	     en_name,
+	     initial,
+	     description,
+	     pic,
+	     sort_order,
+	     status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from goods_brand
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="enName != null">
+	        and en_name=#{enName}
+	     </if>
+	     <if test="initial != null">
+	        and initial=#{initial}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+	
+	
+	<select id="pageGoodsBrandTO" parameterType="map" resultMap="goodsBrandTOResultMap">
+		select 
+		  id,
+		  name,
+		  pic,
+		  initial
+	<include refid="pageGoodsBrandTOCondition" />
+	order by initial, sort_order
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageGoodsBrandTOCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageGoodsBrandTOCondition" />
+	</select>
+
+	<sql id="pageGoodsBrandTOCondition">
+	   	from goods_brand
+	  	where status = 1
+	</sql>
+
+	
+</mapper> 

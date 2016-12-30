@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【对账表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.finance.FinanceReconciliationDao">
+
+	<resultMap id="financeReconciliationResultMap" type="com.bluemobi.po.finance.FinanceReconciliation">
+		<id property="id" column="id" />
+       <result property="batchNo" column="batch_no" />
+       <result property="sno" column="sno" />
+       <result property="payType" column="pay_type" />
+       <result property="orderNo" column="order_no" />
+       <result property="cur" column="cur" />
+       <result property="mtransAmt" column="mtrans_amt" />
+       <result property="transAmt" column="trans_amt" />
+       <result property="mintegral" column="mintegral" />
+       <result property="tintegral" column="tintegral" />
+       <result property="businessDea" column="business_dea" />
+       <result property="status" column="status" />
+       <result property="createTime" column="create_time" />
+       <result property="updateTime" column="update_time" />
+       <result property="receiptTime" column="receipt_time" />
+       <result property="type" column="type" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="financeReconciliationResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="financeReconciliationResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.finance.FinanceReconciliation" useGeneratedKeys="true" keyProperty="id" >
+	   insert into finance_reconciliation (
+	     id,
+	     batch_no,
+	     sno,
+	     pay_type,
+	     order_no,
+	     cur,
+	     mtrans_amt,
+	     trans_amt,
+	     mintegral,
+	     tintegral,
+	     business_dea,
+	     status,
+	     create_time,
+	     update_time,
+	     receipt_time,
+	     type
+	   )values (
+	     #{id},
+	     #{batchNo},
+	     #{sno},
+	     #{payType},
+	     #{orderNo},
+	     #{cur},
+	     #{mtransAmt},
+	     #{transAmt},
+	     #{mintegral},
+	     #{tintegral},
+	     #{businessDea},
+	     #{status},
+	     #{createTime},
+	     #{updateTime},
+	     #{receiptTime},
+	     #{type}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.finance.FinanceReconciliation">
+		update finance_reconciliation
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="batchNo != null">
+				batch_no=#{batchNo},
+			</if>
+			<if test="sno != null">
+				sno=#{sno},
+			</if>
+			<if test="payType != null">
+				pay_type=#{payType},
+			</if>
+			<if test="orderNo != null">
+				order_no=#{orderNo},
+			</if>
+			<if test="cur != null">
+				cur=#{cur},
+			</if>
+			<if test="mtransAmt != null">
+				mtrans_amt=#{mtransAmt},
+			</if>
+			<if test="transAmt != null">
+				trans_amt=#{transAmt},
+			</if>
+			<if test="mintegral != null">
+				mintegral=#{mintegral},
+			</if>
+			<if test="tintegral != null">
+				tintegral=#{tintegral},
+			</if>
+			<if test="businessDea != null">
+				business_dea=#{businessDea},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+			<if test="createTime != null">
+				create_time=#{createTime},
+			</if>
+			<if test="updateTime != null">
+				update_time=#{updateTime},
+			</if>
+			<if test="receiptTime != null">
+				receipt_time=#{receiptTime},
+			</if>
+			<if test="type != null">
+				type=#{type},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     finance_reconciliation 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="financeReconciliationResultMap">
+	   select 
+	    id,
+	    batch_no,
+	    sno,
+	    pay_type,
+	    order_no,
+	    cur,
+	    mtrans_amt,
+	    trans_amt,
+	    mintegral,
+	    tintegral,
+	    business_dea,
+	    status,
+	    create_time,
+	    update_time,
+	    receipt_time,
+	    type
+	   from finance_reconciliation
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="financeReconciliationResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     sno,
+	     pay_type,
+	     order_no,
+	     cur,
+	     mtrans_amt,
+	     trans_amt,
+	     mintegral,
+	     tintegral,
+	     business_dea,
+	     status,
+	     create_time,
+	     update_time,
+	     receipt_time,
+	     type
+	   from finance_reconciliation
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="sno != null">
+	        and sno=#{sno}
+	     </if>
+	     <if test="payType != null">
+	        and pay_type=#{payType}
+	     </if>
+	     <if test="orderNo != null">
+	        and order_no=#{orderNo}
+	     </if>
+	     <if test="cur != null">
+	        and cur=#{cur}
+	     </if>
+	     <if test="mtransAmt != null">
+	        and mtrans_amt=#{mtransAmt}
+	     </if>
+	     <if test="transAmt != null">
+	        and trans_amt=#{transAmt}
+	     </if>
+	     <if test="mintegral != null">
+	        and mintegral=#{mintegral}
+	     </if>
+	     <if test="tintegral != null">
+	        and tintegral=#{tintegral}
+	     </if>
+	     <if test="businessDea != null">
+	        and business_dea=#{businessDea}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	     <if test="updateTime != null">
+	        and update_time=#{updateTime}
+	     </if>
+	     <if test="receiptTime != null">
+	        and receipt_time=#{receiptTime}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    batch_no,
+	    sno,
+	    pay_type,
+	    order_no,
+	    cur,
+	    mtrans_amt,
+	    trans_amt,
+	    mintegral,
+	    tintegral,
+	    business_dea,
+	    status,
+	    create_time,
+	    update_time,
+	    receipt_time,
+	    type
+	   from finance_reconciliation
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     sno,
+	     pay_type,
+	     order_no,
+	     cur,
+	     mtrans_amt,
+	     trans_amt,
+	     mintegral,
+	     tintegral,
+	     business_dea,
+	     status,
+	     create_time,
+	     update_time,
+	     receipt_time,
+	     type
+	   from finance_reconciliation
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="sno != null">
+	        and sno=#{sno}
+	     </if>
+	     <if test="payType != null">
+	        and pay_type=#{payType}
+	     </if>
+	     <if test="orderNo != null">
+	        and order_no=#{orderNo}
+	     </if>
+	     <if test="cur != null">
+	        and cur=#{cur}
+	     </if>
+	     <if test="mtransAmt != null">
+	        and mtrans_amt=#{mtransAmt}
+	     </if>
+	     <if test="transAmt != null">
+	        and trans_amt=#{transAmt}
+	     </if>
+	     <if test="mintegral != null">
+	        and mintegral=#{mintegral}
+	     </if>
+	     <if test="tintegral != null">
+	        and tintegral=#{tintegral}
+	     </if>
+	     <if test="businessDea != null">
+	        and business_dea=#{businessDea}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	     <if test="updateTime != null">
+	        and update_time=#{updateTime}
+	     </if>
+	     <if test="receiptTime != null">
+	        and receipt_time=#{receiptTime}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     sno,
+	     pay_type,
+	     order_no,
+	     cur,
+	     mtrans_amt,
+	     trans_amt,
+	     mintegral,
+	     tintegral,
+	     business_dea,
+	     status,
+	     create_time,
+	     update_time,
+	     receipt_time,
+	     type
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from finance_reconciliation
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="sno != null">
+	        and sno=#{sno}
+	     </if>
+	     <if test="payType != null">
+	        and pay_type=#{payType}
+	     </if>
+	     <if test="orderNo != null">
+	        and order_no=#{orderNo}
+	     </if>
+	     <if test="cur != null">
+	        and cur=#{cur}
+	     </if>
+	     <if test="mtransAmt != null">
+	        and mtrans_amt=#{mtransAmt}
+	     </if>
+	     <if test="transAmt != null">
+	        and trans_amt=#{transAmt}
+	     </if>
+	     <if test="mintegral != null">
+	        and mintegral=#{mintegral}
+	     </if>
+	     <if test="tintegral != null">
+	        and tintegral=#{tintegral}
+	     </if>
+	     <if test="businessDea != null">
+	        and business_dea=#{businessDea}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	     <if test="updateTime != null">
+	        and update_time=#{updateTime}
+	     </if>
+	     <if test="receiptTime != null">
+	        and receipt_time=#{receiptTime}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

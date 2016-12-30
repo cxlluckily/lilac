@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【二清发送收银台记录表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.finance.FinanceClearingSendDao">
+
+	<resultMap id="financeClearingSendResultMap" type="com.bluemobi.po.finance.FinanceClearingSend">
+		<id property="id" column="id" />
+       <result property="batchNo" column="batch_no" />
+       <result property="buinessName" column="buiness_name" />
+       <result property="buinessNo" column="buiness_no" />
+       <result property="message" column="message" />
+       <result property="result" column="result" />
+       <result property="createTime" column="create_time" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="financeClearingSendResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="financeClearingSendResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.finance.FinanceClearingSend" useGeneratedKeys="true" keyProperty="id" >
+	   insert into finance_clearing_send (
+	     id,
+	     batch_no,
+	     buiness_name,
+	     buiness_no,
+	     message,
+	     result,
+	     create_time
+	   )values (
+	     #{id},
+	     #{batchNo},
+	     #{buinessName},
+	     #{buinessNo},
+	     #{message},
+	     #{result},
+	     #{createTime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.finance.FinanceClearingSend">
+		update finance_clearing_send
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="batchNo != null">
+				batch_no=#{batchNo},
+			</if>
+			<if test="buinessName != null">
+				buiness_name=#{buinessName},
+			</if>
+			<if test="buinessNo != null">
+				buiness_no=#{buinessNo},
+			</if>
+			<if test="message != null">
+				message=#{message},
+			</if>
+			<if test="result != null">
+				result=#{result},
+			</if>
+			<if test="createTime != null">
+				create_time=#{createTime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     finance_clearing_send 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="financeClearingSendResultMap">
+	   select 
+	    id,
+	    batch_no,
+	    buiness_name,
+	    buiness_no,
+	    message,
+	    result,
+	    create_time
+	   from finance_clearing_send
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="financeClearingSendResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     buiness_name,
+	     buiness_no,
+	     message,
+	     result,
+	     create_time
+	   from finance_clearing_send
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="buinessName != null">
+	        and buiness_name=#{buinessName}
+	     </if>
+	     <if test="buinessNo != null">
+	        and buiness_no=#{buinessNo}
+	     </if>
+	     <if test="message != null">
+	        and message=#{message}
+	     </if>
+	     <if test="result != null">
+	        and result=#{result}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    batch_no,
+	    buiness_name,
+	    buiness_no,
+	    message,
+	    result,
+	    create_time
+	   from finance_clearing_send
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     buiness_name,
+	     buiness_no,
+	     message,
+	     result,
+	     create_time
+	   from finance_clearing_send
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="buinessName != null">
+	        and buiness_name=#{buinessName}
+	     </if>
+	     <if test="buinessNo != null">
+	        and buiness_no=#{buinessNo}
+	     </if>
+	     <if test="message != null">
+	        and message=#{message}
+	     </if>
+	     <if test="result != null">
+	        and result=#{result}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     buiness_name,
+	     buiness_no,
+	     message,
+	     result,
+	     create_time
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from finance_clearing_send
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="buinessName != null">
+	        and buiness_name=#{buinessName}
+	     </if>
+	     <if test="buinessNo != null">
+	        and buiness_no=#{buinessNo}
+	     </if>
+	     <if test="message != null">
+	        and message=#{message}
+	     </if>
+	     <if test="result != null">
+	        and result=#{result}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

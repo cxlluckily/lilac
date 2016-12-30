@@ -1,0 +1,1069 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【商品订单子表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.bts.BtsOrderChildDao">
+
+	<resultMap id="btsOrderChildResultMap" type="com.bluemobi.po.bts.BtsOrderChild">
+		<id property="id" column="id" />
+       <result property="orderNo" column="order_no" />
+       <result property="orderChildNo" column="order_child_no" />
+       <result property="type" column="type" />
+       <result property="userId" column="user_id" />
+       <result property="merchantId" column="merchant_id" />
+       <result property="remark" column="remark" />
+       <result property="leaveMessage" column="leave_message" />
+       <result property="expressType" column="express_type" />
+       <result property="expressNo" column="express_no" />
+       <result property="deliveryTime" column="delivery_time" />
+       <result property="invoiceTitle" column="invoice_title" />
+       <result property="status" column="status" />
+       <result property="isCancel" column="is_cancel" />
+       <result property="cancelReason" column="cancel_reason" />
+       <result property="isDel" column="is_del" />
+       <result property="quantity" column="quantity" />
+       <result property="goodsAmount" column="goods_amount" />
+       <result property="pointAmount" column="point_amount" />
+       <result property="couponAmount" column="coupon_amount" />
+       <result property="platformCouponAmount" column="platform_coupon_amount" />
+       <result property="merchantCouponAmount" column="merchant_coupon_amount" />
+       <result property="freightAmount" column="freight_amount" />
+       <result property="payableAmount" column="payable_amount" />
+       <result property="payAmount" column="pay_amount" />
+       <result property="payOrderType" column="pay_order_type" />
+       <result property="payType" column="pay_type" />
+       <result property="payStatus" column="pay_status" />
+       <result property="sno" column="sno" />
+       <result property="payTime" column="pay_time" />
+       <result property="ctime" column="ctime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="btsOrderChildResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="btsOrderChildResultMap"></resultMap>
+	
+	
+    <resultMap id="orderTOResultMap" type="com.bluemobi.to.OrderTO">
+        <id property="orderId" column="order_id" />
+        <result property="orderNo" column="order_no" />
+        <result property="expressType" column="express_type" />
+        <result property="expressNo" column="express_no" />
+        <result property="goodsType" column="goods_type" />
+        <result property="payType" column="pay_type" />
+        <result property="goodsAmount" column="goods_amount" />
+        <result property="pointAmount" column="point_amount" />
+        <result property="couponAmount" column="coupon_amount" />
+        <result property="freightAmount" column="freight_amount" />
+        <result property="payableAmount" column="payable_amount" />
+        <result property="payAmount" column="pay_amount" />
+        <result property="payStatus" column="pay_status" />
+        <result property="payTime" column="pay_time" />
+        <result property="ctime" column="ctime" />
+        <result property="status" column="status" />
+        <result property="isCancel" column="is_cancel" />
+        <result property="invoiceTitle" column="invoice_title" />
+        
+        
+        <association property="consignee" javaType="com.bluemobi.to.ConsigneeTO">
+            <result property="name" column="consignee_name" />
+            <result property="mobileNo" column="consignee_mobile_no" />
+            <result property="addrId" column="consignee_region_id" />
+            <result property="address" column="consignee_address" />
+        </association>
+
+        <association property="merchant" column="merchant_id" javaType="com.bluemobi.to.MerchantTO">
+            <id property="merchantId" column="merchant_id" />
+            <result property="name" column="merchant_name" />
+            <result property="phone" column="customer_service_phone" />
+            <result property="beginTime" column="customer_service_begin_time" />
+            <result property="endTime" column="customer_service_end_time" />
+        </association>
+        
+        <collection property="items" javaType="list" ofType="com.bluemobi.to.ItemTO">
+            <id property="itemId" column="item_id" />
+            <result property="skuId" column="sku_id" />
+            <result property="goodsName" column="goods_name" />
+            <result property="goodsPic" column="goods_pic" />
+            <result property="propertys" column="propertys" />
+            <result property="price" column="price" />
+            <result property="pointPrice" column="point_price" />
+            <result property="originalPrice" column="original_price" />
+            <result property="payAmount" column="pay_amount" />
+            <result property="quantity" column="quantity" />
+            <result property="refundQuantity" column="refund_quantity" />
+        </collection>
+
+    </resultMap>
+    
+	
+	<insert id="insert" parameterType="com.bluemobi.po.bts.BtsOrderChild" useGeneratedKeys="true" keyProperty="id" >
+	   insert into bts_order_child (
+	     id,
+	     order_no,
+	     order_child_no,
+	     type,
+	     user_id,
+	     merchant_id,
+	     remark,
+	     leave_message,
+	     express_type,
+	     express_no,
+	     delivery_time,
+	     invoice_title,
+	     status,
+	     is_cancel,
+	     cancel_reason,
+	     is_del,
+	     quantity,
+	     goods_amount,
+	     point_amount,
+	     coupon_amount,
+	     platform_coupon_amount,
+	     merchant_coupon_amount,
+	     freight_amount,
+	     payable_amount,
+	     pay_amount,
+	     pay_order_type,
+	     pay_type,
+	     pay_status,
+	     sno,
+	     pay_time,
+	     ctime
+	   )values (
+	     #{id},
+	     #{orderNo},
+	     #{orderChildNo},
+	     #{type},
+	     #{userId},
+	     #{merchantId},
+	     #{remark},
+	     #{leaveMessage},
+	     #{expressType},
+	     #{expressNo},
+	     #{deliveryTime},
+	     #{invoiceTitle},
+	     #{status},
+	     #{isCancel},
+	     #{cancelReason},
+	     #{isDel},
+	     #{quantity},
+	     #{goodsAmount},
+	     #{pointAmount},
+	     #{couponAmount},
+	     #{platformCouponAmount},
+	     #{merchantCouponAmount},
+	     #{freightAmount},
+	     #{payableAmount},
+	     #{payAmount},
+	     #{payOrderType},
+	     #{payType},
+	     #{payStatus},
+	     #{sno},
+	     #{payTime},
+	     #{ctime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.bts.BtsOrderChild">
+		update bts_order_child
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="orderNo != null">
+				order_no=#{orderNo},
+			</if>
+			<if test="orderChildNo != null">
+				order_child_no=#{orderChildNo},
+			</if>
+			<if test="type != null">
+				type=#{type},
+			</if>
+			<if test="userId != null">
+				user_id=#{userId},
+			</if>
+			<if test="merchantId != null">
+				merchant_id=#{merchantId},
+			</if>
+			<if test="remark != null">
+				remark=#{remark},
+			</if>
+			<if test="leaveMessage != null">
+				leave_message=#{leaveMessage},
+			</if>
+			<if test="expressType != null">
+				express_type=#{expressType},
+			</if>
+			<if test="expressNo != null">
+				express_no=#{expressNo},
+			</if>
+			<if test="deliveryTime != null">
+				delivery_time=#{deliveryTime},
+			</if>
+			<if test="invoiceTitle != null">
+				invoice_title=#{invoiceTitle},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+			<if test="isCancel != null">
+				is_cancel=#{isCancel},
+			</if>
+			<if test="cancelReason != null">
+				cancel_reason=#{cancelReason},
+			</if>
+			<if test="isDel != null">
+				is_del=#{isDel},
+			</if>
+			<if test="quantity != null">
+				quantity=#{quantity},
+			</if>
+			<if test="goodsAmount != null">
+				goods_amount=#{goodsAmount},
+			</if>
+			<if test="pointAmount != null">
+				point_amount=#{pointAmount},
+			</if>
+			<if test="couponAmount != null">
+				coupon_amount=#{couponAmount},
+			</if>
+			<if test="platformCouponAmount != null">
+				platform_coupon_amount=#{platformCouponAmount},
+			</if>
+			<if test="merchantCouponAmount != null">
+				merchant_coupon_amount=#{merchantCouponAmount},
+			</if>
+			<if test="freightAmount != null">
+				freight_amount=#{freightAmount},
+			</if>
+			<if test="payableAmount != null">
+				payable_amount=#{payableAmount},
+			</if>
+			<if test="payAmount != null">
+				pay_amount=#{payAmount},
+			</if>
+			<if test="payOrderType != null">
+				pay_order_type=#{payOrderType},
+			</if>
+			<if test="payType != null">
+				pay_type=#{payType},
+			</if>
+			<if test="payStatus != null">
+				pay_status=#{payStatus},
+			</if>
+			<if test="sno != null">
+				sno=#{sno},
+			</if>
+			<if test="payTime != null">
+				pay_time=#{payTime},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     bts_order_child 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="btsOrderChildResultMap">
+	   select 
+	    id,
+	    order_no,
+	    order_child_no,
+	    type,
+	    user_id,
+	    merchant_id,
+	    remark,
+	    leave_message,
+	    express_type,
+	    express_no,
+	    delivery_time,
+	    invoice_title,
+	    status,
+	    is_cancel,
+	    cancel_reason,
+	    is_del,
+	    quantity,
+	    goods_amount,
+	    point_amount,
+	    coupon_amount,
+	    platform_coupon_amount,
+	    merchant_coupon_amount,
+	    freight_amount,
+	    payable_amount,
+	    pay_amount,
+	    pay_order_type,
+	    pay_type,
+	    pay_status,
+	    sno,
+	    pay_time,
+	    ctime
+	   from bts_order_child
+	   <where>
+		   <if test="id != null">
+		        id=#{id}
+		   </if>
+		   <if test="orderChildNo != null">
+		        order_child_no = #{orderChildNo}
+		   </if>
+	   </where>
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="btsOrderChildResultMap">
+	   select 
+	     id,
+	     order_no,
+	     order_child_no,
+	     type,
+	     user_id,
+	     merchant_id,
+	     remark,
+	     leave_message,
+	     express_type,
+	     express_no,
+	     delivery_time,
+	     invoice_title,
+	     status,
+	     is_cancel,
+	     cancel_reason,
+	     is_del,
+	     quantity,
+	     goods_amount,
+	     point_amount,
+	     coupon_amount,
+	     platform_coupon_amount,
+	     merchant_coupon_amount,
+	     freight_amount,
+	     payable_amount,
+	     pay_amount,
+	     pay_order_type,
+	     pay_type,
+	     pay_status,
+	     sno,
+	     pay_time,
+	     ctime
+	   from bts_order_child
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="orderNo != null">
+	        and order_no=#{orderNo}
+	     </if>
+	     <if test="orderChildNo != null">
+	        and order_child_no=#{orderChildNo}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="remark != null">
+	        and remark=#{remark}
+	     </if>
+	     <if test="leaveMessage != null">
+	        and leave_message=#{leaveMessage}
+	     </if>
+	     <if test="expressType != null">
+	        and express_type=#{expressType}
+	     </if>
+	     <if test="expressNo != null">
+	        and express_no=#{expressNo}
+	     </if>
+	     <if test="deliveryTime != null">
+	        and delivery_time=#{deliveryTime}
+	     </if>
+	     <if test="invoiceTitle != null">
+	        and invoice_title=#{invoiceTitle}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="isCancel != null">
+	        and is_cancel=#{isCancel}
+	     </if>
+	     <if test="cancelReason != null">
+	        and cancel_reason=#{cancelReason}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="quantity != null">
+	        and quantity=#{quantity}
+	     </if>
+	     <if test="goodsAmount != null">
+	        and goods_amount=#{goodsAmount}
+	     </if>
+	     <if test="pointAmount != null">
+	        and point_amount=#{pointAmount}
+	     </if>
+	     <if test="couponAmount != null">
+	        and coupon_amount=#{couponAmount}
+	     </if>
+	     <if test="platformCouponAmount != null">
+	        and platform_coupon_amount=#{platformCouponAmount}
+	     </if>
+	     <if test="merchantCouponAmount != null">
+	        and merchant_coupon_amount=#{merchantCouponAmount}
+	     </if>
+	     <if test="freightAmount != null">
+	        and freight_amount=#{freightAmount}
+	     </if>
+	     <if test="payableAmount != null">
+	        and payable_amount=#{payableAmount}
+	     </if>
+	     <if test="payAmount != null">
+	        and pay_amount=#{payAmount}
+	     </if>
+	     <if test="payOrderType != null">
+	        and pay_order_type=#{payOrderType}
+	     </if>
+	     <if test="payType != null">
+	        and pay_type=#{payType}
+	     </if>
+	     <if test="payStatus != null">
+	        and pay_status=#{payStatus}
+	     </if>
+	     <if test="sno != null">
+	        and sno=#{sno}
+	     </if>
+	     <if test="payTime != null">
+	        and pay_time=#{payTime}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    order_no,
+	    order_child_no,
+	    type,
+	    user_id,
+	    merchant_id,
+	    remark,
+	    leave_message,
+	    express_type,
+	    express_no,
+	    delivery_time,
+	    invoice_title,
+	    status,
+	    is_cancel,
+	    cancel_reason,
+	    is_del,
+	    quantity,
+	    goods_amount,
+	    point_amount,
+	    coupon_amount,
+	    platform_coupon_amount,
+	    merchant_coupon_amount,
+	    freight_amount,
+	    payable_amount,
+	    pay_amount,
+	    pay_order_type,
+	    pay_type,
+	    pay_status,
+	    sno,
+	    pay_time,
+	    ctime
+	   from bts_order_child
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     order_no,
+	     order_child_no,
+	     type,
+	     user_id,
+	     merchant_id,
+	     remark,
+	     leave_message,
+	     express_type,
+	     express_no,
+	     delivery_time,
+	     invoice_title,
+	     status,
+	     is_cancel,
+	     cancel_reason,
+	     is_del,
+	     quantity,
+	     goods_amount,
+	     point_amount,
+	     coupon_amount,
+	     platform_coupon_amount,
+	     merchant_coupon_amount,
+	     freight_amount,
+	     payable_amount,
+	     pay_amount,
+	     pay_order_type,
+	     pay_type,
+	     pay_status,
+	     sno,
+	     pay_time,
+	     ctime
+	   from bts_order_child
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="orderNo != null">
+	        and order_no=#{orderNo}
+	     </if>
+	     <if test="orderChildNo != null">
+	        and order_child_no=#{orderChildNo}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="remark != null">
+	        and remark=#{remark}
+	     </if>
+	     <if test="leaveMessage != null">
+	        and leave_message=#{leaveMessage}
+	     </if>
+	     <if test="expressType != null">
+	        and express_type=#{expressType}
+	     </if>
+	     <if test="expressNo != null">
+	        and express_no=#{expressNo}
+	     </if>
+	     <if test="deliveryTime != null">
+	        and delivery_time=#{deliveryTime}
+	     </if>
+	     <if test="invoiceTitle != null">
+	        and invoice_title=#{invoiceTitle}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="isCancel != null">
+	        and is_cancel=#{isCancel}
+	     </if>
+	     <if test="cancelReason != null">
+	        and cancel_reason=#{cancelReason}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="quantity != null">
+	        and quantity=#{quantity}
+	     </if>
+	     <if test="goodsAmount != null">
+	        and goods_amount=#{goodsAmount}
+	     </if>
+	     <if test="pointAmount != null">
+	        and point_amount=#{pointAmount}
+	     </if>
+	     <if test="couponAmount != null">
+	        and coupon_amount=#{couponAmount}
+	     </if>
+	     <if test="platformCouponAmount != null">
+	        and platform_coupon_amount=#{platformCouponAmount}
+	     </if>
+	     <if test="merchantCouponAmount != null">
+	        and merchant_coupon_amount=#{merchantCouponAmount}
+	     </if>
+	     <if test="freightAmount != null">
+	        and freight_amount=#{freightAmount}
+	     </if>
+	     <if test="payableAmount != null">
+	        and payable_amount=#{payableAmount}
+	     </if>
+	     <if test="payAmount != null">
+	        and pay_amount=#{payAmount}
+	     </if>
+	     <if test="payOrderType != null">
+	        and pay_order_type=#{payOrderType}
+	     </if>
+	     <if test="payType != null">
+	        and pay_type=#{payType}
+	     </if>
+	     <if test="payStatus != null">
+	        and pay_status=#{payStatus}
+	     </if>
+	     <if test="sno != null">
+	        and sno=#{sno}
+	     </if>
+	     <if test="payTime != null">
+	        and pay_time=#{payTime}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     order_no,
+	     order_child_no,
+	     type,
+	     user_id,
+	     merchant_id,
+	     remark,
+	     leave_message,
+	     express_type,
+	     express_no,
+	     delivery_time,
+	     invoice_title,
+	     status,
+	     is_cancel,
+	     cancel_reason,
+	     is_del,
+	     quantity,
+	     goods_amount,
+	     point_amount,
+	     coupon_amount,
+	     platform_coupon_amount,
+	     merchant_coupon_amount,
+	     freight_amount,
+	     payable_amount,
+	     pay_amount,
+	     pay_order_type,
+	     pay_type,
+	     pay_status,
+	     sno,
+	     pay_time,
+	     ctime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from bts_order_child
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="orderNo != null">
+	        and order_no=#{orderNo}
+	     </if>
+	     <if test="orderChildNo != null">
+	        and order_child_no=#{orderChildNo}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="remark != null">
+	        and remark=#{remark}
+	     </if>
+	     <if test="leaveMessage != null">
+	        and leave_message=#{leaveMessage}
+	     </if>
+	     <if test="expressType != null">
+	        and express_type=#{expressType}
+	     </if>
+	     <if test="expressNo != null">
+	        and express_no=#{expressNo}
+	     </if>
+	     <if test="deliveryTime != null">
+	        and delivery_time=#{deliveryTime}
+	     </if>
+	     <if test="invoiceTitle != null">
+	        and invoice_title=#{invoiceTitle}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="isCancel != null">
+	        and is_cancel=#{isCancel}
+	     </if>
+	     <if test="cancelReason != null">
+	        and cancel_reason=#{cancelReason}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="quantity != null">
+	        and quantity=#{quantity}
+	     </if>
+	     <if test="goodsAmount != null">
+	        and goods_amount=#{goodsAmount}
+	     </if>
+	     <if test="pointAmount != null">
+	        and point_amount=#{pointAmount}
+	     </if>
+	     <if test="couponAmount != null">
+	        and coupon_amount=#{couponAmount}
+	     </if>
+	     <if test="platformCouponAmount != null">
+	        and platform_coupon_amount=#{platformCouponAmount}
+	     </if>
+	     <if test="merchantCouponAmount != null">
+	        and merchant_coupon_amount=#{merchantCouponAmount}
+	     </if>
+	     <if test="freightAmount != null">
+	        and freight_amount=#{freightAmount}
+	     </if>
+	     <if test="payableAmount != null">
+	        and payable_amount=#{payableAmount}
+	     </if>
+	     <if test="payAmount != null">
+	        and pay_amount=#{payAmount}
+	     </if>
+	     <if test="payOrderType != null">
+	        and pay_order_type=#{payOrderType}
+	     </if>
+	     <if test="payType != null">
+	        and pay_type=#{payType}
+	     </if>
+	     <if test="payStatus != null">
+	        and pay_status=#{payStatus}
+	     </if>
+	     <if test="sno != null">
+	        and sno=#{sno}
+	     </if>
+	     <if test="payTime != null">
+	        and pay_time=#{payTime}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+    <insert id="insertBatch" parameterType="java.util.List">
+	   insert into bts_order_child (
+	     id,
+	     order_no,
+	     order_child_no,
+	     type,
+	     user_id,
+	     merchant_id,
+	     remark,
+	     leave_message,
+	     express_type,
+	     express_no,
+	     delivery_time,
+	     invoice_title,
+	     status,
+	     is_cancel,
+	     cancel_reason,
+	     is_del,
+	     goods_amount,
+	     point_amount,
+	     coupon_amount,
+	     platform_coupon_amount,
+	     merchant_coupon_amount,
+	     freight_amount,
+	     payable_amount,
+	     pay_amount,
+	     pay_order_type,
+	     pay_type,
+	     pay_status,
+	     sno,
+	     pay_time,
+	     ctime
+	   )values
+       <foreach collection="list" item="obj" index="index" separator=",">
+	   (
+	     #{obj.id},
+	     #{obj.orderNo},
+	     #{obj.orderChildNo},
+	     #{obj.type},
+	     #{obj.userId},
+	     #{obj.merchantId},
+	     #{obj.remark},
+	     #{obj.leaveMessage},
+	     #{obj.expressType},
+	     #{obj.expressNo},
+	     #{obj.deliveryTime},
+	     #{obj.invoiceTitle},
+	     #{obj.status},
+	     #{obj.isCancel},
+	     #{obj.cancelReason},
+	     #{obj.isDel},
+	     #{obj.goodsAmount},
+	     #{obj.pointAmount},
+	     #{obj.couponAmount},
+	     #{obj.platformCouponAmount},
+	     #{obj.merchantCouponAmount},
+	     #{obj.freightAmount},
+	     #{obj.payableAmount},
+	     #{obj.payAmount},
+	     #{obj.payOrderType},
+	     #{obj.payType},
+	     #{obj.payStatus},
+	     #{obj.sno},
+	     #{obj.payTime},
+	     #{obj.ctime}
+	   )
+      </foreach>
+       
+    </insert>
+    
+   
+    <select id="selectOrderTO" parameterType="map" resultMap="orderTOResultMap">
+
+        select
+            c.id order_id,
+            c.order_child_no order_no,
+            c.express_type,
+            c.express_no,
+            o.goods_type,
+            c.pay_type,
+            c.goods_amount,
+			c.point_amount,
+            c.coupon_amount,
+            c.freight_amount,
+            c.pay_amount,
+            c.pay_time,
+            c.ctime,
+    		c.status,
+            c.is_cancel,
+            c.is_del,
+			
+            o.consignee_name consignee_name,
+            o.consignee_mobile_no consignee_mobile_no,
+            o.consignee_region_id consignee_region_id,
+            concat(o.consignee_address,o.consignee_region_name) consignee_address,
+    
+            m.merchant_id,
+			m.name merchant_name,
+			m.customer_service_phone,
+			m.customer_service_begin_time,
+			m.customer_service_end_time,
+    
+            i.id item_id,
+            i.sku_id,
+            i.goods_name,
+            i.goods_pic,
+            i.propertys,
+            i.goods_price price,
+			i.point_price,
+			i.goods_original_price original_price,
+			i.pay_amount,
+            i.quantity,
+			i.refund_quantity,
+            i.is_comment
+        from bts_order_child c
+        LEFT JOIN bts_order o ON c.order_no = o.order_no
+        LEFT JOIN bts_order_items i ON c.order_child_no = i.order_child_no
+        LEFT JOIN merchant m ON c.merchant_id = m.merchant_id
+        
+       <where>
+       
+            c.user_id=#{userId}
+            
+         <if test="orderId != null">
+            and c.id=#{orderId}
+         </if>  
+         <if test="orderNo != null">
+            and c.order_child_no=#{orderNo}
+         </if>   
+         <if test="status != null">
+            and c.status=#{status}
+         </if>
+         <if test="isCancel != null">
+            and c.is_cancel=#{isCancel}
+         </if>
+         <if test="isDel != null">
+            and c.is_del=#{isDel}
+         </if>
+       </where>
+       
+    </select>
+    
+    
+    <select id="pageOrderTO" parameterType="map" resultMap="orderTOResultMap">
+
+        select
+            c.id order_id,
+            c.order_child_no order_no,
+            c.express_type,
+            c.express_no,
+            o.goods_type,
+            c.pay_type,
+            c.goods_amount,
+			c.point_amount,
+            c.coupon_amount,
+            c.freight_amount,
+            c.pay_amount,
+            c.pay_status,
+            c.pay_time,
+            c.ctime,
+    		c.status,
+            c.is_cancel,
+            c.is_del,
+            c.invoice_title,
+			
+            o.consignee_name consignee_name,
+            o.consignee_mobile_no consignee_mobile_no,
+            o.consignee_region_id consignee_region_id,
+            concat(o.consignee_address,o.consignee_region_name) consignee_address,
+    
+            m.merchant_id,
+			m.name merchant_name,
+			m.customer_service_phone,
+			m.customer_service_begin_time,
+			m.customer_service_end_time,
+    
+            i.id item_id,
+            i.sku_id,
+            i.goods_name,
+            i.goods_pic,
+            i.propertys,
+            i.goods_price price,
+			i.point_price,
+			i.goods_original_price original_price,
+            i.quantity,
+			i.refund_quantity
+        <include refid="pageOrderTOCondition" />
+        order by c.ctime desc
+        limit #{offset},#{rows}
+    </select>
+
+    <select id="pageOrderTOCount" parameterType="map" resultType="int">
+       select count(1) from(
+            select c.id
+            <include refid="pageOrderTOCondition" />
+            group by c.id
+       ) t
+    </select>
+
+    <sql id="pageOrderTOCondition">
+        from bts_order_child c
+        LEFT JOIN bts_order o ON c.order_no = o.order_no
+        LEFT JOIN bts_order_items i ON c.order_child_no = i.order_child_no
+        LEFT JOIN merchant m ON c.merchant_id = m.merchant_id
+       <where>
+            
+            c.user_id=#{userId}
+            
+         <if test="status != null">
+         	<if test="status == 1">
+            	and c.status = 1 and c.is_cancel=0
+            </if>
+         	<if test="status == 2">
+            	and (c.status = 2 or c.status = 3) and c.is_cancel=0
+            </if>
+            <if test="status == 4">
+            	<![CDATA[ and c.status >= 4 and c.is_cancel=0 ]]>
+            </if>
+         </if>
+         <if test="goodsType != null">
+            and o.goods_type=#{goodsType}
+         </if>
+         <if test="isCancel != null">
+            and c.is_cancel=#{isCancel}
+         </if>
+         <if test="isDel != null">
+            and c.is_del=#{isDel}
+         </if>
+       </where>
+    </sql>
+    
+    
+ <!--    
+    <select id="selectExpiredOrder" parameterType="map" resultMap="pageExpireOrderTOResultMap">
+        select
+            c.id order_id,
+            c.order_child_no order_no,
+            c.user_id,
+            c.express_type,
+            c.express_no,
+            c.status,
+            c.is_cancel,
+            c.is_del,
+            c.goods_amount,
+            c.discount_amount,
+            c.freight_amount,
+            c.payable_amount,
+            c.pay_amount,
+            c.pay_type,
+            c.pay_time,
+            c.ctime,
+    
+            o.consignee_name consignee_name,
+            o.consignee_mobile_no consignee_mobile_no,
+            o.consignee_region_id consignee_region_id,
+            o.consignee_region_name consignee_region_name,
+            o.consignee_address consignee_address,
+    
+            s.id shop_id,
+            s.name shop_name,
+            s.avatar shop_avatar,
+            s.pic shop_pic,
+    
+            i.id item_id,
+            i.sku_id,
+            i.goods_name,
+            i.goods_pic,
+            i.propertys,
+            i.goods_original_price originalPrice,
+            i.goods_price price,
+            i.quantity,
+            i.is_comment
+        from bts_order_child c
+        LEFT JOIN bts_order o ON c.order_no = o.order_no and o.status = 1 and o.is_cancel = 0 and o.is_del = 0
+        LEFT JOIN bts_order_items i ON c.order_child_no = i.order_child_no
+        LEFT JOIN shop s ON c.shop_id = s.id
+        <where>
+            c.is_cancel = 0
+            and c.is_del = 0
+            and c.status = 1
+	        <if test="status != null">
+	            and c.status=#{status}
+	        </if>
+	        <if test="EXPIRES != null">
+				<![CDATA[   
+				    and UNIX_TIMESTAMP(now()) - UNIX_TIMESTAMP(c.ctime) > #{EXPIRES}
+				]]>   
+            </if>
+         </where>
+        order by c.ctime desc
+    </select>
+    
+    <select id="selectNotDeleteCountByOrderNo" parameterType="map" resultType="int">
+        select 
+            count(1)
+        from
+            bts_order_child
+        where
+            order_no = #{orderNo}
+            and is_del = 0
+            and user_id = #{userId}
+    </select>
+ -->
+	
+</mapper> 

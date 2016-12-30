@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【审核日志表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.log.LogAuditDao">
+
+	<resultMap id="logAuditResultMap" type="com.bluemobi.po.log.LogAudit">
+		<id property="id" column="id" />
+       <result property="type" column="type" />
+       <result property="targetId" column="target_id" />
+       <result property="remark" column="remark" />
+       <result property="description" column="description" />
+       <result property="grade" column="grade" />
+       <result property="status" column="status" />
+       <result property="auditer" column="auditer" />
+       <result property="auditTime" column="audit_time" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="logAuditResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="logAuditResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.log.LogAudit" useGeneratedKeys="true" keyProperty="id" >
+	   insert into log_audit (
+	     id,
+	     type,
+	     target_id,
+	     remark,
+	     description,
+	     grade,
+	     status,
+	     auditer,
+	     audit_time
+	   )values (
+	     #{id},
+	     #{type},
+	     #{targetId},
+	     #{remark},
+	     #{description},
+	     #{grade},
+	     #{status},
+	     #{auditer},
+	     #{auditTime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.log.LogAudit">
+		update log_audit
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="type != null">
+				type=#{type},
+			</if>
+			<if test="targetId != null">
+				target_id=#{targetId},
+			</if>
+			<if test="remark != null">
+				remark=#{remark},
+			</if>
+			<if test="description != null">
+				description=#{description},
+			</if>
+			<if test="grade != null">
+				grade=#{grade},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+			<if test="auditer != null">
+				auditer=#{auditer},
+			</if>
+			<if test="auditTime != null">
+				audit_time=#{auditTime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     log_audit 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="logAuditResultMap">
+	   select 
+	    id,
+	    type,
+	    target_id,
+	    remark,
+	    description,
+	    grade,
+	    status,
+	    auditer,
+	    audit_time
+	   from log_audit
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="logAuditResultMap">
+	   select 
+	     id,
+	     type,
+	     target_id,
+	     remark,
+	     description,
+	     grade,
+	     status,
+	     auditer,
+	     audit_time
+	   from log_audit
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="targetId != null">
+	        and target_id=#{targetId}
+	     </if>
+	     <if test="remark != null">
+	        and remark=#{remark}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="grade != null">
+	        and grade=#{grade}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="auditer != null">
+	        and auditer=#{auditer}
+	     </if>
+	     <if test="auditTime != null">
+	        and audit_time=#{auditTime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    type,
+	    target_id,
+	    remark,
+	    description,
+	    grade,
+	    status,
+	    auditer,
+	    audit_time
+	   from log_audit
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     type,
+	     target_id,
+	     remark,
+	     description,
+	     grade,
+	     status,
+	     auditer,
+	     audit_time
+	   from log_audit
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="targetId != null">
+	        and target_id=#{targetId}
+	     </if>
+	     <if test="remark != null">
+	        and remark=#{remark}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="grade != null">
+	        and grade=#{grade}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="auditer != null">
+	        and auditer=#{auditer}
+	     </if>
+	     <if test="auditTime != null">
+	        and audit_time=#{auditTime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     type,
+	     target_id,
+	     remark,
+	     description,
+	     grade,
+	     status,
+	     auditer,
+	     audit_time
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from log_audit
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="targetId != null">
+	        and target_id=#{targetId}
+	     </if>
+	     <if test="remark != null">
+	        and remark=#{remark}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="grade != null">
+	        and grade=#{grade}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="auditer != null">
+	        and auditer=#{auditer}
+	     </if>
+	     <if test="auditTime != null">
+	        and audit_time=#{auditTime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

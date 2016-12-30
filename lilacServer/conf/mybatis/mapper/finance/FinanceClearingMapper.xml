@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【二清清算总表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.finance.FinanceClearingDao">
+
+	<resultMap id="financeClearingResultMap" type="com.bluemobi.po.finance.FinanceClearing">
+		<id property="id" column="id" />
+       <result property="batchNo" column="batch_no" />
+       <result property="payType" column="pay_type" />
+       <result property="sno" column="sno" />
+       <result property="orderNo" column="order_no" />
+       <result property="buinessName" column="buiness_name" />
+       <result property="buinessNo" column="buiness_no" />
+       <result property="businessDeal" column="business_deal" />
+       <result property="cur" column="cur" />
+       <result property="transAmt" column="trans_amt" />
+       <result property="integral" column="integral" />
+       <result property="channel" column="channel" />
+       <result property="flag" column="flag" />
+       <result property="paybkNo" column="paybk_no" />
+       <result property="paybkCode" column="paybk_code" />
+       <result property="receiptTime" column="receipt_time" />
+       <result property="createTime" column="create_time" />
+       <result property="factorage" column="factorage" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="financeClearingResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="financeClearingResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.finance.FinanceClearing" useGeneratedKeys="true" keyProperty="id" >
+	   insert into finance_clearing (
+	     id,
+	     batch_no,
+	     pay_type,
+	     sno,
+	     order_no,
+	     buiness_name,
+	     buiness_no,
+	     business_deal,
+	     cur,
+	     trans_amt,
+	     integral,
+	     channel,
+	     flag,
+	     paybk_no,
+	     paybk_code,
+	     receipt_time,
+	     create_time,
+	     factorage
+	   )values (
+	     #{id},
+	     #{batchNo},
+	     #{payType},
+	     #{sno},
+	     #{orderNo},
+	     #{buinessName},
+	     #{buinessNo},
+	     #{businessDeal},
+	     #{cur},
+	     #{transAmt},
+	     #{integral},
+	     #{channel},
+	     #{flag},
+	     #{paybkNo},
+	     #{paybkCode},
+	     #{receiptTime},
+	     #{createTime},
+	     #{factorage}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.finance.FinanceClearing">
+		update finance_clearing
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="batchNo != null">
+				batch_no=#{batchNo},
+			</if>
+			<if test="payType != null">
+				pay_type=#{payType},
+			</if>
+			<if test="sno != null">
+				sno=#{sno},
+			</if>
+			<if test="orderNo != null">
+				order_no=#{orderNo},
+			</if>
+			<if test="buinessName != null">
+				buiness_name=#{buinessName},
+			</if>
+			<if test="buinessNo != null">
+				buiness_no=#{buinessNo},
+			</if>
+			<if test="businessDeal != null">
+				business_deal=#{businessDeal},
+			</if>
+			<if test="cur != null">
+				cur=#{cur},
+			</if>
+			<if test="transAmt != null">
+				trans_amt=#{transAmt},
+			</if>
+			<if test="integral != null">
+				integral=#{integral},
+			</if>
+			<if test="channel != null">
+				channel=#{channel},
+			</if>
+			<if test="flag != null">
+				flag=#{flag},
+			</if>
+			<if test="paybkNo != null">
+				paybk_no=#{paybkNo},
+			</if>
+			<if test="paybkCode != null">
+				paybk_code=#{paybkCode},
+			</if>
+			<if test="receiptTime != null">
+				receipt_time=#{receiptTime},
+			</if>
+			<if test="createTime != null">
+				create_time=#{createTime},
+			</if>
+			<if test="factorage != null">
+				factorage=#{factorage},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     finance_clearing 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="financeClearingResultMap">
+	   select 
+	    id,
+	    batch_no,
+	    pay_type,
+	    sno,
+	    order_no,
+	    buiness_name,
+	    buiness_no,
+	    business_deal,
+	    cur,
+	    trans_amt,
+	    integral,
+	    channel,
+	    flag,
+	    paybk_no,
+	    paybk_code,
+	    receipt_time,
+	    create_time,
+	    factorage
+	   from finance_clearing
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="financeClearingResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     pay_type,
+	     sno,
+	     order_no,
+	     buiness_name,
+	     buiness_no,
+	     business_deal,
+	     cur,
+	     trans_amt,
+	     integral,
+	     channel,
+	     flag,
+	     paybk_no,
+	     paybk_code,
+	     receipt_time,
+	     create_time,
+	     factorage
+	   from finance_clearing
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="payType != null">
+	        and pay_type=#{payType}
+	     </if>
+	     <if test="sno != null">
+	        and sno=#{sno}
+	     </if>
+	     <if test="orderNo != null">
+	        and order_no=#{orderNo}
+	     </if>
+	     <if test="buinessName != null">
+	        and buiness_name=#{buinessName}
+	     </if>
+	     <if test="buinessNo != null">
+	        and buiness_no=#{buinessNo}
+	     </if>
+	     <if test="businessDeal != null">
+	        and business_deal=#{businessDeal}
+	     </if>
+	     <if test="cur != null">
+	        and cur=#{cur}
+	     </if>
+	     <if test="transAmt != null">
+	        and trans_amt=#{transAmt}
+	     </if>
+	     <if test="integral != null">
+	        and integral=#{integral}
+	     </if>
+	     <if test="channel != null">
+	        and channel=#{channel}
+	     </if>
+	     <if test="flag != null">
+	        and flag=#{flag}
+	     </if>
+	     <if test="paybkNo != null">
+	        and paybk_no=#{paybkNo}
+	     </if>
+	     <if test="paybkCode != null">
+	        and paybk_code=#{paybkCode}
+	     </if>
+	     <if test="receiptTime != null">
+	        and receipt_time=#{receiptTime}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	     <if test="factorage != null">
+	        and factorage=#{factorage}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    batch_no,
+	    pay_type,
+	    sno,
+	    order_no,
+	    buiness_name,
+	    buiness_no,
+	    business_deal,
+	    cur,
+	    trans_amt,
+	    integral,
+	    channel,
+	    flag,
+	    paybk_no,
+	    paybk_code,
+	    receipt_time,
+	    create_time,
+	    factorage
+	   from finance_clearing
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     pay_type,
+	     sno,
+	     order_no,
+	     buiness_name,
+	     buiness_no,
+	     business_deal,
+	     cur,
+	     trans_amt,
+	     integral,
+	     channel,
+	     flag,
+	     paybk_no,
+	     paybk_code,
+	     receipt_time,
+	     create_time,
+	     factorage
+	   from finance_clearing
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="payType != null">
+	        and pay_type=#{payType}
+	     </if>
+	     <if test="sno != null">
+	        and sno=#{sno}
+	     </if>
+	     <if test="orderNo != null">
+	        and order_no=#{orderNo}
+	     </if>
+	     <if test="buinessName != null">
+	        and buiness_name=#{buinessName}
+	     </if>
+	     <if test="buinessNo != null">
+	        and buiness_no=#{buinessNo}
+	     </if>
+	     <if test="businessDeal != null">
+	        and business_deal=#{businessDeal}
+	     </if>
+	     <if test="cur != null">
+	        and cur=#{cur}
+	     </if>
+	     <if test="transAmt != null">
+	        and trans_amt=#{transAmt}
+	     </if>
+	     <if test="integral != null">
+	        and integral=#{integral}
+	     </if>
+	     <if test="channel != null">
+	        and channel=#{channel}
+	     </if>
+	     <if test="flag != null">
+	        and flag=#{flag}
+	     </if>
+	     <if test="paybkNo != null">
+	        and paybk_no=#{paybkNo}
+	     </if>
+	     <if test="paybkCode != null">
+	        and paybk_code=#{paybkCode}
+	     </if>
+	     <if test="receiptTime != null">
+	        and receipt_time=#{receiptTime}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	     <if test="factorage != null">
+	        and factorage=#{factorage}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     pay_type,
+	     sno,
+	     order_no,
+	     buiness_name,
+	     buiness_no,
+	     business_deal,
+	     cur,
+	     trans_amt,
+	     integral,
+	     channel,
+	     flag,
+	     paybk_no,
+	     paybk_code,
+	     receipt_time,
+	     create_time,
+	     factorage
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from finance_clearing
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="payType != null">
+	        and pay_type=#{payType}
+	     </if>
+	     <if test="sno != null">
+	        and sno=#{sno}
+	     </if>
+	     <if test="orderNo != null">
+	        and order_no=#{orderNo}
+	     </if>
+	     <if test="buinessName != null">
+	        and buiness_name=#{buinessName}
+	     </if>
+	     <if test="buinessNo != null">
+	        and buiness_no=#{buinessNo}
+	     </if>
+	     <if test="businessDeal != null">
+	        and business_deal=#{businessDeal}
+	     </if>
+	     <if test="cur != null">
+	        and cur=#{cur}
+	     </if>
+	     <if test="transAmt != null">
+	        and trans_amt=#{transAmt}
+	     </if>
+	     <if test="integral != null">
+	        and integral=#{integral}
+	     </if>
+	     <if test="channel != null">
+	        and channel=#{channel}
+	     </if>
+	     <if test="flag != null">
+	        and flag=#{flag}
+	     </if>
+	     <if test="paybkNo != null">
+	        and paybk_no=#{paybkNo}
+	     </if>
+	     <if test="paybkCode != null">
+	        and paybk_code=#{paybkCode}
+	     </if>
+	     <if test="receiptTime != null">
+	        and receipt_time=#{receiptTime}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	     <if test="factorage != null">
+	        and factorage=#{factorage}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

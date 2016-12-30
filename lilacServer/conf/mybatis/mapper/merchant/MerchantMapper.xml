@@ -1,0 +1,1028 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【商户表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.merchant.MerchantDao">
+
+	<resultMap id="merchantResultMap" type="com.bluemobi.po.merchant.Merchant">
+		<id property="merchantId" column="merchant_id" />
+       <result property="merchantNo" column="merchant_no" />
+       <result property="name" column="name" />
+       <result property="fullName" column="full_name" />
+       <result property="legalPerson" column="legal_person" />
+       <result property="registeredCapital" column="registered_capital" />
+       <result property="cardType" column="card_type" />
+       <result property="cardNo" column="card_no" />
+       <result property="companyType" column="company_type" />
+       <result property="businessLicenseNo" column="business_license_no" />
+       <result property="businessLicenseBeginTime" column="business_license_begin_time" />
+       <result property="businessLicenseEndTime" column="business_license_end_time" />
+       <result property="organizationCode" column="organization_code" />
+       <result property="organizationBeginTime" column="organization_begin_time" />
+       <result property="organizationEndTime" column="organization_end_time" />
+       <result property="province" column="province" />
+       <result property="city" column="city" />
+       <result property="county" column="county" />
+       <result property="address" column="address" />
+       <result property="linkmanName" column="linkman_name" />
+       <result property="linkmanPhone" column="linkman_phone" />
+       <result property="linkmanEmail" column="linkman_email" />
+       <result property="contractBeginTime" column="contract_begin_time" />
+       <result property="contractEndTime" column="contract_end_time" />
+       <result property="bankAccountName" column="bank_account_name" />
+       <result property="bankAccount" column="bank_account" />
+       <result property="bankName" column="bank_name" />
+       <result property="bankNo" column="bank_no" />
+       <result property="bankCity" column="bank_city" />
+       <result property="bankAccountType" column="bank_account_type" />
+       <result property="financeLinkmanName" column="finance_linkman_name" />
+       <result property="financeLinkmanPhone" column="finance_linkman_phone" />
+       <result property="financeLinkmanEmail" column="finance_linkman_email" />
+       <result property="customerServicePhone" column="customer_service_phone" />
+       <result property="customerServiceBeginTime" column="customer_service_begin_time" />
+       <result property="customerServiceEndTime" column="customer_service_end_time" />
+       <result property="extraFile" column="extra_file" />
+       <result property="contractFile" column="contract_file" />
+       <result property="description" column="description" />
+       <result property="auditStatus" column="audit_status" />
+       <result property="isStop" column="is_stop" />
+       <result property="isDel" column="is_del" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="merchantResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="merchantResultMap"></resultMap>
+	
+	
+	<resultMap id="merchantTOResultMap" type="com.bluemobi.to.MerchantTO">
+		<id property="merchantId" column="merchant_id" />
+       <result property="name" column="name" />
+       <result property="phone" column="customer_service_phone" />
+       <result property="beginTime" column="customer_service_begin_time" />
+       <result property="endTime" column="customer_service_end_time" />
+	</resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.merchant.Merchant" useGeneratedKeys="true" keyProperty="merchantId" >
+	   insert into merchant (
+	     merchant_id,
+	     merchant_no,
+	     name,
+	     full_name,
+	     legal_person,
+	     registered_capital,
+	     card_type,
+	     card_no,
+	     company_type,
+	     business_license_no,
+	     business_license_begin_time,
+	     business_license_end_time,
+	     organization_code,
+	     organization_begin_time,
+	     organization_end_time,
+	     province,
+	     city,
+	     county,
+	     address,
+	     linkman_name,
+	     linkman_phone,
+	     linkman_email,
+	     contract_begin_time,
+	     contract_end_time,
+	     bank_account_name,
+	     bank_account,
+	     bank_name,
+	     bank_no,
+	     bank_city,
+	     bank_account_type,
+	     finance_linkman_name,
+	     finance_linkman_phone,
+	     finance_linkman_email,
+	     customer_service_phone,
+	     customer_service_begin_time,
+	     customer_service_end_time,
+	     extra_file,
+	     contract_file,
+	     description,
+	     audit_status,
+	     is_stop,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{merchantId},
+	     #{merchantNo},
+	     #{name},
+	     #{fullName},
+	     #{legalPerson},
+	     #{registeredCapital},
+	     #{cardType},
+	     #{cardNo},
+	     #{companyType},
+	     #{businessLicenseNo},
+	     #{businessLicenseBeginTime},
+	     #{businessLicenseEndTime},
+	     #{organizationCode},
+	     #{organizationBeginTime},
+	     #{organizationEndTime},
+	     #{province},
+	     #{city},
+	     #{county},
+	     #{address},
+	     #{linkmanName},
+	     #{linkmanPhone},
+	     #{linkmanEmail},
+	     #{contractBeginTime},
+	     #{contractEndTime},
+	     #{bankAccountName},
+	     #{bankAccount},
+	     #{bankName},
+	     #{bankNo},
+	     #{bankCity},
+	     #{bankAccountType},
+	     #{financeLinkmanName},
+	     #{financeLinkmanPhone},
+	     #{financeLinkmanEmail},
+	     #{customerServicePhone},
+	     #{customerServiceBeginTime},
+	     #{customerServiceEndTime},
+	     #{extraFile},
+	     #{contractFile},
+	     #{description},
+	     #{auditStatus},
+	     #{isStop},
+	     #{isDel},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.merchant.Merchant">
+		update merchant
+		<set>
+			<if test="merchantId != null">
+				merchant_id=#{merchantId},
+			</if>
+			<if test="merchantNo != null">
+				merchant_no=#{merchantNo},
+			</if>
+			<if test="name != null">
+				name=#{name},
+			</if>
+			<if test="fullName != null">
+				full_name=#{fullName},
+			</if>
+			<if test="legalPerson != null">
+				legal_person=#{legalPerson},
+			</if>
+			<if test="registeredCapital != null">
+				registered_capital=#{registeredCapital},
+			</if>
+			<if test="cardType != null">
+				card_type=#{cardType},
+			</if>
+			<if test="cardNo != null">
+				card_no=#{cardNo},
+			</if>
+			<if test="companyType != null">
+				company_type=#{companyType},
+			</if>
+			<if test="businessLicenseNo != null">
+				business_license_no=#{businessLicenseNo},
+			</if>
+			<if test="businessLicenseBeginTime != null">
+				business_license_begin_time=#{businessLicenseBeginTime},
+			</if>
+			<if test="businessLicenseEndTime != null">
+				business_license_end_time=#{businessLicenseEndTime},
+			</if>
+			<if test="organizationCode != null">
+				organization_code=#{organizationCode},
+			</if>
+			<if test="organizationBeginTime != null">
+				organization_begin_time=#{organizationBeginTime},
+			</if>
+			<if test="organizationEndTime != null">
+				organization_end_time=#{organizationEndTime},
+			</if>
+			<if test="province != null">
+				province=#{province},
+			</if>
+			<if test="city != null">
+				city=#{city},
+			</if>
+			<if test="county != null">
+				county=#{county},
+			</if>
+			<if test="address != null">
+				address=#{address},
+			</if>
+			<if test="linkmanName != null">
+				linkman_name=#{linkmanName},
+			</if>
+			<if test="linkmanPhone != null">
+				linkman_phone=#{linkmanPhone},
+			</if>
+			<if test="linkmanEmail != null">
+				linkman_email=#{linkmanEmail},
+			</if>
+			<if test="contractBeginTime != null">
+				contract_begin_time=#{contractBeginTime},
+			</if>
+			<if test="contractEndTime != null">
+				contract_end_time=#{contractEndTime},
+			</if>
+			<if test="bankAccountName != null">
+				bank_account_name=#{bankAccountName},
+			</if>
+			<if test="bankAccount != null">
+				bank_account=#{bankAccount},
+			</if>
+			<if test="bankName != null">
+				bank_name=#{bankName},
+			</if>
+			<if test="bankNo != null">
+				bank_no=#{bankNo},
+			</if>
+			<if test="bankCity != null">
+				bank_city=#{bankCity},
+			</if>
+			<if test="bankAccountType != null">
+				bank_account_type=#{bankAccountType},
+			</if>
+			<if test="financeLinkmanName != null">
+				finance_linkman_name=#{financeLinkmanName},
+			</if>
+			<if test="financeLinkmanPhone != null">
+				finance_linkman_phone=#{financeLinkmanPhone},
+			</if>
+			<if test="financeLinkmanEmail != null">
+				finance_linkman_email=#{financeLinkmanEmail},
+			</if>
+			<if test="customerServicePhone != null">
+				customer_service_phone=#{customerServicePhone},
+			</if>
+			<if test="customerServiceBeginTime != null">
+				customer_service_begin_time=#{customerServiceBeginTime},
+			</if>
+			<if test="customerServiceEndTime != null">
+				customer_service_end_time=#{customerServiceEndTime},
+			</if>
+			<if test="extraFile != null">
+				extra_file=#{extraFile},
+			</if>
+			<if test="contractFile != null">
+				contract_file=#{contractFile},
+			</if>
+			<if test="description != null">
+				description=#{description},
+			</if>
+			<if test="auditStatus != null">
+				audit_status=#{auditStatus},
+			</if>
+			<if test="isStop != null">
+				is_stop=#{isStop},
+			</if>
+			<if test="isDel != null">
+				is_del=#{isDel},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			merchant_id=#{merchantId} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     merchant 
+	   where 
+	    merchant_id=#{merchantId} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="merchantResultMap">
+	   select 
+	    merchant_id,
+	    merchant_no,
+	    name,
+	    full_name,
+	    legal_person,
+	    registered_capital,
+	    card_type,
+	    card_no,
+	    company_type,
+	    business_license_no,
+	    business_license_begin_time,
+	    business_license_end_time,
+	    organization_code,
+	    organization_begin_time,
+	    organization_end_time,
+	    province,
+	    city,
+	    county,
+	    address,
+	    linkman_name,
+	    linkman_phone,
+	    linkman_email,
+	    contract_begin_time,
+	    contract_end_time,
+	    bank_account_name,
+	    bank_account,
+	    bank_name,
+	    bank_no,
+	    bank_city,
+	    bank_account_type,
+	    finance_linkman_name,
+	    finance_linkman_phone,
+	    finance_linkman_email,
+	    customer_service_phone,
+	    customer_service_begin_time,
+	    customer_service_end_time,
+	    extra_file,
+	    contract_file,
+	    description,
+	    audit_status,
+	    is_stop,
+	    is_del,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from merchant
+	   where 
+	    merchant_id=#{merchantId} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="merchantResultMap">
+	   select 
+	     merchant_id,
+	     merchant_no,
+	     name,
+	     full_name,
+	     legal_person,
+	     registered_capital,
+	     card_type,
+	     card_no,
+	     company_type,
+	     business_license_no,
+	     business_license_begin_time,
+	     business_license_end_time,
+	     organization_code,
+	     organization_begin_time,
+	     organization_end_time,
+	     province,
+	     city,
+	     county,
+	     address,
+	     linkman_name,
+	     linkman_phone,
+	     linkman_email,
+	     contract_begin_time,
+	     contract_end_time,
+	     bank_account_name,
+	     bank_account,
+	     bank_name,
+	     bank_no,
+	     bank_city,
+	     bank_account_type,
+	     finance_linkman_name,
+	     finance_linkman_phone,
+	     finance_linkman_email,
+	     customer_service_phone,
+	     customer_service_begin_time,
+	     customer_service_end_time,
+	     extra_file,
+	     contract_file,
+	     description,
+	     audit_status,
+	     is_stop,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from merchant
+	   <where>
+	     <if test="merchantId != null">
+	        merchant_id=#{merchantId}
+	     </if>
+	     <if test="merchantNo != null">
+	        and merchant_no=#{merchantNo}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="fullName != null">
+	        and full_name=#{fullName}
+	     </if>
+	     <if test="legalPerson != null">
+	        and legal_person=#{legalPerson}
+	     </if>
+	     <if test="registeredCapital != null">
+	        and registered_capital=#{registeredCapital}
+	     </if>
+	     <if test="cardType != null">
+	        and card_type=#{cardType}
+	     </if>
+	     <if test="cardNo != null">
+	        and card_no=#{cardNo}
+	     </if>
+	     <if test="companyType != null">
+	        and company_type=#{companyType}
+	     </if>
+	     <if test="businessLicenseNo != null">
+	        and business_license_no=#{businessLicenseNo}
+	     </if>
+	     <if test="businessLicenseBeginTime != null">
+	        and business_license_begin_time=#{businessLicenseBeginTime}
+	     </if>
+	     <if test="businessLicenseEndTime != null">
+	        and business_license_end_time=#{businessLicenseEndTime}
+	     </if>
+	     <if test="organizationCode != null">
+	        and organization_code=#{organizationCode}
+	     </if>
+	     <if test="organizationBeginTime != null">
+	        and organization_begin_time=#{organizationBeginTime}
+	     </if>
+	     <if test="organizationEndTime != null">
+	        and organization_end_time=#{organizationEndTime}
+	     </if>
+	     <if test="province != null">
+	        and province=#{province}
+	     </if>
+	     <if test="city != null">
+	        and city=#{city}
+	     </if>
+	     <if test="county != null">
+	        and county=#{county}
+	     </if>
+	     <if test="address != null">
+	        and address=#{address}
+	     </if>
+	     <if test="linkmanName != null">
+	        and linkman_name=#{linkmanName}
+	     </if>
+	     <if test="linkmanPhone != null">
+	        and linkman_phone=#{linkmanPhone}
+	     </if>
+	     <if test="linkmanEmail != null">
+	        and linkman_email=#{linkmanEmail}
+	     </if>
+	     <if test="contractBeginTime != null">
+	        and contract_begin_time=#{contractBeginTime}
+	     </if>
+	     <if test="contractEndTime != null">
+	        and contract_end_time=#{contractEndTime}
+	     </if>
+	     <if test="bankAccountName != null">
+	        and bank_account_name=#{bankAccountName}
+	     </if>
+	     <if test="bankAccount != null">
+	        and bank_account=#{bankAccount}
+	     </if>
+	     <if test="bankName != null">
+	        and bank_name=#{bankName}
+	     </if>
+	     <if test="bankNo != null">
+	        and bank_no=#{bankNo}
+	     </if>
+	     <if test="bankCity != null">
+	        and bank_city=#{bankCity}
+	     </if>
+	     <if test="bankAccountType != null">
+	        and bank_account_type=#{bankAccountType}
+	     </if>
+	     <if test="financeLinkmanName != null">
+	        and finance_linkman_name=#{financeLinkmanName}
+	     </if>
+	     <if test="financeLinkmanPhone != null">
+	        and finance_linkman_phone=#{financeLinkmanPhone}
+	     </if>
+	     <if test="financeLinkmanEmail != null">
+	        and finance_linkman_email=#{financeLinkmanEmail}
+	     </if>
+	     <if test="customerServicePhone != null">
+	        and customer_service_phone=#{customerServicePhone}
+	     </if>
+	     <if test="customerServiceBeginTime != null">
+	        and customer_service_begin_time=#{customerServiceBeginTime}
+	     </if>
+	     <if test="customerServiceEndTime != null">
+	        and customer_service_end_time=#{customerServiceEndTime}
+	     </if>
+	     <if test="extraFile != null">
+	        and extra_file=#{extraFile}
+	     </if>
+	     <if test="contractFile != null">
+	        and contract_file=#{contractFile}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="isStop != null">
+	        and is_stop=#{isStop}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    merchant_id,
+	    merchant_no,
+	    name,
+	    full_name,
+	    legal_person,
+	    registered_capital,
+	    card_type,
+	    card_no,
+	    company_type,
+	    business_license_no,
+	    business_license_begin_time,
+	    business_license_end_time,
+	    organization_code,
+	    organization_begin_time,
+	    organization_end_time,
+	    province,
+	    city,
+	    county,
+	    address,
+	    linkman_name,
+	    linkman_phone,
+	    linkman_email,
+	    contract_begin_time,
+	    contract_end_time,
+	    bank_account_name,
+	    bank_account,
+	    bank_name,
+	    bank_no,
+	    bank_city,
+	    bank_account_type,
+	    finance_linkman_name,
+	    finance_linkman_phone,
+	    finance_linkman_email,
+	    customer_service_phone,
+	    customer_service_begin_time,
+	    customer_service_end_time,
+	    extra_file,
+	    contract_file,
+	    description,
+	    audit_status,
+	    is_stop,
+	    is_del,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from merchant
+	   where 
+	    merchant_id=#{merchantId} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     merchant_id,
+	     merchant_no,
+	     name,
+	     full_name,
+	     legal_person,
+	     registered_capital,
+	     card_type,
+	     card_no,
+	     company_type,
+	     business_license_no,
+	     business_license_begin_time,
+	     business_license_end_time,
+	     organization_code,
+	     organization_begin_time,
+	     organization_end_time,
+	     province,
+	     city,
+	     county,
+	     address,
+	     linkman_name,
+	     linkman_phone,
+	     linkman_email,
+	     contract_begin_time,
+	     contract_end_time,
+	     bank_account_name,
+	     bank_account,
+	     bank_name,
+	     bank_no,
+	     bank_city,
+	     bank_account_type,
+	     finance_linkman_name,
+	     finance_linkman_phone,
+	     finance_linkman_email,
+	     customer_service_phone,
+	     customer_service_begin_time,
+	     customer_service_end_time,
+	     extra_file,
+	     contract_file,
+	     description,
+	     audit_status,
+	     is_stop,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from merchant
+	   <where>
+	     <if test="merchantId != null">
+	        merchant_id=#{merchantId}
+	     </if>
+	     <if test="merchantNo != null">
+	        and merchant_no=#{merchantNo}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="fullName != null">
+	        and full_name=#{fullName}
+	     </if>
+	     <if test="legalPerson != null">
+	        and legal_person=#{legalPerson}
+	     </if>
+	     <if test="registeredCapital != null">
+	        and registered_capital=#{registeredCapital}
+	     </if>
+	     <if test="cardType != null">
+	        and card_type=#{cardType}
+	     </if>
+	     <if test="cardNo != null">
+	        and card_no=#{cardNo}
+	     </if>
+	     <if test="companyType != null">
+	        and company_type=#{companyType}
+	     </if>
+	     <if test="businessLicenseNo != null">
+	        and business_license_no=#{businessLicenseNo}
+	     </if>
+	     <if test="businessLicenseBeginTime != null">
+	        and business_license_begin_time=#{businessLicenseBeginTime}
+	     </if>
+	     <if test="businessLicenseEndTime != null">
+	        and business_license_end_time=#{businessLicenseEndTime}
+	     </if>
+	     <if test="organizationCode != null">
+	        and organization_code=#{organizationCode}
+	     </if>
+	     <if test="organizationBeginTime != null">
+	        and organization_begin_time=#{organizationBeginTime}
+	     </if>
+	     <if test="organizationEndTime != null">
+	        and organization_end_time=#{organizationEndTime}
+	     </if>
+	     <if test="province != null">
+	        and province=#{province}
+	     </if>
+	     <if test="city != null">
+	        and city=#{city}
+	     </if>
+	     <if test="county != null">
+	        and county=#{county}
+	     </if>
+	     <if test="address != null">
+	        and address=#{address}
+	     </if>
+	     <if test="linkmanName != null">
+	        and linkman_name=#{linkmanName}
+	     </if>
+	     <if test="linkmanPhone != null">
+	        and linkman_phone=#{linkmanPhone}
+	     </if>
+	     <if test="linkmanEmail != null">
+	        and linkman_email=#{linkmanEmail}
+	     </if>
+	     <if test="contractBeginTime != null">
+	        and contract_begin_time=#{contractBeginTime}
+	     </if>
+	     <if test="contractEndTime != null">
+	        and contract_end_time=#{contractEndTime}
+	     </if>
+	     <if test="bankAccountName != null">
+	        and bank_account_name=#{bankAccountName}
+	     </if>
+	     <if test="bankAccount != null">
+	        and bank_account=#{bankAccount}
+	     </if>
+	     <if test="bankName != null">
+	        and bank_name=#{bankName}
+	     </if>
+	     <if test="bankNo != null">
+	        and bank_no=#{bankNo}
+	     </if>
+	     <if test="bankCity != null">
+	        and bank_city=#{bankCity}
+	     </if>
+	     <if test="bankAccountType != null">
+	        and bank_account_type=#{bankAccountType}
+	     </if>
+	     <if test="financeLinkmanName != null">
+	        and finance_linkman_name=#{financeLinkmanName}
+	     </if>
+	     <if test="financeLinkmanPhone != null">
+	        and finance_linkman_phone=#{financeLinkmanPhone}
+	     </if>
+	     <if test="financeLinkmanEmail != null">
+	        and finance_linkman_email=#{financeLinkmanEmail}
+	     </if>
+	     <if test="customerServicePhone != null">
+	        and customer_service_phone=#{customerServicePhone}
+	     </if>
+	     <if test="customerServiceBeginTime != null">
+	        and customer_service_begin_time=#{customerServiceBeginTime}
+	     </if>
+	     <if test="customerServiceEndTime != null">
+	        and customer_service_end_time=#{customerServiceEndTime}
+	     </if>
+	     <if test="extraFile != null">
+	        and extra_file=#{extraFile}
+	     </if>
+	     <if test="contractFile != null">
+	        and contract_file=#{contractFile}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="isStop != null">
+	        and is_stop=#{isStop}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     merchant_id,
+	     merchant_no,
+	     name,
+	     full_name,
+	     legal_person,
+	     registered_capital,
+	     card_type,
+	     card_no,
+	     company_type,
+	     business_license_no,
+	     business_license_begin_time,
+	     business_license_end_time,
+	     organization_code,
+	     organization_begin_time,
+	     organization_end_time,
+	     province,
+	     city,
+	     county,
+	     address,
+	     linkman_name,
+	     linkman_phone,
+	     linkman_email,
+	     contract_begin_time,
+	     contract_end_time,
+	     bank_account_name,
+	     bank_account,
+	     bank_name,
+	     bank_no,
+	     bank_city,
+	     bank_account_type,
+	     finance_linkman_name,
+	     finance_linkman_phone,
+	     finance_linkman_email,
+	     customer_service_phone,
+	     customer_service_begin_time,
+	     customer_service_end_time,
+	     extra_file,
+	     contract_file,
+	     description,
+	     audit_status,
+	     is_stop,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from merchant
+	   <where>
+	     <if test="merchantId != null">
+	        merchant_id=#{merchantId}
+	     </if>
+	     <if test="merchantNo != null">
+	        and merchant_no=#{merchantNo}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="fullName != null">
+	        and full_name=#{fullName}
+	     </if>
+	     <if test="legalPerson != null">
+	        and legal_person=#{legalPerson}
+	     </if>
+	     <if test="registeredCapital != null">
+	        and registered_capital=#{registeredCapital}
+	     </if>
+	     <if test="cardType != null">
+	        and card_type=#{cardType}
+	     </if>
+	     <if test="cardNo != null">
+	        and card_no=#{cardNo}
+	     </if>
+	     <if test="companyType != null">
+	        and company_type=#{companyType}
+	     </if>
+	     <if test="businessLicenseNo != null">
+	        and business_license_no=#{businessLicenseNo}
+	     </if>
+	     <if test="businessLicenseBeginTime != null">
+	        and business_license_begin_time=#{businessLicenseBeginTime}
+	     </if>
+	     <if test="businessLicenseEndTime != null">
+	        and business_license_end_time=#{businessLicenseEndTime}
+	     </if>
+	     <if test="organizationCode != null">
+	        and organization_code=#{organizationCode}
+	     </if>
+	     <if test="organizationBeginTime != null">
+	        and organization_begin_time=#{organizationBeginTime}
+	     </if>
+	     <if test="organizationEndTime != null">
+	        and organization_end_time=#{organizationEndTime}
+	     </if>
+	     <if test="province != null">
+	        and province=#{province}
+	     </if>
+	     <if test="city != null">
+	        and city=#{city}
+	     </if>
+	     <if test="county != null">
+	        and county=#{county}
+	     </if>
+	     <if test="address != null">
+	        and address=#{address}
+	     </if>
+	     <if test="linkmanName != null">
+	        and linkman_name=#{linkmanName}
+	     </if>
+	     <if test="linkmanPhone != null">
+	        and linkman_phone=#{linkmanPhone}
+	     </if>
+	     <if test="linkmanEmail != null">
+	        and linkman_email=#{linkmanEmail}
+	     </if>
+	     <if test="contractBeginTime != null">
+	        and contract_begin_time=#{contractBeginTime}
+	     </if>
+	     <if test="contractEndTime != null">
+	        and contract_end_time=#{contractEndTime}
+	     </if>
+	     <if test="bankAccountName != null">
+	        and bank_account_name=#{bankAccountName}
+	     </if>
+	     <if test="bankAccount != null">
+	        and bank_account=#{bankAccount}
+	     </if>
+	     <if test="bankName != null">
+	        and bank_name=#{bankName}
+	     </if>
+	     <if test="bankNo != null">
+	        and bank_no=#{bankNo}
+	     </if>
+	     <if test="bankCity != null">
+	        and bank_city=#{bankCity}
+	     </if>
+	     <if test="bankAccountType != null">
+	        and bank_account_type=#{bankAccountType}
+	     </if>
+	     <if test="financeLinkmanName != null">
+	        and finance_linkman_name=#{financeLinkmanName}
+	     </if>
+	     <if test="financeLinkmanPhone != null">
+	        and finance_linkman_phone=#{financeLinkmanPhone}
+	     </if>
+	     <if test="financeLinkmanEmail != null">
+	        and finance_linkman_email=#{financeLinkmanEmail}
+	     </if>
+	     <if test="customerServicePhone != null">
+	        and customer_service_phone=#{customerServicePhone}
+	     </if>
+	     <if test="customerServiceBeginTime != null">
+	        and customer_service_begin_time=#{customerServiceBeginTime}
+	     </if>
+	     <if test="customerServiceEndTime != null">
+	        and customer_service_end_time=#{customerServiceEndTime}
+	     </if>
+	     <if test="extraFile != null">
+	        and extra_file=#{extraFile}
+	     </if>
+	     <if test="contractFile != null">
+	        and contract_file=#{contractFile}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="isStop != null">
+	        and is_stop=#{isStop}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+	<select id="selectMerchantTO" parameterType="map" resultMap="merchantTOResultMap">
+	   select 
+		    merchant_id,
+		    name,
+		    customer_service_phone,
+		    customer_service_begin_time,
+		    customer_service_end_time
+	   from merchant
+	   where 
+	    	merchant_id=#{merchantId} 
+	</select>
+
+	
+</mapper> 

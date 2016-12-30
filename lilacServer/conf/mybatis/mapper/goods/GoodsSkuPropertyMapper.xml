@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【商品sku属性表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.goods.GoodsSkuPropertyDao">
+
+	<resultMap id="goodsSkuPropertyResultMap" type="com.bluemobi.po.goods.GoodsSkuProperty">
+		<id property="id" column="id" />
+       <result property="skuId" column="sku_id" />
+       <result property="propertyId" column="property_id" />
+       <result property="propertyValueId" column="property_value_id" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="goodsSkuPropertyResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="goodsSkuPropertyResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.goods.GoodsSkuProperty" useGeneratedKeys="true" keyProperty="id" >
+	   insert into goods_sku_property (
+	     id,
+	     sku_id,
+	     property_id,
+	     property_value_id
+	   )values (
+	     #{id},
+	     #{skuId},
+	     #{propertyId},
+	     #{propertyValueId}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.goods.GoodsSkuProperty">
+		update goods_sku_property
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="skuId != null">
+				sku_id=#{skuId},
+			</if>
+			<if test="propertyId != null">
+				property_id=#{propertyId},
+			</if>
+			<if test="propertyValueId != null">
+				property_value_id=#{propertyValueId},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     goods_sku_property 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="goodsSkuPropertyResultMap">
+	   select 
+	    id,
+	    sku_id,
+	    property_id,
+	    property_value_id
+	   from goods_sku_property
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="goodsSkuPropertyResultMap">
+	   select 
+	     id,
+	     sku_id,
+	     property_id,
+	     property_value_id
+	   from goods_sku_property
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="propertyId != null">
+	        and property_id=#{propertyId}
+	     </if>
+	     <if test="propertyValueId != null">
+	        and property_value_id=#{propertyValueId}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    sku_id,
+	    property_id,
+	    property_value_id
+	   from goods_sku_property
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     sku_id,
+	     property_id,
+	     property_value_id
+	   from goods_sku_property
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="propertyId != null">
+	        and property_id=#{propertyId}
+	     </if>
+	     <if test="propertyValueId != null">
+	        and property_value_id=#{propertyValueId}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     sku_id,
+	     property_id,
+	     property_value_id
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from goods_sku_property
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="propertyId != null">
+	        and property_id=#{propertyId}
+	     </if>
+	     <if test="propertyValueId != null">
+	        and property_value_id=#{propertyValueId}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

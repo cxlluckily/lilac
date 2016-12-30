@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【商品分类绑定品牌表，后台管理员在新增商品的时候，选好分类后，系统会自动带出当前商品的品牌列表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.goods.GoodsCategoryBrandDao">
+
+	<resultMap id="goodsCategoryBrandResultMap" type="com.bluemobi.po.goods.GoodsCategoryBrand">
+		<id property="id" column="id" />
+       <result property="categoryId" column="category_id" />
+       <result property="brandId" column="brand_id" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="goodsCategoryBrandResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="goodsCategoryBrandResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.goods.GoodsCategoryBrand" useGeneratedKeys="true" keyProperty="id" >
+	   insert into goods_category_brand (
+	     id,
+	     category_id,
+	     brand_id
+	   )values (
+	     #{id},
+	     #{categoryId},
+	     #{brandId}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.goods.GoodsCategoryBrand">
+		update goods_category_brand
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="categoryId != null">
+				category_id=#{categoryId},
+			</if>
+			<if test="brandId != null">
+				brand_id=#{brandId},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     goods_category_brand 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="goodsCategoryBrandResultMap">
+	   select 
+	    id,
+	    category_id,
+	    brand_id
+	   from goods_category_brand
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="goodsCategoryBrandResultMap">
+	   select 
+	     id,
+	     category_id,
+	     brand_id
+	   from goods_category_brand
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="categoryId != null">
+	        and category_id=#{categoryId}
+	     </if>
+	     <if test="brandId != null">
+	        and brand_id=#{brandId}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    category_id,
+	    brand_id
+	   from goods_category_brand
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     category_id,
+	     brand_id
+	   from goods_category_brand
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="categoryId != null">
+	        and category_id=#{categoryId}
+	     </if>
+	     <if test="brandId != null">
+	        and brand_id=#{brandId}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     category_id,
+	     brand_id
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from goods_category_brand
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="categoryId != null">
+	        and category_id=#{categoryId}
+	     </if>
+	     <if test="brandId != null">
+	        and brand_id=#{brandId}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

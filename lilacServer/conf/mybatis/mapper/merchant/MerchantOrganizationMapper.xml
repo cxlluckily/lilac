@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【商户机构表，权益商户需要添加自己的机构】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.merchant.MerchantOrganizationDao">
+
+	<resultMap id="merchantOrganizationResultMap" type="com.bluemobi.po.merchant.MerchantOrganization">
+		<id property="id" column="id" />
+       <result property="merchantId" column="merchant_id" />
+       <result property="organizationNo" column="organization_no" />
+       <result property="name" column="name" />
+       <result property="address" column="address" />
+       <result property="phone" column="phone" />
+       <result property="categoryId1" column="category_id1" />
+       <result property="categoryId2" column="category_id2" />
+       <result property="pic" column="pic" />
+       <result property="longitude" column="longitude" />
+       <result property="latitude" column="latitude" />
+       <result property="sortOrder" column="sort_order" />
+       <result property="isDel" column="is_del" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="merchantOrganizationResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="merchantOrganizationResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.merchant.MerchantOrganization" useGeneratedKeys="true" keyProperty="id" >
+	   insert into merchant_organization (
+	     id,
+	     merchant_id,
+	     organization_no,
+	     name,
+	     address,
+	     phone,
+	     category_id1,
+	     category_id2,
+	     pic,
+	     longitude,
+	     latitude,
+	     sort_order,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{id},
+	     #{merchantId},
+	     #{organizationNo},
+	     #{name},
+	     #{address},
+	     #{phone},
+	     #{categoryId1},
+	     #{categoryId2},
+	     #{pic},
+	     #{longitude},
+	     #{latitude},
+	     #{sortOrder},
+	     #{isDel},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.merchant.MerchantOrganization">
+		update merchant_organization
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="merchantId != null">
+				merchant_id=#{merchantId},
+			</if>
+			<if test="organizationNo != null">
+				organization_no=#{organizationNo},
+			</if>
+			<if test="name != null">
+				name=#{name},
+			</if>
+			<if test="address != null">
+				address=#{address},
+			</if>
+			<if test="phone != null">
+				phone=#{phone},
+			</if>
+			<if test="categoryId1 != null">
+				category_id1=#{categoryId1},
+			</if>
+			<if test="categoryId2 != null">
+				category_id2=#{categoryId2},
+			</if>
+			<if test="pic != null">
+				pic=#{pic},
+			</if>
+			<if test="longitude != null">
+				longitude=#{longitude},
+			</if>
+			<if test="latitude != null">
+				latitude=#{latitude},
+			</if>
+			<if test="sortOrder != null">
+				sort_order=#{sortOrder},
+			</if>
+			<if test="isDel != null">
+				is_del=#{isDel},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     merchant_organization 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="merchantOrganizationResultMap">
+	   select 
+	    id,
+	    merchant_id,
+	    organization_no,
+	    name,
+	    address,
+	    phone,
+	    category_id1,
+	    category_id2,
+	    pic,
+	    longitude,
+	    latitude,
+	    sort_order,
+	    is_del,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from merchant_organization
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="merchantOrganizationResultMap">
+	   select 
+	     id,
+	     merchant_id,
+	     organization_no,
+	     name,
+	     address,
+	     phone,
+	     category_id1,
+	     category_id2,
+	     pic,
+	     longitude,
+	     latitude,
+	     sort_order,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from merchant_organization
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="organizationNo != null">
+	        and organization_no=#{organizationNo}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="address != null">
+	        and address=#{address}
+	     </if>
+	     <if test="phone != null">
+	        and phone=#{phone}
+	     </if>
+	     <if test="categoryId1 != null">
+	        and category_id1=#{categoryId1}
+	     </if>
+	     <if test="categoryId2 != null">
+	        and category_id2=#{categoryId2}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="longitude != null">
+	        and longitude=#{longitude}
+	     </if>
+	     <if test="latitude != null">
+	        and latitude=#{latitude}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    merchant_id,
+	    organization_no,
+	    name,
+	    address,
+	    phone,
+	    category_id1,
+	    category_id2,
+	    pic,
+	    longitude,
+	    latitude,
+	    sort_order,
+	    is_del,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from merchant_organization
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     merchant_id,
+	     organization_no,
+	     name,
+	     address,
+	     phone,
+	     category_id1,
+	     category_id2,
+	     pic,
+	     longitude,
+	     latitude,
+	     sort_order,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from merchant_organization
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="organizationNo != null">
+	        and organization_no=#{organizationNo}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="address != null">
+	        and address=#{address}
+	     </if>
+	     <if test="phone != null">
+	        and phone=#{phone}
+	     </if>
+	     <if test="categoryId1 != null">
+	        and category_id1=#{categoryId1}
+	     </if>
+	     <if test="categoryId2 != null">
+	        and category_id2=#{categoryId2}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="longitude != null">
+	        and longitude=#{longitude}
+	     </if>
+	     <if test="latitude != null">
+	        and latitude=#{latitude}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     merchant_id,
+	     organization_no,
+	     name,
+	     address,
+	     phone,
+	     category_id1,
+	     category_id2,
+	     pic,
+	     longitude,
+	     latitude,
+	     sort_order,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from merchant_organization
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="organizationNo != null">
+	        and organization_no=#{organizationNo}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="address != null">
+	        and address=#{address}
+	     </if>
+	     <if test="phone != null">
+	        and phone=#{phone}
+	     </if>
+	     <if test="categoryId1 != null">
+	        and category_id1=#{categoryId1}
+	     </if>
+	     <if test="categoryId2 != null">
+	        and category_id2=#{categoryId2}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="longitude != null">
+	        and longitude=#{longitude}
+	     </if>
+	     <if test="latitude != null">
+	        and latitude=#{latitude}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

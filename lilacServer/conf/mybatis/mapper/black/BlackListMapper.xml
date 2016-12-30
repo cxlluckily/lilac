@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【黑名单表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.black.BlackListDao">
+
+	<resultMap id="blackListResultMap" type="com.bluemobi.po.black.BlackList">
+		<id property="id" column="id" />
+       <result property="certType" column="cert_type" />
+       <result property="certNo" column="cert_no" />
+       <result property="reason" column="reason" />
+       <result property="isDel" column="is_del" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="blackListResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="blackListResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.black.BlackList" useGeneratedKeys="true" keyProperty="id" >
+	   insert into black_list (
+	     id,
+	     cert_type,
+	     cert_no,
+	     reason,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{id},
+	     #{certType},
+	     #{certNo},
+	     #{reason},
+	     #{isDel},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.black.BlackList">
+		update black_list
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="certType != null">
+				cert_type=#{certType},
+			</if>
+			<if test="certNo != null">
+				cert_no=#{certNo},
+			</if>
+			<if test="reason != null">
+				reason=#{reason},
+			</if>
+			<if test="isDel != null">
+				is_del=#{isDel},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     black_list 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="blackListResultMap">
+	   select 
+	    id,
+	    cert_type,
+	    cert_no,
+	    reason,
+	    is_del,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from black_list
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="blackListResultMap">
+	   select 
+	     id,
+	     cert_type,
+	     cert_no,
+	     reason,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from black_list
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="certType != null">
+	        and cert_type=#{certType}
+	     </if>
+	     <if test="certNo != null">
+	        and cert_no=#{certNo}
+	     </if>
+	     <if test="reason != null">
+	        and reason=#{reason}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    cert_type,
+	    cert_no,
+	    reason,
+	    is_del,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from black_list
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     cert_type,
+	     cert_no,
+	     reason,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from black_list
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="certType != null">
+	        and cert_type=#{certType}
+	     </if>
+	     <if test="certNo != null">
+	        and cert_no=#{certNo}
+	     </if>
+	     <if test="reason != null">
+	        and reason=#{reason}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     cert_type,
+	     cert_no,
+	     reason,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from black_list
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="certType != null">
+	        and cert_type=#{certType}
+	     </if>
+	     <if test="certNo != null">
+	        and cert_no=#{certNo}
+	     </if>
+	     <if test="reason != null">
+	        and reason=#{reason}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【优惠券：全场券、类别券，每笔订单只能使用一张优惠券，使用优惠券有金额限制，支持白名单，支持主动领取和自动下发】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.coupon.CouponDao">
+
+	<resultMap id="couponResultMap" type="com.bluemobi.po.coupon.Coupon">
+		<id property="id" column="id" />
+       <result property="name" column="name" />
+       <result property="pic" column="pic" />
+       <result property="type" column="type" />
+       <result property="couponAmount" column="coupon_amount" />
+       <result property="platformAmount" column="platform_amount" />
+       <result property="merchantAmount" column="merchant_amount" />
+       <result property="minAmount" column="min_amount" />
+       <result property="count" column="count" />
+       <result property="useBeginTime" column="use_begin_time" />
+       <result property="useEndTime" column="use_end_time" />
+       <result property="publishBeginTime" column="publish_begin_time" />
+       <result property="publishEndTime" column="publish_end_time" />
+       <result property="publishType" column="publish_type" />
+       <result property="targetType" column="target_type" />
+       <result property="whiteListId" column="white_list_id" />
+       <result property="description1" column="description1" />
+       <result property="description2" column="description2" />
+       <result property="auditStatus" column="audit_status" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="couponResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="couponResultMap"></resultMap>
+	
+	<resultMap id="couponTOResultMap" type="com.bluemobi.to.CouponTO" >
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="pic" column="pic" />
+		<result property="type" column="type" />
+		<result property="couponAmount" column="coupon_amount" />
+		<result property="minAmount" column="min_amount" />
+		<result property="useBeginTime" column="use_begin_time" />
+		<result property="useEndTime" column="use_end_time" />
+		<result property="status" column="status" />
+		<result property="isGet" column="is_get" />
+		<result property="description1" column="description1" />
+		<result property="description2" column="description2" />    	
+		<result property="platformAmount" column="platform_amount" />    	
+		<result property="merchantAmount" column="merchant_amount" />    	
+	</resultMap>
+	
+	<insert id="insert" parameterType="com.bluemobi.po.coupon.Coupon" useGeneratedKeys="true" keyProperty="id" >
+	   insert into coupon (
+	     id,
+	     name,
+	     pic,
+	     type,
+	     coupon_amount,
+	     platform_amount,
+	     merchant_amount,
+	     min_amount,
+	     count,
+	     use_begin_time,
+	     use_end_time,
+	     publish_begin_time,
+	     publish_end_time,
+	     publish_type,
+	     target_type,
+	     white_list_id,
+	     description1,
+	     description2,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{id},
+	     #{name},
+	     #{pic},
+	     #{type},
+	     #{couponAmount},
+	     #{platformAmount},
+	     #{merchantAmount},
+	     #{minAmount},
+	     #{count},
+	     #{useBeginTime},
+	     #{useEndTime},
+	     #{publishBeginTime},
+	     #{publishEndTime},
+	     #{publishType},
+	     #{targetType},
+	     #{whiteListId},
+	     #{description1},
+	     #{description2},
+	     #{auditStatus},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.coupon.Coupon">
+		update coupon
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="name != null">
+				name=#{name},
+			</if>
+			<if test="pic != null">
+				pic=#{pic},
+			</if>
+			<if test="type != null">
+				type=#{type},
+			</if>
+			<if test="couponAmount != null">
+				coupon_amount=#{couponAmount},
+			</if>
+			<if test="platformAmount != null">
+				platform_amount=#{platformAmount},
+			</if>
+			<if test="merchantAmount != null">
+				merchant_amount=#{merchantAmount},
+			</if>
+			<if test="minAmount != null">
+				min_amount=#{minAmount},
+			</if>
+			<if test="count != null">
+				count=#{count},
+			</if>
+			<if test="useBeginTime != null">
+				use_begin_time=#{useBeginTime},
+			</if>
+			<if test="useEndTime != null">
+				use_end_time=#{useEndTime},
+			</if>
+			<if test="publishBeginTime != null">
+				publish_begin_time=#{publishBeginTime},
+			</if>
+			<if test="publishEndTime != null">
+				publish_end_time=#{publishEndTime},
+			</if>
+			<if test="publishType != null">
+				publish_type=#{publishType},
+			</if>
+			<if test="targetType != null">
+				target_type=#{targetType},
+			</if>
+			<if test="whiteListId != null">
+				white_list_id=#{whiteListId},
+			</if>
+			<if test="description1 != null">
+				description1=#{description1},
+			</if>
+			<if test="description2 != null">
+				description2=#{description2},
+			</if>
+			<if test="auditStatus != null">
+				audit_status=#{auditStatus},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     coupon 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="couponResultMap">
+	   select 
+	    id,
+	    name,
+	    pic,
+	    type,
+	    coupon_amount,
+	    platform_amount,
+	    merchant_amount,
+	    min_amount,
+	    count,
+	    use_begin_time,
+	    use_end_time,
+	    publish_begin_time,
+	    publish_end_time,
+	    publish_type,
+	    target_type,
+	    white_list_id,
+	    description1,
+	    description2,
+	    audit_status,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from coupon
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="couponResultMap">
+	   select 
+	     id,
+	     name,
+	     pic,
+	     type,
+	     coupon_amount,
+	     platform_amount,
+	     merchant_amount,
+	     min_amount,
+	     count,
+	     use_begin_time,
+	     use_end_time,
+	     publish_begin_time,
+	     publish_end_time,
+	     publish_type,
+	     target_type,
+	     white_list_id,
+	     description1,
+	     description2,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from coupon
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="couponAmount != null">
+	        and coupon_amount=#{couponAmount}
+	     </if>
+	     <if test="platformAmount != null">
+	        and platform_amount=#{platformAmount}
+	     </if>
+	     <if test="merchantAmount != null">
+	        and merchant_amount=#{merchantAmount}
+	     </if>
+	     <if test="minAmount != null">
+	        and min_amount=#{minAmount}
+	     </if>
+	     <if test="count != null">
+	        and count=#{count}
+	     </if>
+	     <if test="useBeginTime != null">
+	        and use_begin_time=#{useBeginTime}
+	     </if>
+	     <if test="useEndTime != null">
+	        and use_end_time=#{useEndTime}
+	     </if>
+	     <if test="publishBeginTime != null">
+	        and publish_begin_time=#{publishBeginTime}
+	     </if>
+	     <if test="publishEndTime != null">
+	        and publish_end_time=#{publishEndTime}
+	     </if>
+	     <if test="publishType != null">
+	        and publish_type=#{publishType}
+	     </if>
+	     <if test="targetType != null">
+	        and target_type=#{targetType}
+	     </if>
+	     <if test="whiteListId != null">
+	        and white_list_id=#{whiteListId}
+	     </if>
+	     <if test="description1 != null">
+	        and description1=#{description1}
+	     </if>
+	     <if test="description2 != null">
+	        and description2=#{description2}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    name,
+	    pic,
+	    type,
+	    coupon_amount,
+	    platform_amount,
+	    merchant_amount,
+	    min_amount,
+	    count,
+	    use_begin_time,
+	    use_end_time,
+	    publish_begin_time,
+	    publish_end_time,
+	    publish_type,
+	    target_type,
+	    white_list_id,
+	    description1,
+	    description2,
+	    audit_status,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from coupon
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     name,
+	     pic,
+	     type,
+	     coupon_amount,
+	     platform_amount,
+	     merchant_amount,
+	     min_amount,
+	     count,
+	     use_begin_time,
+	     use_end_time,
+	     publish_begin_time,
+	     publish_end_time,
+	     publish_type,
+	     target_type,
+	     white_list_id,
+	     description1,
+	     description2,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from coupon
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="couponAmount != null">
+	        and coupon_amount=#{couponAmount}
+	     </if>
+	     <if test="platformAmount != null">
+	        and platform_amount=#{platformAmount}
+	     </if>
+	     <if test="merchantAmount != null">
+	        and merchant_amount=#{merchantAmount}
+	     </if>
+	     <if test="minAmount != null">
+	        and min_amount=#{minAmount}
+	     </if>
+	     <if test="count != null">
+	        and count=#{count}
+	     </if>
+	     <if test="useBeginTime != null">
+	        and use_begin_time=#{useBeginTime}
+	     </if>
+	     <if test="useEndTime != null">
+	        and use_end_time=#{useEndTime}
+	     </if>
+	     <if test="publishBeginTime != null">
+	        and publish_begin_time=#{publishBeginTime}
+	     </if>
+	     <if test="publishEndTime != null">
+	        and publish_end_time=#{publishEndTime}
+	     </if>
+	     <if test="publishType != null">
+	        and publish_type=#{publishType}
+	     </if>
+	     <if test="targetType != null">
+	        and target_type=#{targetType}
+	     </if>
+	     <if test="whiteListId != null">
+	        and white_list_id=#{whiteListId}
+	     </if>
+	     <if test="description1 != null">
+	        and description1=#{description1}
+	     </if>
+	     <if test="description2 != null">
+	        and description2=#{description2}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     name,
+	     pic,
+	     type,
+	     coupon_amount,
+	     platform_amount,
+	     merchant_amount,
+	     min_amount,
+	     count,
+	     use_begin_time,
+	     use_end_time,
+	     publish_begin_time,
+	     publish_end_time,
+	     publish_type,
+	     target_type,
+	     white_list_id,
+	     description1,
+	     description2,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from coupon
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="couponAmount != null">
+	        and coupon_amount=#{couponAmount}
+	     </if>
+	     <if test="platformAmount != null">
+	        and platform_amount=#{platformAmount}
+	     </if>
+	     <if test="merchantAmount != null">
+	        and merchant_amount=#{merchantAmount}
+	     </if>
+	     <if test="minAmount != null">
+	        and min_amount=#{minAmount}
+	     </if>
+	     <if test="count != null">
+	        and count=#{count}
+	     </if>
+	     <if test="useBeginTime != null">
+	        and use_begin_time=#{useBeginTime}
+	     </if>
+	     <if test="useEndTime != null">
+	        and use_end_time=#{useEndTime}
+	     </if>
+	     <if test="publishBeginTime != null">
+	        and publish_begin_time=#{publishBeginTime}
+	     </if>
+	     <if test="publishEndTime != null">
+	        and publish_end_time=#{publishEndTime}
+	     </if>
+	     <if test="publishType != null">
+	        and publish_type=#{publishType}
+	     </if>
+	     <if test="targetType != null">
+	        and target_type=#{targetType}
+	     </if>
+	     <if test="whiteListId != null">
+	        and white_list_id=#{whiteListId}
+	     </if>
+	     <if test="description1 != null">
+	        and description1=#{description1}
+	     </if>
+	     <if test="description2 != null">
+	        and description2=#{description2}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+	
+	<select id="pageCoupons" parameterType="map" resultMap="couponTOResultMap">
+		SELECT
+			c.id,
+			c.name,
+			c.pic,
+			c.type,
+			c.coupon_amount,
+			c.min_amount,
+			c.use_begin_time,
+			c.use_end_time,
+			c.description1,
+			c.description2,
+			u.status,
+			u.coupon_id is_get
+		<include refid="pageCouponsCondition" />
+		order by c.publish_begin_time desc
+		limit #{offset},#{rows}
+	</select>
+	
+	<select id="pageCouponsCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCouponsCondition" />
+	</select>
+
+	<sql id="pageCouponsCondition">
+		<![CDATA[
+	 FROM coupon c
+	 LEFT JOIN
+		(SELECT
+		bc.id,
+		bc.name,
+		bu.status,
+		bu.coupon_id
+		FROM coupon bc
+		LEFT JOIN user_coupon bu ON bc.id = bu.coupon_id
+    WHERE bu.user_id = #{userId}) u ON c.id = u.id
+    WHERE
+		audit_status = 1
+		and publish_type = 2
+		and publish_begin_time <= now()
+		and publish_end_time >=now()
+        ]]>
+	</sql>
+	
+	<select id="pageMyCoupons" parameterType="map" resultMap="couponTOResultMap">
+		SELECT
+			c.id,
+			c.name,
+			c.pic,
+			c.type,
+			c.coupon_amount,
+			c.min_amount,
+			c.use_begin_time,
+			c.use_end_time,
+			c.description1,
+			c.description2,
+			u.status,
+			u.coupon_id is_get
+		<include refid="pageMyCouponsCondition" />
+		order by u.ctime desc
+		limit #{offset},#{rows}
+	</select>
+	
+	<select id="pageMyCouponsCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageMyCouponsCondition" />
+	</select>
+	
+	<sql id="pageMyCouponsCondition">
+		<![CDATA[
+	FROM user_coupon u
+	LEFT JOIN coupon c ON u.coupon_id=c.id
+	WHERE
+		u.user_id=#{userId}
+		and u.status=#{status}
+        ]]>
+	</sql>
+	
+	<select id="allMyCoupons" parameterType="map" resultMap="couponTOResultMap">
+	SELECT
+			c.id,
+			c.name,
+			c.pic,
+			c.type,
+			c.coupon_amount,
+			c.min_amount,
+			c.use_begin_time,
+			c.use_end_time,
+			c.description1,
+			c.description2,
+			c.platform_amount,
+			c.merchant_amount,
+			u.status,
+			u.coupon_id is_get
+	FROM user_coupon u
+	LEFT JOIN coupon c ON u.coupon_id=c.id
+	WHERE
+		u.user_id=#{userId}
+		and u.status=0
+		<if test="couponId!=null">
+			and c.id=couponId
+		</if>
+	</select>
+
+	
+</mapper> 

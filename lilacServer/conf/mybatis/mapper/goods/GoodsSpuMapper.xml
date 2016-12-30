@@ -1,0 +1,1067 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【商品spu】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.goods.GoodsSpuDao">
+
+	<resultMap id="goodsSpuResultMap" type="com.bluemobi.po.goods.GoodsSpu">
+		<id property="spuId" column="spu_id" />
+       <result property="merchantId" column="merchant_id" />
+       <result property="spu" column="spu" />
+       <result property="name" column="name" />
+       <result property="brandId" column="brand_id" />
+       <result property="categoryId1" column="category_id1" />
+       <result property="categoryId2" column="category_id2" />
+       <result property="categoryId3" column="category_id3" />
+       <result property="goodsType" column="goods_type" />
+       <result property="viewType" column="view_type" />
+       <result property="regionId" column="region_id" />
+       <result property="isMoneyPay" column="is_money_pay" />
+       <result property="isPointPay" column="is_point_pay" />
+       <result property="isMixPay" column="is_mix_pay" />
+       <result property="isInstallmentPay" column="is_installment_pay" />
+       <result property="isRefundable" column="is_refundable" />
+       <result property="isInvoice" column="is_invoice" />
+       <result property="maxBuyCount" column="max_buy_count" />
+       <result property="vipType" column="vip_type" />
+       <result property="isMultSku" column="is_mult_sku" />
+       <result property="skuPropertys" column="sku_propertys" />
+       <result property="propertys" column="propertys" />
+       <result property="pics" column="pics" />
+       <result property="searchKeywords" column="search_keywords" />
+       <result property="description" column="description" />
+       <result property="promotion" column="promotion" />
+       <result property="promotionBeginTime" column="promotion_begin_time" />
+       <result property="promotionEndTime" column="promotion_end_time" />
+       <result property="procurementBatchNo" column="procurement_batch_no" />
+       <result property="length" column="length" />
+       <result property="wide" column="wide" />
+       <result property="high" column="high" />
+       <result property="weight" column="weight" />
+       <result property="monthSalesQuantity" column="month_sales_quantity" />
+       <result property="monthSalesAmount" column="month_sales_amount" />
+       <result property="salesQuantity" column="sales_quantity" />
+       <result property="salesAmount" column="sales_amount" />
+       <result property="goodsCommentCount" column="goods_comment_count" />
+       <result property="goodsCommentRate" column="goods_comment_rate" />
+       <result property="status" column="status" />
+       <result property="isShow" column="is_show" />
+       <result property="auditStatus" column="audit_status" />
+       <result property="isDel" column="is_del" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="goodsSpuResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="goodsSpuResultMap"></resultMap>
+	
+	
+	<resultMap id="goodsSpuTOResultMap" type="com.bluemobi.to.GoodsSpuTO">
+		<id property="spuId" column="spu_id" />
+       <result property="merchantId" column="merchant_id" />
+       <result property="goodsType" column="goods_type" />
+       <result property="name" column="name" />
+       <result property="monthSalesQuantity" column="month_sales_quantity" />
+       <result property="regionId" column="region_id" />
+       <result property="regionName" column="region_name" />
+       <result property="maxBuyCount" column="max_buy_count" />
+       <result property="promotion" column="promotion" />
+       <result property="pics" column="pics" />
+       <result property="skuPropertys" column="sku_propertys" />
+       <result property="propertys" column="propertys" />
+       <result property="description" column="description" />
+	</resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.goods.GoodsSpu" useGeneratedKeys="true" keyProperty="spuId" >
+	   insert into goods_spu (
+	     spu_id,
+	     merchant_id,
+	     spu,
+	     name,
+	     brand_id,
+	     category_id1,
+	     category_id2,
+	     category_id3,
+	     goods_type,
+	     view_type,
+	     region_id,
+	     is_money_pay,
+	     is_point_pay,
+	     is_mix_pay,
+	     is_installment_pay,
+	     is_refundable,
+	     is_invoice,
+	     max_buy_count,
+	     vip_type,
+	     is_mult_sku,
+	     sku_propertys,
+	     propertys,
+	     pics,
+	     search_keywords,
+	     description,
+	     promotion,
+	     promotion_begin_time,
+	     promotion_end_time,
+	     procurement_batch_no,
+	     length,
+	     wide,
+	     high,
+	     weight,
+	     month_sales_quantity,
+	     month_sales_amount,
+	     sales_quantity,
+	     sales_amount,
+	     goods_comment_count,
+	     goods_comment_rate,
+	     status,
+	     is_show,
+	     audit_status,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{spuId},
+	     #{merchantId},
+	     #{spu},
+	     #{name},
+	     #{brandId},
+	     #{categoryId1},
+	     #{categoryId2},
+	     #{categoryId3},
+	     #{goodsType},
+	     #{viewType},
+	     #{regionId},
+	     #{isMoneyPay},
+	     #{isPointPay},
+	     #{isMixPay},
+	     #{isInstallmentPay},
+	     #{isRefundable},
+	     #{isInvoice},
+	     #{maxBuyCount},
+	     #{vipType},
+	     #{isMultSku},
+	     #{skuPropertys},
+	     #{propertys},
+	     #{pics},
+	     #{searchKeywords},
+	     #{description},
+	     #{promotion},
+	     #{promotionBeginTime},
+	     #{promotionEndTime},
+	     #{procurementBatchNo},
+	     #{length},
+	     #{wide},
+	     #{high},
+	     #{weight},
+	     #{monthSalesQuantity},
+	     #{monthSalesAmount},
+	     #{salesQuantity},
+	     #{salesAmount},
+	     #{goodsCommentCount},
+	     #{goodsCommentRate},
+	     #{status},
+	     #{isShow},
+	     #{auditStatus},
+	     #{isDel},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.goods.GoodsSpu">
+		update goods_spu
+		<set>
+			<if test="spuId != null">
+				spu_id=#{spuId},
+			</if>
+			<if test="merchantId != null">
+				merchant_id=#{merchantId},
+			</if>
+			<if test="spu != null">
+				spu=#{spu},
+			</if>
+			<if test="name != null">
+				name=#{name},
+			</if>
+			<if test="brandId != null">
+				brand_id=#{brandId},
+			</if>
+			<if test="categoryId1 != null">
+				category_id1=#{categoryId1},
+			</if>
+			<if test="categoryId2 != null">
+				category_id2=#{categoryId2},
+			</if>
+			<if test="categoryId3 != null">
+				category_id3=#{categoryId3},
+			</if>
+			<if test="goodsType != null">
+				goods_type=#{goodsType},
+			</if>
+			<if test="viewType != null">
+				view_type=#{viewType},
+			</if>
+			<if test="regionId != null">
+				region_id=#{regionId},
+			</if>
+			<if test="isMoneyPay != null">
+				is_money_pay=#{isMoneyPay},
+			</if>
+			<if test="isPointPay != null">
+				is_point_pay=#{isPointPay},
+			</if>
+			<if test="isMixPay != null">
+				is_mix_pay=#{isMixPay},
+			</if>
+			<if test="isInstallmentPay != null">
+				is_installment_pay=#{isInstallmentPay},
+			</if>
+			<if test="isRefundable != null">
+				is_refundable=#{isRefundable},
+			</if>
+			<if test="isInvoice != null">
+				is_invoice=#{isInvoice},
+			</if>
+			<if test="maxBuyCount != null">
+				max_buy_count=#{maxBuyCount},
+			</if>
+			<if test="vipType != null">
+				vip_type=#{vipType},
+			</if>
+			<if test="isMultSku != null">
+				is_mult_sku=#{isMultSku},
+			</if>
+			<if test="skuPropertys != null">
+				sku_propertys=#{skuPropertys},
+			</if>
+			<if test="propertys != null">
+				propertys=#{propertys},
+			</if>
+			<if test="pics != null">
+				pics=#{pics},
+			</if>
+			<if test="searchKeywords != null">
+				search_keywords=#{searchKeywords},
+			</if>
+			<if test="description != null">
+				description=#{description},
+			</if>
+			<if test="promotion != null">
+				promotion=#{promotion},
+			</if>
+			<if test="promotionBeginTime != null">
+				promotion_begin_time=#{promotionBeginTime},
+			</if>
+			<if test="promotionEndTime != null">
+				promotion_end_time=#{promotionEndTime},
+			</if>
+			<if test="procurementBatchNo != null">
+				procurement_batch_no=#{procurementBatchNo},
+			</if>
+			<if test="length != null">
+				length=#{length},
+			</if>
+			<if test="wide != null">
+				wide=#{wide},
+			</if>
+			<if test="high != null">
+				high=#{high},
+			</if>
+			<if test="weight != null">
+				weight=#{weight},
+			</if>
+			<if test="monthSalesQuantity != null">
+				month_sales_quantity=#{monthSalesQuantity},
+			</if>
+			<if test="monthSalesAmount != null">
+				month_sales_amount=#{monthSalesAmount},
+			</if>
+			<if test="salesQuantity != null">
+				sales_quantity=#{salesQuantity},
+			</if>
+			<if test="salesAmount != null">
+				sales_amount=#{salesAmount},
+			</if>
+			<if test="goodsCommentCount != null">
+				goods_comment_count=#{goodsCommentCount},
+			</if>
+			<if test="goodsCommentRate != null">
+				goods_comment_rate=#{goodsCommentRate},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+			<if test="isShow != null">
+				is_show=#{isShow},
+			</if>
+			<if test="auditStatus != null">
+				audit_status=#{auditStatus},
+			</if>
+			<if test="isDel != null">
+				is_del=#{isDel},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			spu_id=#{spuId} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     goods_spu 
+	   where 
+	    spu_id=#{spuId} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="goodsSpuResultMap">
+	   select 
+	    spu_id,
+	    merchant_id,
+	    spu,
+	    name,
+	    brand_id,
+	    category_id1,
+	    category_id2,
+	    category_id3,
+	    goods_type,
+	    view_type,
+	    region_id,
+	    is_money_pay,
+	    is_point_pay,
+	    is_mix_pay,
+	    is_installment_pay,
+	    is_refundable,
+	    is_invoice,
+	    max_buy_count,
+	    vip_type,
+	    is_mult_sku,
+	    sku_propertys,
+	    propertys,
+	    pics,
+	    search_keywords,
+	    description,
+	    promotion,
+	    promotion_begin_time,
+	    promotion_end_time,
+	    procurement_batch_no,
+	    length,
+	    wide,
+	    high,
+	    weight,
+	    month_sales_quantity,
+	    month_sales_amount,
+	    sales_quantity,
+	    sales_amount,
+	    goods_comment_count,
+	    goods_comment_rate,
+	    status,
+	    is_show,
+	    audit_status,
+	    is_del,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from goods_spu
+	   where 
+	    spu_id=#{spuId} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="goodsSpuResultMap">
+	   select 
+	     spu_id,
+	     merchant_id,
+	     spu,
+	     name,
+	     brand_id,
+	     category_id1,
+	     category_id2,
+	     category_id3,
+	     goods_type,
+	     view_type,
+	     region_id,
+	     is_money_pay,
+	     is_point_pay,
+	     is_mix_pay,
+	     is_installment_pay,
+	     is_refundable,
+	     is_invoice,
+	     max_buy_count,
+	     vip_type,
+	     is_mult_sku,
+	     sku_propertys,
+	     propertys,
+	     pics,
+	     search_keywords,
+	     description,
+	     promotion,
+	     promotion_begin_time,
+	     promotion_end_time,
+	     procurement_batch_no,
+	     length,
+	     wide,
+	     high,
+	     weight,
+	     month_sales_quantity,
+	     month_sales_amount,
+	     sales_quantity,
+	     sales_amount,
+	     goods_comment_count,
+	     goods_comment_rate,
+	     status,
+	     is_show,
+	     audit_status,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from goods_spu
+	   <where>
+	     <if test="spuId != null">
+	        spu_id=#{spuId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="spu != null">
+	        and spu=#{spu}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="brandId != null">
+	        and brand_id=#{brandId}
+	     </if>
+	     <if test="categoryId1 != null">
+	        and category_id1=#{categoryId1}
+	     </if>
+	     <if test="categoryId2 != null">
+	        and category_id2=#{categoryId2}
+	     </if>
+	     <if test="categoryId3 != null">
+	        and category_id3=#{categoryId3}
+	     </if>
+	     <if test="goodsType != null">
+	        and goods_type=#{goodsType}
+	     </if>
+	     <if test="viewType != null">
+	        and view_type=#{viewType}
+	     </if>
+	     <if test="regionId != null">
+	        and region_id=#{regionId}
+	     </if>
+	     <if test="isMoneyPay != null">
+	        and is_money_pay=#{isMoneyPay}
+	     </if>
+	     <if test="isPointPay != null">
+	        and is_point_pay=#{isPointPay}
+	     </if>
+	     <if test="isMixPay != null">
+	        and is_mix_pay=#{isMixPay}
+	     </if>
+	     <if test="isInstallmentPay != null">
+	        and is_installment_pay=#{isInstallmentPay}
+	     </if>
+	     <if test="isRefundable != null">
+	        and is_refundable=#{isRefundable}
+	     </if>
+	     <if test="isInvoice != null">
+	        and is_invoice=#{isInvoice}
+	     </if>
+	     <if test="maxBuyCount != null">
+	        and max_buy_count=#{maxBuyCount}
+	     </if>
+	     <if test="vipType != null">
+	        and vip_type=#{vipType}
+	     </if>
+	     <if test="isMultSku != null">
+	        and is_mult_sku=#{isMultSku}
+	     </if>
+	     <if test="skuPropertys != null">
+	        and sku_propertys=#{skuPropertys}
+	     </if>
+	     <if test="propertys != null">
+	        and propertys=#{propertys}
+	     </if>
+	     <if test="pics != null">
+	        and pics=#{pics}
+	     </if>
+	     <if test="searchKeywords != null">
+	        and search_keywords=#{searchKeywords}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="promotion != null">
+	        and promotion=#{promotion}
+	     </if>
+	     <if test="promotionBeginTime != null">
+	        and promotion_begin_time=#{promotionBeginTime}
+	     </if>
+	     <if test="promotionEndTime != null">
+	        and promotion_end_time=#{promotionEndTime}
+	     </if>
+	     <if test="procurementBatchNo != null">
+	        and procurement_batch_no=#{procurementBatchNo}
+	     </if>
+	     <if test="length != null">
+	        and length=#{length}
+	     </if>
+	     <if test="wide != null">
+	        and wide=#{wide}
+	     </if>
+	     <if test="high != null">
+	        and high=#{high}
+	     </if>
+	     <if test="weight != null">
+	        and weight=#{weight}
+	     </if>
+	     <if test="monthSalesQuantity != null">
+	        and month_sales_quantity=#{monthSalesQuantity}
+	     </if>
+	     <if test="monthSalesAmount != null">
+	        and month_sales_amount=#{monthSalesAmount}
+	     </if>
+	     <if test="salesQuantity != null">
+	        and sales_quantity=#{salesQuantity}
+	     </if>
+	     <if test="salesAmount != null">
+	        and sales_amount=#{salesAmount}
+	     </if>
+	     <if test="goodsCommentCount != null">
+	        and goods_comment_count=#{goodsCommentCount}
+	     </if>
+	     <if test="goodsCommentRate != null">
+	        and goods_comment_rate=#{goodsCommentRate}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="isShow != null">
+	        and is_show=#{isShow}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    spu_id,
+	    merchant_id,
+	    spu,
+	    name,
+	    brand_id,
+	    category_id1,
+	    category_id2,
+	    category_id3,
+	    goods_type,
+	    view_type,
+	    region_id,
+	    is_money_pay,
+	    is_point_pay,
+	    is_mix_pay,
+	    is_installment_pay,
+	    is_refundable,
+	    is_invoice,
+	    max_buy_count,
+	    vip_type,
+	    is_mult_sku,
+	    sku_propertys,
+	    propertys,
+	    pics,
+	    search_keywords,
+	    description,
+	    promotion,
+	    promotion_begin_time,
+	    promotion_end_time,
+	    procurement_batch_no,
+	    length,
+	    wide,
+	    high,
+	    weight,
+	    month_sales_quantity,
+	    month_sales_amount,
+	    sales_quantity,
+	    sales_amount,
+	    goods_comment_count,
+	    goods_comment_rate,
+	    status,
+	    is_show,
+	    audit_status,
+	    is_del,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from goods_spu
+	   where 
+	    spu_id=#{spuId} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     spu_id,
+	     merchant_id,
+	     spu,
+	     name,
+	     brand_id,
+	     category_id1,
+	     category_id2,
+	     category_id3,
+	     goods_type,
+	     view_type,
+	     region_id,
+	     is_money_pay,
+	     is_point_pay,
+	     is_mix_pay,
+	     is_installment_pay,
+	     is_refundable,
+	     is_invoice,
+	     max_buy_count,
+	     vip_type,
+	     is_mult_sku,
+	     sku_propertys,
+	     propertys,
+	     pics,
+	     search_keywords,
+	     description,
+	     promotion,
+	     promotion_begin_time,
+	     promotion_end_time,
+	     procurement_batch_no,
+	     length,
+	     wide,
+	     high,
+	     weight,
+	     month_sales_quantity,
+	     month_sales_amount,
+	     sales_quantity,
+	     sales_amount,
+	     goods_comment_count,
+	     goods_comment_rate,
+	     status,
+	     is_show,
+	     audit_status,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from goods_spu
+	   <where>
+	     <if test="spuId != null">
+	        spu_id=#{spuId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="spu != null">
+	        and spu=#{spu}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="brandId != null">
+	        and brand_id=#{brandId}
+	     </if>
+	     <if test="categoryId1 != null">
+	        and category_id1=#{categoryId1}
+	     </if>
+	     <if test="categoryId2 != null">
+	        and category_id2=#{categoryId2}
+	     </if>
+	     <if test="categoryId3 != null">
+	        and category_id3=#{categoryId3}
+	     </if>
+	     <if test="goodsType != null">
+	        and goods_type=#{goodsType}
+	     </if>
+	     <if test="viewType != null">
+	        and view_type=#{viewType}
+	     </if>
+	     <if test="regionId != null">
+	        and region_id=#{regionId}
+	     </if>
+	     <if test="isMoneyPay != null">
+	        and is_money_pay=#{isMoneyPay}
+	     </if>
+	     <if test="isPointPay != null">
+	        and is_point_pay=#{isPointPay}
+	     </if>
+	     <if test="isMixPay != null">
+	        and is_mix_pay=#{isMixPay}
+	     </if>
+	     <if test="isInstallmentPay != null">
+	        and is_installment_pay=#{isInstallmentPay}
+	     </if>
+	     <if test="isRefundable != null">
+	        and is_refundable=#{isRefundable}
+	     </if>
+	     <if test="isInvoice != null">
+	        and is_invoice=#{isInvoice}
+	     </if>
+	     <if test="maxBuyCount != null">
+	        and max_buy_count=#{maxBuyCount}
+	     </if>
+	     <if test="vipType != null">
+	        and vip_type=#{vipType}
+	     </if>
+	     <if test="isMultSku != null">
+	        and is_mult_sku=#{isMultSku}
+	     </if>
+	     <if test="skuPropertys != null">
+	        and sku_propertys=#{skuPropertys}
+	     </if>
+	     <if test="propertys != null">
+	        and propertys=#{propertys}
+	     </if>
+	     <if test="pics != null">
+	        and pics=#{pics}
+	     </if>
+	     <if test="searchKeywords != null">
+	        and search_keywords=#{searchKeywords}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="promotion != null">
+	        and promotion=#{promotion}
+	     </if>
+	     <if test="promotionBeginTime != null">
+	        and promotion_begin_time=#{promotionBeginTime}
+	     </if>
+	     <if test="promotionEndTime != null">
+	        and promotion_end_time=#{promotionEndTime}
+	     </if>
+	     <if test="procurementBatchNo != null">
+	        and procurement_batch_no=#{procurementBatchNo}
+	     </if>
+	     <if test="length != null">
+	        and length=#{length}
+	     </if>
+	     <if test="wide != null">
+	        and wide=#{wide}
+	     </if>
+	     <if test="high != null">
+	        and high=#{high}
+	     </if>
+	     <if test="weight != null">
+	        and weight=#{weight}
+	     </if>
+	     <if test="monthSalesQuantity != null">
+	        and month_sales_quantity=#{monthSalesQuantity}
+	     </if>
+	     <if test="monthSalesAmount != null">
+	        and month_sales_amount=#{monthSalesAmount}
+	     </if>
+	     <if test="salesQuantity != null">
+	        and sales_quantity=#{salesQuantity}
+	     </if>
+	     <if test="salesAmount != null">
+	        and sales_amount=#{salesAmount}
+	     </if>
+	     <if test="goodsCommentCount != null">
+	        and goods_comment_count=#{goodsCommentCount}
+	     </if>
+	     <if test="goodsCommentRate != null">
+	        and goods_comment_rate=#{goodsCommentRate}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="isShow != null">
+	        and is_show=#{isShow}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     spu_id,
+	     merchant_id,
+	     spu,
+	     name,
+	     brand_id,
+	     category_id1,
+	     category_id2,
+	     category_id3,
+	     goods_type,
+	     view_type,
+	     region_id,
+	     is_money_pay,
+	     is_point_pay,
+	     is_mix_pay,
+	     is_installment_pay,
+	     is_refundable,
+	     is_invoice,
+	     max_buy_count,
+	     vip_type,
+	     is_mult_sku,
+	     sku_propertys,
+	     propertys,
+	     pics,
+	     search_keywords,
+	     description,
+	     promotion,
+	     promotion_begin_time,
+	     promotion_end_time,
+	     procurement_batch_no,
+	     length,
+	     wide,
+	     high,
+	     weight,
+	     month_sales_quantity,
+	     month_sales_amount,
+	     sales_quantity,
+	     sales_amount,
+	     goods_comment_count,
+	     goods_comment_rate,
+	     status,
+	     is_show,
+	     audit_status,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from goods_spu
+	   <where>
+	     <if test="spuId != null">
+	        spu_id=#{spuId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="spu != null">
+	        and spu=#{spu}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="brandId != null">
+	        and brand_id=#{brandId}
+	     </if>
+	     <if test="categoryId1 != null">
+	        and category_id1=#{categoryId1}
+	     </if>
+	     <if test="categoryId2 != null">
+	        and category_id2=#{categoryId2}
+	     </if>
+	     <if test="categoryId3 != null">
+	        and category_id3=#{categoryId3}
+	     </if>
+	     <if test="goodsType != null">
+	        and goods_type=#{goodsType}
+	     </if>
+	     <if test="viewType != null">
+	        and view_type=#{viewType}
+	     </if>
+	     <if test="regionId != null">
+	        and region_id=#{regionId}
+	     </if>
+	     <if test="isMoneyPay != null">
+	        and is_money_pay=#{isMoneyPay}
+	     </if>
+	     <if test="isPointPay != null">
+	        and is_point_pay=#{isPointPay}
+	     </if>
+	     <if test="isMixPay != null">
+	        and is_mix_pay=#{isMixPay}
+	     </if>
+	     <if test="isInstallmentPay != null">
+	        and is_installment_pay=#{isInstallmentPay}
+	     </if>
+	     <if test="isRefundable != null">
+	        and is_refundable=#{isRefundable}
+	     </if>
+	     <if test="isInvoice != null">
+	        and is_invoice=#{isInvoice}
+	     </if>
+	     <if test="maxBuyCount != null">
+	        and max_buy_count=#{maxBuyCount}
+	     </if>
+	     <if test="vipType != null">
+	        and vip_type=#{vipType}
+	     </if>
+	     <if test="isMultSku != null">
+	        and is_mult_sku=#{isMultSku}
+	     </if>
+	     <if test="skuPropertys != null">
+	        and sku_propertys=#{skuPropertys}
+	     </if>
+	     <if test="propertys != null">
+	        and propertys=#{propertys}
+	     </if>
+	     <if test="pics != null">
+	        and pics=#{pics}
+	     </if>
+	     <if test="searchKeywords != null">
+	        and search_keywords=#{searchKeywords}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="promotion != null">
+	        and promotion=#{promotion}
+	     </if>
+	     <if test="promotionBeginTime != null">
+	        and promotion_begin_time=#{promotionBeginTime}
+	     </if>
+	     <if test="promotionEndTime != null">
+	        and promotion_end_time=#{promotionEndTime}
+	     </if>
+	     <if test="procurementBatchNo != null">
+	        and procurement_batch_no=#{procurementBatchNo}
+	     </if>
+	     <if test="length != null">
+	        and length=#{length}
+	     </if>
+	     <if test="wide != null">
+	        and wide=#{wide}
+	     </if>
+	     <if test="high != null">
+	        and high=#{high}
+	     </if>
+	     <if test="weight != null">
+	        and weight=#{weight}
+	     </if>
+	     <if test="monthSalesQuantity != null">
+	        and month_sales_quantity=#{monthSalesQuantity}
+	     </if>
+	     <if test="monthSalesAmount != null">
+	        and month_sales_amount=#{monthSalesAmount}
+	     </if>
+	     <if test="salesQuantity != null">
+	        and sales_quantity=#{salesQuantity}
+	     </if>
+	     <if test="salesAmount != null">
+	        and sales_amount=#{salesAmount}
+	     </if>
+	     <if test="goodsCommentCount != null">
+	        and goods_comment_count=#{goodsCommentCount}
+	     </if>
+	     <if test="goodsCommentRate != null">
+	        and goods_comment_rate=#{goodsCommentRate}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="isShow != null">
+	        and is_show=#{isShow}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+	<select id="selectGoodsSpuTO" parameterType="map" resultMap="goodsSpuTOResultMap">
+	   select 
+		    spu.spu_id,
+		    spu.merchant_id,
+		    spu.goods_type,
+		    spu.name,
+		    spu.month_sales_quantity,
+		    spu.region_id,
+		    r.name region_name,
+		    spu.max_buy_count,
+		    <![CDATA[  
+		    if(spu.promotion_begin_time<=now() and spu.promotion_end_time>=now(), spu.promotion,'') promotion,
+		    ]]>
+		    spu.pics,
+		    spu.sku_propertys,
+		    spu.propertys,
+		    spu.description  
+	   from goods_spu spu
+	   LEFT JOIN system_region r ON spu.region_id = r.id
+	   where 
+	    	spu.spu_id=#{spuId} 
+	</select>
+	
+	
+</mapper> 

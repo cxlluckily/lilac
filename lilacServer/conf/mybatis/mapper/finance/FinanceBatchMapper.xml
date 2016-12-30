@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【批次总表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.finance.FinanceBatchDao">
+
+	<resultMap id="financeBatchResultMap" type="com.bluemobi.po.finance.FinanceBatch">
+		<id property="id" column="id" />
+       <result property="batchNo" column="batch_no" />
+       <result property="receiptTime" column="receipt_time" />
+       <result property="createTime" column="create_time" />
+       <result property="channeNo" column="channe_no" />
+       <result property="fileName1" column="file_name1" />
+       <result property="fileName2" column="file_name2" />
+       <result property="fileName3" column="file_name3" />
+       <result property="fileName4" column="file_name4" />
+       <result property="fileName5" column="file_name5" />
+       <result property="fileName6" column="file_name6" />
+       <result property="thirdbackAmount" column="thirdback_amount" />
+       <result property="flag" column="flag" />
+       <result property="status" column="status" />
+       <result property="successTotal" column="success_total" />
+       <result property="faileTotal" column="faile_total" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="financeBatchResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="financeBatchResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.finance.FinanceBatch" useGeneratedKeys="true" keyProperty="id" >
+	   insert into finance_batch (
+	     id,
+	     batch_no,
+	     receipt_time,
+	     create_time,
+	     channe_no,
+	     file_name1,
+	     file_name2,
+	     file_name3,
+	     file_name4,
+	     file_name5,
+	     file_name6,
+	     thirdback_amount,
+	     flag,
+	     status,
+	     success_total,
+	     faile_total
+	   )values (
+	     #{id},
+	     #{batchNo},
+	     #{receiptTime},
+	     #{createTime},
+	     #{channeNo},
+	     #{fileName1},
+	     #{fileName2},
+	     #{fileName3},
+	     #{fileName4},
+	     #{fileName5},
+	     #{fileName6},
+	     #{thirdbackAmount},
+	     #{flag},
+	     #{status},
+	     #{successTotal},
+	     #{faileTotal}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.finance.FinanceBatch">
+		update finance_batch
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="batchNo != null">
+				batch_no=#{batchNo},
+			</if>
+			<if test="receiptTime != null">
+				receipt_time=#{receiptTime},
+			</if>
+			<if test="createTime != null">
+				create_time=#{createTime},
+			</if>
+			<if test="channeNo != null">
+				channe_no=#{channeNo},
+			</if>
+			<if test="fileName1 != null">
+				file_name1=#{fileName1},
+			</if>
+			<if test="fileName2 != null">
+				file_name2=#{fileName2},
+			</if>
+			<if test="fileName3 != null">
+				file_name3=#{fileName3},
+			</if>
+			<if test="fileName4 != null">
+				file_name4=#{fileName4},
+			</if>
+			<if test="fileName5 != null">
+				file_name5=#{fileName5},
+			</if>
+			<if test="fileName6 != null">
+				file_name6=#{fileName6},
+			</if>
+			<if test="thirdbackAmount != null">
+				thirdback_amount=#{thirdbackAmount},
+			</if>
+			<if test="flag != null">
+				flag=#{flag},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+			<if test="successTotal != null">
+				success_total=#{successTotal},
+			</if>
+			<if test="faileTotal != null">
+				faile_total=#{faileTotal},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     finance_batch 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="financeBatchResultMap">
+	   select 
+	    id,
+	    batch_no,
+	    receipt_time,
+	    create_time,
+	    channe_no,
+	    file_name1,
+	    file_name2,
+	    file_name3,
+	    file_name4,
+	    file_name5,
+	    file_name6,
+	    thirdback_amount,
+	    flag,
+	    status,
+	    success_total,
+	    faile_total
+	   from finance_batch
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="financeBatchResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     receipt_time,
+	     create_time,
+	     channe_no,
+	     file_name1,
+	     file_name2,
+	     file_name3,
+	     file_name4,
+	     file_name5,
+	     file_name6,
+	     thirdback_amount,
+	     flag,
+	     status,
+	     success_total,
+	     faile_total
+	   from finance_batch
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="receiptTime != null">
+	        and receipt_time=#{receiptTime}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	     <if test="channeNo != null">
+	        and channe_no=#{channeNo}
+	     </if>
+	     <if test="fileName1 != null">
+	        and file_name1=#{fileName1}
+	     </if>
+	     <if test="fileName2 != null">
+	        and file_name2=#{fileName2}
+	     </if>
+	     <if test="fileName3 != null">
+	        and file_name3=#{fileName3}
+	     </if>
+	     <if test="fileName4 != null">
+	        and file_name4=#{fileName4}
+	     </if>
+	     <if test="fileName5 != null">
+	        and file_name5=#{fileName5}
+	     </if>
+	     <if test="fileName6 != null">
+	        and file_name6=#{fileName6}
+	     </if>
+	     <if test="thirdbackAmount != null">
+	        and thirdback_amount=#{thirdbackAmount}
+	     </if>
+	     <if test="flag != null">
+	        and flag=#{flag}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="successTotal != null">
+	        and success_total=#{successTotal}
+	     </if>
+	     <if test="faileTotal != null">
+	        and faile_total=#{faileTotal}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    batch_no,
+	    receipt_time,
+	    create_time,
+	    channe_no,
+	    file_name1,
+	    file_name2,
+	    file_name3,
+	    file_name4,
+	    file_name5,
+	    file_name6,
+	    thirdback_amount,
+	    flag,
+	    status,
+	    success_total,
+	    faile_total
+	   from finance_batch
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     receipt_time,
+	     create_time,
+	     channe_no,
+	     file_name1,
+	     file_name2,
+	     file_name3,
+	     file_name4,
+	     file_name5,
+	     file_name6,
+	     thirdback_amount,
+	     flag,
+	     status,
+	     success_total,
+	     faile_total
+	   from finance_batch
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="receiptTime != null">
+	        and receipt_time=#{receiptTime}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	     <if test="channeNo != null">
+	        and channe_no=#{channeNo}
+	     </if>
+	     <if test="fileName1 != null">
+	        and file_name1=#{fileName1}
+	     </if>
+	     <if test="fileName2 != null">
+	        and file_name2=#{fileName2}
+	     </if>
+	     <if test="fileName3 != null">
+	        and file_name3=#{fileName3}
+	     </if>
+	     <if test="fileName4 != null">
+	        and file_name4=#{fileName4}
+	     </if>
+	     <if test="fileName5 != null">
+	        and file_name5=#{fileName5}
+	     </if>
+	     <if test="fileName6 != null">
+	        and file_name6=#{fileName6}
+	     </if>
+	     <if test="thirdbackAmount != null">
+	        and thirdback_amount=#{thirdbackAmount}
+	     </if>
+	     <if test="flag != null">
+	        and flag=#{flag}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="successTotal != null">
+	        and success_total=#{successTotal}
+	     </if>
+	     <if test="faileTotal != null">
+	        and faile_total=#{faileTotal}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     batch_no,
+	     receipt_time,
+	     create_time,
+	     channe_no,
+	     file_name1,
+	     file_name2,
+	     file_name3,
+	     file_name4,
+	     file_name5,
+	     file_name6,
+	     thirdback_amount,
+	     flag,
+	     status,
+	     success_total,
+	     faile_total
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from finance_batch
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="batchNo != null">
+	        and batch_no=#{batchNo}
+	     </if>
+	     <if test="receiptTime != null">
+	        and receipt_time=#{receiptTime}
+	     </if>
+	     <if test="createTime != null">
+	        and create_time=#{createTime}
+	     </if>
+	     <if test="channeNo != null">
+	        and channe_no=#{channeNo}
+	     </if>
+	     <if test="fileName1 != null">
+	        and file_name1=#{fileName1}
+	     </if>
+	     <if test="fileName2 != null">
+	        and file_name2=#{fileName2}
+	     </if>
+	     <if test="fileName3 != null">
+	        and file_name3=#{fileName3}
+	     </if>
+	     <if test="fileName4 != null">
+	        and file_name4=#{fileName4}
+	     </if>
+	     <if test="fileName5 != null">
+	        and file_name5=#{fileName5}
+	     </if>
+	     <if test="fileName6 != null">
+	        and file_name6=#{fileName6}
+	     </if>
+	     <if test="thirdbackAmount != null">
+	        and thirdback_amount=#{thirdbackAmount}
+	     </if>
+	     <if test="flag != null">
+	        and flag=#{flag}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="successTotal != null">
+	        and success_total=#{successTotal}
+	     </if>
+	     <if test="faileTotal != null">
+	        and faile_total=#{faileTotal}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

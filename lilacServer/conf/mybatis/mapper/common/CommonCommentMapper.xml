@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【评论表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.common.CommonCommentDao">
+
+	<resultMap id="commonCommentResultMap" type="com.bluemobi.po.common.CommonComment">
+		<id property="id" column="id" />
+       <result property="userId" column="user_id" />
+       <result property="type" column="type" />
+       <result property="targetId" column="target_id" />
+       <result property="score" column="score" />
+       <result property="content" column="content" />
+       <result property="ctime" column="ctime" />
+       <result property="status" column="status" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="commonCommentResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="commonCommentResultMap"></resultMap>
+	
+	<insert id="insert" parameterType="com.bluemobi.po.common.CommonComment" useGeneratedKeys="true" keyProperty="id" >
+	   insert into common_comment (
+	     id,
+	     user_id,
+	     type,
+	     target_id,
+	     score,
+	     content,
+	     ctime,
+	     status
+	   )values 
+	<foreach collection="list" item="item" index="index" separator="," >  
+		(
+		     #{item.id},
+		     #{item.userId},
+		     #{item.type},
+		     #{item.targetId},
+		     #{item.score},
+		     #{item.content},
+		     #{item.ctime},
+		     #{item.status}
+		   )
+	
+	 </foreach> 
+	   <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">  
+            select LAST_INSERT_ID();
+       </selectKey>    
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.common.CommonComment">
+		update common_comment
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="userId != null">
+				user_id=#{userId},
+			</if>
+			<if test="type != null">
+				type=#{type},
+			</if>
+			<if test="targetId != null">
+				target_id=#{targetId},
+			</if>
+			<if test="score != null">
+				score=#{score},
+			</if>
+			<if test="content != null">
+				content=#{content},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     common_comment 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="commonCommentResultMap">
+	   select 
+	    id,
+	    user_id,
+	    type,
+	    target_id,
+	    score,
+	    content,
+	    ctime,
+	    status
+	   from common_comment
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="commonCommentResultMap">
+	   select 
+	     id,
+	     user_id,
+	     type,
+	     target_id,
+	     score,
+	     content,
+	     ctime,
+	     status
+	   from common_comment
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="targetId != null">
+	        and target_id = #{targetId}
+	     </if>
+	     <if test="score != null">
+	        and score=#{score}
+	     </if>
+	     <if test="content != null">
+	        and content=#{content}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    user_id,
+	    type,
+	    target_id,
+	    score,
+	    content,
+	    ctime,
+	    status
+	   from common_comment
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     user_id,
+	     type,
+	     target_id,
+	     score,
+	     content,
+	     ctime,
+	     status
+	   from common_comment
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="targetId != null">
+	        and target_id=#{targetId}
+	     </if>
+	     <if test="score != null">
+	        and score=#{score}
+	     </if>
+	     <if test="content != null">
+	        and content=#{content}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     user_id,
+	     type,
+	     target_id,
+	     score,
+	     content,
+	     ctime,
+	     status
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from common_comment
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="targetId != null">
+	        and target_id=#{targetId}
+	     </if>
+	     <if test="score != null">
+	        and score=#{score}
+	     </if>
+	     <if test="content != null">
+	        and content=#{content}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	   </where>
+	</sql>
+
+	<!-- 查询订单明细 -->
+	<select id="selectOrderItems" parameterType="map" resultType="java.lang.Integer">
+	SELECT
+		items.sku_id
+	FROM
+		bts_order_items items
+		INNER JOIN bts_order_child child ON child.order_child_no = items.order_child_no
+		INNER JOIN bts_order orders ON child.order_no = orders.order_no
+	where 
+		orders.id = #{orderId}
+	</select>
+	
+	<!-- 查询订单明细 -->
+	<select id="selectGoodsScores" parameterType="map" resultType="java.lang.Integer">
+	SELECT
+		score
+	FROM
+	    common_comment
+	where  
+	 target_id in 
+	<foreach item="targetId" index="index" collection="targetIds" open="(" separator="," close=")">  
+  		#{targetId}
+ 	</foreach> 
+	</select>
+	
+	<!-- 查询好评数量 -->
+	<select id="selectGoodCount" parameterType="map" resultType="java.lang.Integer">
+	SELECT
+		count(target_id)
+	FROM
+		common_comment
+	WHERE
+		target_id = #{targetId}
+	AND score >= 4.5
+	</select>
+</mapper> 

@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【秒杀活动：积分秒杀，平台发起】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.activity.ActivitySeckillDao">
+
+	<resultMap id="activitySeckillResultMap" type="com.bluemobi.po.activity.ActivitySeckill">
+		<id property="id" column="id" />
+       <result property="name" column="name" />
+       <result property="skuId" column="sku_id" />
+       <result property="stock" column="stock" />
+       <result property="totalStock" column="total_stock" />
+       <result property="settlementPrice" column="settlement_price" />
+       <result property="price" column="price" />
+       <result property="sortOrder" column="sort_order" />
+       <result property="description" column="description" />
+       <result property="showTime" column="show_time" />
+       <result property="beginTime" column="begin_time" />
+       <result property="endTime" column="end_time" />
+       <result property="isWhiteListActivity" column="is_white_list_activity" />
+       <result property="auditStatus" column="audit_status" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="activitySeckillResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="activitySeckillResultMap"></resultMap>
+	
+	<resultMap id="seckillTOMap" type="com.bluemobi.to.SeckillTO">
+		<id property="seckillBeginTime" column="begin_time" />
+		<result property="seckillEndTime" column="end_time" />
+		<result property="isSeckill" column="is_seckill" />
+	</resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.activity.ActivitySeckill" useGeneratedKeys="true" keyProperty="id" >
+	   insert into activity_seckill (
+	     id,
+	     name,
+	     sku_id,
+	     stock,
+	     total_stock,
+	     settlement_price,
+	     price,
+	     sort_order,
+	     description,
+	     show_time,
+	     begin_time,
+	     end_time,
+	     is_white_list_activity,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{id},
+	     #{name},
+	     #{skuId},
+	     #{stock},
+	     #{totalStock},
+	     #{settlementPrice},
+	     #{price},
+	     #{sortOrder},
+	     #{description},
+	     #{showTime},
+	     #{beginTime},
+	     #{endTime},
+	     #{isWhiteListActivity},
+	     #{auditStatus},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.activity.ActivitySeckill">
+		update activity_seckill
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="name != null">
+				name=#{name},
+			</if>
+			<if test="skuId != null">
+				sku_id=#{skuId},
+			</if>
+			<if test="stock != null">
+				stock=#{stock},
+			</if>
+			<if test="totalStock != null">
+				total_stock=#{totalStock},
+			</if>
+			<if test="settlementPrice != null">
+				settlement_price=#{settlementPrice},
+			</if>
+			<if test="price != null">
+				price=#{price},
+			</if>
+			<if test="sortOrder != null">
+				sort_order=#{sortOrder},
+			</if>
+			<if test="description != null">
+				description=#{description},
+			</if>
+			<if test="showTime != null">
+				show_time=#{showTime},
+			</if>
+			<if test="beginTime != null">
+				begin_time=#{beginTime},
+			</if>
+			<if test="endTime != null">
+				end_time=#{endTime},
+			</if>
+			<if test="isWhiteListActivity != null">
+				is_white_list_activity=#{isWhiteListActivity},
+			</if>
+			<if test="auditStatus != null">
+				audit_status=#{auditStatus},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     activity_seckill 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="activitySeckillResultMap">
+	   select 
+	    id,
+	    name,
+	    sku_id,
+	    stock,
+	    total_stock,
+	    settlement_price,
+	    price,
+	    sort_order,
+	    description,
+	    show_time,
+	    begin_time,
+	    end_time,
+	    is_white_list_activity,
+	    audit_status,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from activity_seckill
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="activitySeckillResultMap">
+	   select 
+	     id,
+	     name,
+	     sku_id,
+	     stock,
+	     total_stock,
+	     settlement_price,
+	     price,
+	     sort_order,
+	     description,
+	     show_time,
+	     begin_time,
+	     end_time,
+	     is_white_list_activity,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from activity_seckill
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="stock != null">
+	        and stock=#{stock}
+	     </if>
+	     <if test="totalStock != null">
+	        and total_stock=#{totalStock}
+	     </if>
+	     <if test="settlementPrice != null">
+	        and settlement_price=#{settlementPrice}
+	     </if>
+	     <if test="price != null">
+	        and price=#{price}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="showTime != null">
+	        and show_time=#{showTime}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="isWhiteListActivity != null">
+	        and is_white_list_activity=#{isWhiteListActivity}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    name,
+	    sku_id,
+	    stock,
+	    total_stock,
+	    settlement_price,
+	    price,
+	    sort_order,
+	    description,
+	    show_time,
+	    begin_time,
+	    end_time,
+	    is_white_list_activity,
+	    audit_status,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from activity_seckill
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     name,
+	     sku_id,
+	     stock,
+	     total_stock,
+	     settlement_price,
+	     price,
+	     sort_order,
+	     description,
+	     show_time,
+	     begin_time,
+	     end_time,
+	     is_white_list_activity,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from activity_seckill
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="stock != null">
+	        and stock=#{stock}
+	     </if>
+	     <if test="totalStock != null">
+	        and total_stock=#{totalStock}
+	     </if>
+	     <if test="settlementPrice != null">
+	        and settlement_price=#{settlementPrice}
+	     </if>
+	     <if test="price != null">
+	        and price=#{price}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="showTime != null">
+	        and show_time=#{showTime}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="isWhiteListActivity != null">
+	        and is_white_list_activity=#{isWhiteListActivity}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     name,
+	     sku_id,
+	     stock,
+	     total_stock,
+	     settlement_price,
+	     price,
+	     sort_order,
+	     description,
+	     show_time,
+	     begin_time,
+	     end_time,
+	     is_white_list_activity,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from activity_seckill
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="stock != null">
+	        and stock=#{stock}
+	     </if>
+	     <if test="totalStock != null">
+	        and total_stock=#{totalStock}
+	     </if>
+	     <if test="settlementPrice != null">
+	        and settlement_price=#{settlementPrice}
+	     </if>
+	     <if test="price != null">
+	        and price=#{price}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="showTime != null">
+	        and show_time=#{showTime}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="isWhiteListActivity != null">
+	        and is_white_list_activity=#{isWhiteListActivity}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+
+	<select id="selectActivitySeckillBySkuId" parameterType="int" resultMap="seckillTOMap">
+		select 
+			begin_time,
+			end_time
+		from
+			activity_seckill
+		where 
+			sku_id=#{skuId}
+			<![CDATA[and begin_time <= now() and end_time >= now()]]>
+	</select>
+	
+</mapper> 

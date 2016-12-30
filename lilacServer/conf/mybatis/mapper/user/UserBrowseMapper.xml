@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【用户浏览过的商品表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.user.UserBrowseDao">
+
+	<resultMap id="userBrowseResultMap" type="com.bluemobi.po.user.UserBrowse">
+		<id property="id" column="id" />
+       <result property="userId" column="user_id" />
+       <result property="type" column="type" />
+       <result property="skuId" column="sku_id" />
+       <result property="ctime" column="ctime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="userBrowseResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="userBrowseResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.user.UserBrowse" useGeneratedKeys="true" keyProperty="id" >
+	   insert into user_browse (
+	     id,
+	     user_id,
+	     type,
+	     sku_id,
+	     ctime
+	   )values (
+	     #{id},
+	     #{userId},
+	     #{type},
+	     #{skuId},
+	     #{ctime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.user.UserBrowse">
+		update user_browse
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="userId != null">
+				user_id=#{userId},
+			</if>
+			<if test="type != null">
+				type=#{type},
+			</if>
+			<if test="skuId != null">
+				sku_id=#{skuId},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     user_browse 
+	   <where>
+	   	 user_id=#{userId}
+	     <if test="id != null">
+	        and id=#{id}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	   </where>
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="userBrowseResultMap">
+	   select 
+	    id,
+	    user_id,
+	    type,
+	    sku_id,
+	    ctime
+	   from user_browse
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="userBrowseResultMap">
+	   select 
+	     id,
+	     user_id,
+	     type,
+	     sku_id,
+	     ctime
+	   from user_browse
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    user_id,
+	    type,
+	    sku_id,
+	    ctime
+	   from user_browse
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     user_id,
+	     type,
+	     sku_id,
+	     ctime
+	   from user_browse
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     user_id,
+	     type,
+	     sku_id,
+	     ctime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from user_browse
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

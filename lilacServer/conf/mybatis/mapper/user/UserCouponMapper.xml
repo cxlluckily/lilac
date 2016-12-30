@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【用户优惠券表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.user.UserCouponDao">
+
+	<resultMap id="userCouponResultMap" type="com.bluemobi.po.user.UserCoupon">
+		<id property="id" column="id" />
+       <result property="userId" column="user_id" />
+       <result property="couponId" column="coupon_id" />
+       <result property="code" column="code" />
+       <result property="status" column="status" />
+       <result property="orderNo" column="order_no" />
+       <result property="isDel" column="is_del" />
+       <result property="ctime" column="ctime" />
+       <result property="utime" column="utime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="userCouponResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="userCouponResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.user.UserCoupon" useGeneratedKeys="true" keyProperty="id" >
+	   insert into user_coupon (
+	     id,
+	     user_id,
+	     coupon_id,
+	     code,
+	     status,
+	     order_no,
+	     is_del,
+	     ctime,
+	     utime
+	   )values (
+	     #{id},
+	     #{userId},
+	     #{couponId},
+	     #{code},
+	     #{status},
+	     #{orderNo},
+	     #{isDel},
+	     #{ctime},
+	     #{utime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.user.UserCoupon">
+		update user_coupon
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="userId != null">
+				user_id=#{userId},
+			</if>
+			<if test="couponId != null">
+				coupon_id=#{couponId},
+			</if>
+			<if test="code != null">
+				code=#{code},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+			<if test="orderNo != null">
+				order_no=#{orderNo},
+			</if>
+			<if test="isDel != null">
+				is_del=#{isDel},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="utime != null">
+				utime=#{utime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     user_coupon 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="userCouponResultMap">
+	   select 
+	    id,
+	    user_id,
+	    coupon_id,
+	    code,
+	    status,
+	    order_no,
+	    is_del,
+	    ctime,
+	    utime
+	   from user_coupon
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="userCouponResultMap">
+	   select 
+	     id,
+	     user_id,
+	     coupon_id,
+	     code,
+	     status,
+	     order_no,
+	     is_del,
+	     ctime,
+	     utime
+	   from user_coupon
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="couponId != null">
+	        and coupon_id=#{couponId}
+	     </if>
+	     <if test="code != null">
+	        and code=#{code}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="orderNo != null">
+	        and order_no=#{orderNo}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="utime != null">
+	        and utime=#{utime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    user_id,
+	    coupon_id,
+	    code,
+	    status,
+	    order_no,
+	    is_del,
+	    ctime,
+	    utime
+	   from user_coupon
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     user_id,
+	     coupon_id,
+	     code,
+	     status,
+	     order_no,
+	     is_del,
+	     ctime,
+	     utime
+	   from user_coupon
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="couponId != null">
+	        and coupon_id=#{couponId}
+	     </if>
+	     <if test="code != null">
+	        and code=#{code}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="orderNo != null">
+	        and order_no=#{orderNo}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="utime != null">
+	        and utime=#{utime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     user_id,
+	     coupon_id,
+	     code,
+	     status,
+	     order_no,
+	     is_del,
+	     ctime,
+	     utime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from user_coupon
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="couponId != null">
+	        and coupon_id=#{couponId}
+	     </if>
+	     <if test="code != null">
+	        and code=#{code}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="orderNo != null">
+	        and order_no=#{orderNo}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="utime != null">
+	        and utime=#{utime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

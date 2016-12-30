@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【优惠券关联表，用于关联优惠券可用于的 二级分类，商户，品牌等】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.coupon.CouponTargetDao">
+
+	<resultMap id="couponTargetResultMap" type="com.bluemobi.po.coupon.CouponTarget">
+		<id property="id" column="id" />
+       <result property="couponId" column="coupon_id" />
+       <result property="type" column="type" />
+       <result property="targetId" column="target_id" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="couponTargetResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="couponTargetResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.coupon.CouponTarget" useGeneratedKeys="true" keyProperty="id" >
+	   insert into coupon_target (
+	     id,
+	     coupon_id,
+	     type,
+	     target_id
+	   )values (
+	     #{id},
+	     #{couponId},
+	     #{type},
+	     #{targetId}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.coupon.CouponTarget">
+		update coupon_target
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="couponId != null">
+				coupon_id=#{couponId},
+			</if>
+			<if test="type != null">
+				type=#{type},
+			</if>
+			<if test="targetId != null">
+				target_id=#{targetId},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     coupon_target 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="couponTargetResultMap">
+	   select 
+	    id,
+	    coupon_id,
+	    type,
+	    target_id
+	   from coupon_target
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="couponTargetResultMap">
+	   select 
+	     id,
+	     coupon_id,
+	     type,
+	     target_id
+	   from coupon_target
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="couponId != null">
+	        and coupon_id=#{couponId}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="targetId != null">
+	        and target_id=#{targetId}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    coupon_id,
+	    type,
+	    target_id
+	   from coupon_target
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     coupon_id,
+	     type,
+	     target_id
+	   from coupon_target
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="couponId != null">
+	        and coupon_id=#{couponId}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="targetId != null">
+	        and target_id=#{targetId}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     coupon_id,
+	     type,
+	     target_id
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from coupon_target
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="couponId != null">
+	        and coupon_id=#{couponId}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="targetId != null">
+	        and target_id=#{targetId}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

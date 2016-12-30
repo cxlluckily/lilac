@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+@author AutoCode 309444359@qq.com
+@date 2016-06
+ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+	
+    <dubbo:application name="bm-service-1" />    
+    
+    <!-- 设置延迟时间，超时时间，失败重试次数 -->
+    <dubbo:provider delay="-1" timeout="1000000" retries="0"/>
+    
+    <!-- 使用multicast广播注册中心暴露服务地址 -->
+    <!-- <dubbo:registry address="multicast://224.5.6.7:1234" /> -->
+    
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry address="zookeeper://139.196.175.164:10002" />
+
+    <dubbo:protocol name="dubbo" port="20001" />
+   
+    <!-- 提供服务：【校验session】 -->
+    <dubbo:service interface="com.appcore.service.SessionService" ref="sessionService" />
+
+
+	<!-- 提供服务:【限时折扣活动：本金购买，商户发起】 -->
+	<dubbo:service interface="com.bluemobi.service.activity.ActivityDiscountService" ref="activityDiscountService" />
+	<!-- 提供服务:【团购活动：本金购买，平台发起】 -->
+	<dubbo:service interface="com.bluemobi.service.activity.ActivityGrouponService" ref="activityGrouponService" />
+	<!-- 提供服务:【抽奖活动：积分抽奖，平台发起】 -->
+	<dubbo:service interface="com.bluemobi.service.activity.ActivityLotteryService" ref="activityLotteryService" />
+	<!-- 提供服务:【抽奖明细】 -->
+	<dubbo:service interface="com.bluemobi.service.activity.ActivityLotteryItemService" ref="activityLotteryItemService" />
+	<!-- 提供服务:【秒杀活动：积分秒杀，平台发起】 -->
+	<dubbo:service interface="com.bluemobi.service.activity.ActivitySeckillService" ref="activitySeckillService" />
+	<!-- 提供服务:【菜单表】 -->
+	<dubbo:service interface="com.bluemobi.service.admin.AdminMenuService" ref="adminMenuService" />
+	<!-- 提供服务:【权限表】 -->
+	<dubbo:service interface="com.bluemobi.service.admin.AdminPermissionService" ref="adminPermissionService" />
+	<!-- 提供服务:【权限表代码表，用于控制前端的按钮显示】 -->
+	<dubbo:service interface="com.bluemobi.service.admin.AdminPermissionCodeService" ref="adminPermissionCodeService" />
+	<!-- 提供服务:【角色表】 -->
+	<dubbo:service interface="com.bluemobi.service.admin.AdminRoleService" ref="adminRoleService" />
+	<!-- 提供服务:【角色权限表】 -->
+	<dubbo:service interface="com.bluemobi.service.admin.AdminRolePermissionService" ref="adminRolePermissionService" />
+	<!-- 提供服务:【后台用户token表】 -->
+	<dubbo:service interface="com.bluemobi.service.admin.AdminTokenService" ref="adminTokenService" />
+	<!-- 提供服务:【管理员用户表】 -->
+	<dubbo:service interface="com.bluemobi.service.admin.AdminUserService" ref="adminUserService" />
+	<!-- 提供服务:【用户角色表】 -->
+	<dubbo:service interface="com.bluemobi.service.admin.AdminUserRoleService" ref="adminUserRoleService" />
+	<!-- 提供服务:【广告表，存放广告位信息、banner信息等】 -->
+	<dubbo:service interface="com.bluemobi.service.advert.AdvertService" ref="advertService" />
+	<!-- 提供服务:【黑名单表】 -->
+	<dubbo:service interface="com.bluemobi.service.black.BlackListService" ref="blackListService" />
+	<!-- 提供服务:【购物车表】 -->
+	<dubbo:service interface="com.bluemobi.service.bts.BtsCartService" ref="btsCartService" />
+	<!-- 提供服务:【商品订单表，存放主订单编号，收货人信息等】 -->
+	<dubbo:service interface="com.bluemobi.service.bts.BtsOrderService" ref="btsOrderService" />
+	<!-- 提供服务:【商品订单子表】 -->
+	<dubbo:service interface="com.bluemobi.service.bts.BtsOrderChildService" ref="btsOrderChildService" />
+	<!-- 提供服务:【商品订单明细表】 -->
+	<dubbo:service interface="com.bluemobi.service.bts.BtsOrderItemsService" ref="btsOrderItemsService" />
+	<!-- 提供服务:【退货单表】 -->
+	<dubbo:service interface="com.bluemobi.service.bts.BtsOrderRefundService" ref="btsOrderRefundService" />
+	<!-- 提供服务:【评论表】 -->
+	<dubbo:service interface="com.bluemobi.service.common.CommonCommentService" ref="commonCommentService" />
+	<!-- 提供服务:【优惠券：全场券、类别券，每笔订单只能使用一张优惠券，使用优惠券有金额限制，支持白名单，支持主动领取和自动下发】 -->
+	<dubbo:service interface="com.bluemobi.service.coupon.CouponService" ref="couponService" />
+	<!-- 提供服务:【优惠券关联表，用于关联优惠券可用于的 二级分类，商户，品牌等】 -->
+	<dubbo:service interface="com.bluemobi.service.coupon.CouponTargetService" ref="couponTargetService" />
+	<!-- 提供服务:【权益绑定商户表，一个权益商品下面可以有多个商户，商户下面可以有多个机构，机构需审核】 -->
+	<dubbo:service interface="com.bluemobi.service.equity.EquityMerchantService" ref="equityMerchantService" />
+	<!-- 提供服务:【权益绑定商户机构表，商户在权益下面添加自己的机构，添加完成后，需平台审核】 -->
+	<dubbo:service interface="com.bluemobi.service.equity.EquityMerchantOrganizationService" ref="equityMerchantOrganizationService" />
+	<!-- 提供服务:【批次总表】 -->
+	<dubbo:service interface="com.bluemobi.service.finance.FinanceBatchService" ref="financeBatchService" />
+	<!-- 提供服务:【收银台文件数据】 -->
+	<dubbo:service interface="com.bluemobi.service.finance.FinanceCheckstandService" ref="financeCheckstandService" />
+	<!-- 提供服务:【二清清算总表】 -->
+	<dubbo:service interface="com.bluemobi.service.finance.FinanceClearingService" ref="financeClearingService" />
+	<!-- 提供服务:【二清发送收银台记录表】 -->
+	<dubbo:service interface="com.bluemobi.service.finance.FinanceClearingSendService" ref="financeClearingSendService" />
+	<!-- 提供服务:【对账表】 -->
+	<dubbo:service interface="com.bluemobi.service.finance.FinanceReconciliationService" ref="financeReconciliationService" />
+	<!-- 提供服务:【商品品牌表】 -->
+	<dubbo:service interface="com.bluemobi.service.goods.GoodsBrandService" ref="goodsBrandService" />
+	<!-- 提供服务:【商品分类】 -->
+	<dubbo:service interface="com.bluemobi.service.goods.GoodsCategoryService" ref="goodsCategoryService" />
+	<!-- 提供服务:【商品分类绑定品牌表，后台管理员在新增商品的时候，选好分类后，系统会自动带出当前商品的品牌列表】 -->
+	<dubbo:service interface="com.bluemobi.service.goods.GoodsCategoryBrandService" ref="goodsCategoryBrandService" />
+	<!-- 提供服务:【商品分类绑定属性表，后台管理员在新增商品的时候，选好分类后，系统会自动带出当前商品的属性】 -->
+	<dubbo:service interface="com.bluemobi.service.goods.GoodsCategoryPropertyService" ref="goodsCategoryPropertyService" />
+	<!-- 提供服务:【商品关联文件表，如 商品图文详情、sku图片、视频等】 -->
+	<dubbo:service interface="com.bluemobi.service.goods.GoodsFileService" ref="goodsFileService" />
+	<!-- 提供服务:【商品属性基础数据表】 -->
+	<dubbo:service interface="com.bluemobi.service.goods.GoodsPropertyService" ref="goodsPropertyService" />
+	<!-- 提供服务:【商品属性值】 -->
+	<dubbo:service interface="com.bluemobi.service.goods.GoodsPropertyValueService" ref="goodsPropertyValueService" />
+	<!-- 提供服务:【商品sku】 -->
+	<dubbo:service interface="com.bluemobi.service.goods.GoodsSkuService" ref="goodsSkuService" />
+	<!-- 提供服务:【商品sku属性表】 -->
+	<dubbo:service interface="com.bluemobi.service.goods.GoodsSkuPropertyService" ref="goodsSkuPropertyService" />
+	<!-- 提供服务:【商品sku自定义属性表】 -->
+	<dubbo:service interface="com.bluemobi.service.goods.GoodsSkuPropertyCustomService" ref="goodsSkuPropertyCustomService" />
+	<!-- 提供服务:【商品spu】 -->
+	<dubbo:service interface="com.bluemobi.service.goods.GoodsSpuService" ref="goodsSpuService" />
+	<!-- 提供服务:【商品spu属性表】 -->
+	<dubbo:service interface="com.bluemobi.service.goods.GoodsSpuPropertyService" ref="goodsSpuPropertyService" />
+	<!-- 提供服务:【商品spu自定义属性表】 -->
+	<dubbo:service interface="com.bluemobi.service.goods.GoodsSpuPropertyCustomService" ref="goodsSpuPropertyCustomService" />
+	<!-- 提供服务:【审核日志表】 -->
+	<dubbo:service interface="com.bluemobi.service.log.LogAuditService" ref="logAuditService" />
+	<!-- 提供服务:【用户行为日志表】 -->
+	<dubbo:service interface="com.bluemobi.service.log.LogUserActionService" ref="logUserActionService" />
+	<!-- 提供服务:【商户表】 -->
+	<dubbo:service interface="com.bluemobi.service.merchant.MerchantService" ref="merchantService" />
+	<!-- 提供服务:【商户授权表品牌】 -->
+	<dubbo:service interface="com.bluemobi.service.merchant.MerchantBrandService" ref="merchantBrandService" />
+	<!-- 提供服务:【商户授权品牌分类表】 -->
+	<dubbo:service interface="com.bluemobi.service.merchant.MerchantBrandCategoryService" ref="merchantBrandCategoryService" />
+	<!-- 提供服务:【商户机构表，权益商户需要添加自己的机构】 -->
+	<dubbo:service interface="com.bluemobi.service.merchant.MerchantOrganizationService" ref="merchantOrganizationService" />
+	<!-- 提供服务:【银行基础数据，银行编号，银行名称】 -->
+	<dubbo:service interface="com.bluemobi.service.system.SystemBankService" ref="systemBankService" />
+	<!-- 提供服务:【地区表】 -->
+	<dubbo:service interface="com.bluemobi.service.system.SystemRegionService" ref="systemRegionService" />
+	<!-- 提供服务:【请求url，对应的请求名，用于通过url显示用户操作】 -->
+	<dubbo:service interface="com.bluemobi.service.system.SystemUrlService" ref="systemUrlService" />
+	<!-- 提供服务:【用户表】 -->
+	<dubbo:service interface="com.bluemobi.service.user.UserService" ref="userService" />
+	<!-- 提供服务:【用户优惠券表】 -->
+	<dubbo:service interface="com.bluemobi.service.user.UserCouponService" ref="userCouponService" />
+	<!-- 提供服务:【用户团购表】 -->
+	<dubbo:service interface="com.bluemobi.service.user.UserGrouponService" ref="userGrouponService" />
+	<!-- 提供服务:【白名单主表】 -->
+	<dubbo:service interface="com.bluemobi.service.white.WhiteListService" ref="whiteListService" />
+	<!-- 提供服务:【白名单明细表】 -->
+	<dubbo:service interface="com.bluemobi.service.white.WhiteListDetailService" ref="whiteListDetailService" />
+	<!-- 提供服务:【白名单关联表】 -->
+	<dubbo:service interface="com.bluemobi.service.white.WhiteListTargetService" ref="whiteListTargetService" />
+
+	
+	
+</beans>

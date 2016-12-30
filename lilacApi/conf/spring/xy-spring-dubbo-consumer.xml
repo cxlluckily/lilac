@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">     
+	
+	
+	<dubbo:application name="xy-b2c-consumer" />
+
+
+    <dubbo:registry  protocol="zookeeper" address="18.0.0.7:2181" check="false" />
+    
+    <!-- 用户accessToken验证接口 -->
+    <dubbo:reference version="1.0.0" id="passportApi"  interface="com.cib.fintech.ifp.passport.api.PassportApi" group="huawei" timeout="60000" check="false"/>
+   	<!-- 用户管理接口 -->
+	<dubbo:reference  version="1.1.0" id="userManageApi"  interface="com.cib.fintech.ifp.user.api.UserManageApi" group="huawei" timeout="60000" check="false"/>
+	<!-- 用户信息接口 -->
+	<dubbo:reference version="1.1.0" id="userInfoApi"  interface="com.cib.fintech.ifp.user.api.UserInfoApi" group="huawei" timeout="60000" check="false"/>
+	<!-- 创建支付订单接口 -->
+	<dubbo:reference version="1.1.0" id="paymentService"  interface="com.cib.fintech.xlife.api.service.payment.PaymentService" group="huawei" timeout="60000" check="false"/>
+	<!-- 退款接口 -->
+	<dubbo:reference version="1.0.0" id="refundServiceApi"  interface="com.cib.fintech.ifp.pay.api.RefundServiceApi" group="huawei" timeout="60000" check="false"/>
+	<!-- 获取地区列表 -->
+	<dubbo:reference version="1.0.0" id="areaQueryApi" interface="com.cib.fintech.ifp.config.api.AreaQueryApi" group="huawei" timeout="60000" check="false"/>
+	
+	
+</beans>

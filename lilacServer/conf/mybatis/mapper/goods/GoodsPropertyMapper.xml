@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【商品属性基础数据表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.goods.GoodsPropertyDao">
+
+	<resultMap id="goodsPropertyResultMap" type="com.bluemobi.po.goods.GoodsProperty">
+		<id property="id" column="id" />
+       <result property="name" column="name" />
+       <result property="description" column="description" />
+       <result property="sortOrder" column="sort_order" />
+       <result property="isSku" column="is_sku" />
+       <result property="isPic" column="is_pic" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="goodsPropertyResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="goodsPropertyResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.goods.GoodsProperty" useGeneratedKeys="true" keyProperty="id" >
+	   insert into goods_property (
+	     id,
+	     name,
+	     description,
+	     sort_order,
+	     is_sku,
+	     is_pic
+	   )values (
+	     #{id},
+	     #{name},
+	     #{description},
+	     #{sortOrder},
+	     #{isSku},
+	     #{isPic}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.goods.GoodsProperty">
+		update goods_property
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="name != null">
+				name=#{name},
+			</if>
+			<if test="description != null">
+				description=#{description},
+			</if>
+			<if test="sortOrder != null">
+				sort_order=#{sortOrder},
+			</if>
+			<if test="isSku != null">
+				is_sku=#{isSku},
+			</if>
+			<if test="isPic != null">
+				is_pic=#{isPic},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     goods_property 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="goodsPropertyResultMap">
+	   select 
+	    id,
+	    name,
+	    description,
+	    sort_order,
+	    is_sku,
+	    is_pic
+	   from goods_property
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="goodsPropertyResultMap">
+	   select 
+	     id,
+	     name,
+	     description,
+	     sort_order,
+	     is_sku,
+	     is_pic
+	   from goods_property
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="isSku != null">
+	        and is_sku=#{isSku}
+	     </if>
+	     <if test="isPic != null">
+	        and is_pic=#{isPic}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    name,
+	    description,
+	    sort_order,
+	    is_sku,
+	    is_pic
+	   from goods_property
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     name,
+	     description,
+	     sort_order,
+	     is_sku,
+	     is_pic
+	   from goods_property
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="isSku != null">
+	        and is_sku=#{isSku}
+	     </if>
+	     <if test="isPic != null">
+	        and is_pic=#{isPic}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     name,
+	     description,
+	     sort_order,
+	     is_sku,
+	     is_pic
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from goods_property
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="isSku != null">
+	        and is_sku=#{isSku}
+	     </if>
+	     <if test="isPic != null">
+	        and is_pic=#{isPic}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

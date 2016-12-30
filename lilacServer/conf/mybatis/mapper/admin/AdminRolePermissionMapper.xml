@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【角色权限表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.admin.AdminRolePermissionDao">
+
+	<resultMap id="adminRolePermissionResultMap" type="com.bluemobi.po.admin.AdminRolePermission">
+		<id property="id" column="id" />
+       <result property="roleId" column="role_id" />
+       <result property="permissionId" column="permission_id" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="adminRolePermissionResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="adminRolePermissionResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.admin.AdminRolePermission" useGeneratedKeys="true" keyProperty="id" >
+	   insert into admin_role_permission (
+	     id,
+	     role_id,
+	     permission_id
+	   )values (
+	     #{id},
+	     #{roleId},
+	     #{permissionId}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.admin.AdminRolePermission">
+		update admin_role_permission
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="roleId != null">
+				role_id=#{roleId},
+			</if>
+			<if test="permissionId != null">
+				permission_id=#{permissionId},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     admin_role_permission 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="adminRolePermissionResultMap">
+	   select 
+	    id,
+	    role_id,
+	    permission_id
+	   from admin_role_permission
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="adminRolePermissionResultMap">
+	   select 
+	     id,
+	     role_id,
+	     permission_id
+	   from admin_role_permission
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="roleId != null">
+	        and role_id=#{roleId}
+	     </if>
+	     <if test="permissionId != null">
+	        and permission_id=#{permissionId}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    role_id,
+	    permission_id
+	   from admin_role_permission
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     role_id,
+	     permission_id
+	   from admin_role_permission
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="roleId != null">
+	        and role_id=#{roleId}
+	     </if>
+	     <if test="permissionId != null">
+	        and permission_id=#{permissionId}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     role_id,
+	     permission_id
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from admin_role_permission
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="roleId != null">
+	        and role_id=#{roleId}
+	     </if>
+	     <if test="permissionId != null">
+	        and permission_id=#{permissionId}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

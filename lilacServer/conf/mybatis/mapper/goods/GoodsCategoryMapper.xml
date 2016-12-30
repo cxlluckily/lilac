@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【商品分类】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.goods.GoodsCategoryDao">
+
+	<resultMap id="goodsCategoryResultMap" type="com.bluemobi.po.goods.GoodsCategory">
+		<id property="id" column="id" />
+       <result property="name" column="name" />
+       <result property="shortName" column="short_name" />
+       <result property="pId" column="p_id" />
+       <result property="grade" column="grade" />
+       <result property="pic" column="pic" />
+       <result property="floorPic" column="floor_pic" />
+       <result property="pointFloorPic" column="point_floor_pic" />
+       <result property="sortOrder" column="sort_order" />
+       <result property="pointSortOrder" column="point_sort_order" />
+       <result property="status" column="status" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="goodsCategoryResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="goodsCategoryResultMap"></resultMap>
+	
+	<resultMap id="categoryTOResultMap" type="com.bluemobi.to.CategoryTO">
+		<id property="id" column="id" />
+       <result property="name" column="name" />
+       <result property="shortName" column="short_name" />
+       <result property="pic" column="pic" />
+       <result property="floorPic" column="floor_pic" />
+	</resultMap>
+	
+	<resultMap id="goodsCategoryTOResultMap" type="com.bluemobi.to.GoodsCategoryTO">
+		<id property="id" column="id" />
+       <result property="name" column="name" />
+       <result property="pic" column="pic" />
+       <result property="pId" column="p_id" />
+       <result property="grade" column="grade" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="com.bluemobi.po.goods.GoodsCategory" useGeneratedKeys="true" keyProperty="id" >
+	   insert into goods_category (
+	     id,
+	     name,
+	     short_name,
+	     p_id,
+	     grade,
+	     pic,
+	     floor_pic,
+	     point_floor_pic,
+	     sort_order,
+	     point_sort_order,
+	     status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{id},
+	     #{name},
+	     #{shortName},
+	     #{pId},
+	     #{grade},
+	     #{pic},
+	     #{floorPic},
+	     #{pointFloorPic},
+	     #{sortOrder},
+	     #{pointSortOrder},
+	     #{status},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.goods.GoodsCategory">
+		update goods_category
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="name != null">
+				name=#{name},
+			</if>
+			<if test="shortName != null">
+				short_name=#{shortName},
+			</if>
+			<if test="pId != null">
+				p_id=#{pId},
+			</if>
+			<if test="grade != null">
+				grade=#{grade},
+			</if>
+			<if test="pic != null">
+				pic=#{pic},
+			</if>
+			<if test="floorPic != null">
+				floor_pic=#{floorPic},
+			</if>
+			<if test="pointFloorPic != null">
+				point_floor_pic=#{pointFloorPic},
+			</if>
+			<if test="sortOrder != null">
+				sort_order=#{sortOrder},
+			</if>
+			<if test="pointSortOrder != null">
+				point_sort_order=#{pointSortOrder},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     goods_category 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="goodsCategoryResultMap">
+	   select 
+	    id,
+	    name,
+	    short_name,
+	    p_id,
+	    grade,
+	    pic,
+	    floor_pic,
+	    point_floor_pic,
+	    sort_order,
+	    point_sort_order,
+	    status,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from goods_category
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="goodsCategoryResultMap">
+	   select 
+	     id,
+	     name,
+	     short_name,
+	     p_id,
+	     grade,
+	     pic,
+	     floor_pic,
+	     point_floor_pic,
+	     sort_order,
+	     point_sort_order,
+	     status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from goods_category
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="shortName != null">
+	        and short_name=#{shortName}
+	     </if>
+	     <if test="pId != null">
+	        and p_id=#{pId}
+	     </if>
+	     <if test="grade != null">
+	        and grade=#{grade}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="floorPic != null">
+	        and floor_pic=#{floorPic}
+	     </if>
+	     <if test="pointFloorPic != null">
+	        and point_floor_pic=#{pointFloorPic}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="pointSortOrder != null">
+	        and point_sort_order=#{pointSortOrder}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    name,
+	    short_name,
+	    p_id,
+	    grade,
+	    pic,
+	    floor_pic,
+	    point_floor_pic,
+	    sort_order,
+	    point_sort_order,
+	    status,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from goods_category
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     name,
+	     short_name,
+	     p_id,
+	     grade,
+	     pic,
+	     floor_pic,
+	     point_floor_pic,
+	     sort_order,
+	     point_sort_order,
+	     status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from goods_category
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="shortName != null">
+	        and short_name=#{shortName}
+	     </if>
+	     <if test="pId != null">
+	        and p_id=#{pId}
+	     </if>
+	     <if test="grade != null">
+	        and grade=#{grade}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="floorPic != null">
+	        and floor_pic=#{floorPic}
+	     </if>
+	     <if test="pointFloorPic != null">
+	        and point_floor_pic=#{pointFloorPic}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="pointSortOrder != null">
+	        and point_sort_order=#{pointSortOrder}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     name,
+	     short_name,
+	     p_id,
+	     grade,
+	     pic,
+	     floor_pic,
+	     point_floor_pic,
+	     sort_order,
+	     point_sort_order,
+	     status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from goods_category
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="shortName != null">
+	        and short_name=#{shortName}
+	     </if>
+	     <if test="pId != null">
+	        and p_id=#{pId}
+	     </if>
+	     <if test="grade != null">
+	        and grade=#{grade}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="floorPic != null">
+	        and floor_pic=#{floorPic}
+	     </if>
+	     <if test="pointFloorPic != null">
+	        and point_floor_pic=#{pointFloorPic}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="pointSortOrder != null">
+	        and point_sort_order=#{pointSortOrder}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+	
+	
+    <select id="selectPointCategoryTOList" parameterType="map" resultMap="categoryTOResultMap">
+	 <![CDATA[
+	 select 
+	         id,
+	         short_name name,
+	         pic,
+	         floor_pic,
+	         p_id,
+	         grade
+	  from goods_category
+	  where 
+	        status = 1 
+	        and grade = 1
+	        and name <> '权益'
+	        order by grade, point_sort_order
+	  ]]>      
+    </select>
+	
+    <select id="selectInstallmentCategoryTOList" parameterType="map" resultMap="categoryTOResultMap">
+	 <![CDATA[
+	 select 
+	         id,
+	         short_name name,
+	         pic,
+	         floor_pic,
+	         p_id,
+	         grade
+	  from goods_category
+	  where 
+	        status = 1 
+	        and grade = 1
+	        and name <>'权益'
+	        order by grade, sort_order  
+	 ]]>         
+    </select>
+    
+    
+    <select id="selectEquityCategoryTOList" parameterType="map" resultMap="categoryTOResultMap">
+	 select 
+	         id,
+	         short_name name,
+	         pic,
+	         p_id,
+	         grade
+	  from goods_category
+	  where 
+	        status = 1 
+	        and grade = 2
+	        and p_id = (select id from goods_category where name ='权益')
+	        order by grade, sort_order
+		<if test="size != null">
+	        limit #{size}
+	     </if>
+    </select>
+    
+	
+    <select id="selectGoodsCategoryTOList" parameterType="map" resultMap="goodsCategoryTOResultMap">
+       select 
+         id,
+         name,
+         pic,
+         p_id,
+         grade
+       from goods_category
+       where 
+        status = 1 
+        order by grade, sort_order    
+    </select>
+
+	
+</mapper> 

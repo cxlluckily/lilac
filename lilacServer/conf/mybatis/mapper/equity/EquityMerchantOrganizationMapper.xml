@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【权益绑定商户机构表，商户在权益下面添加自己的机构，添加完成后，需平台审核】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.equity.EquityMerchantOrganizationDao">
+
+	<resultMap id="equityMerchantOrganizationResultMap" type="com.bluemobi.po.equity.EquityMerchantOrganization">
+		<id property="id" column="id" />
+       <result property="equityMerchantId" column="equity_merchant_id" />
+       <result property="organizationId" column="organization_id" />
+       <result property="auditStatus" column="audit_status" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="equityMerchantOrganizationResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="equityMerchantOrganizationResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.equity.EquityMerchantOrganization" useGeneratedKeys="true" keyProperty="id" >
+	   insert into equity_merchant_organization (
+	     id,
+	     equity_merchant_id,
+	     organization_id,
+	     audit_status
+	   )values (
+	     #{id},
+	     #{equityMerchantId},
+	     #{organizationId},
+	     #{auditStatus}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.equity.EquityMerchantOrganization">
+		update equity_merchant_organization
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="equityMerchantId != null">
+				equity_merchant_id=#{equityMerchantId},
+			</if>
+			<if test="organizationId != null">
+				organization_id=#{organizationId},
+			</if>
+			<if test="auditStatus != null">
+				audit_status=#{auditStatus},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     equity_merchant_organization 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="equityMerchantOrganizationResultMap">
+	   select 
+	    id,
+	    equity_merchant_id,
+	    organization_id,
+	    audit_status
+	   from equity_merchant_organization
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="equityMerchantOrganizationResultMap">
+	   select 
+	     id,
+	     equity_merchant_id,
+	     organization_id,
+	     audit_status
+	   from equity_merchant_organization
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="equityMerchantId != null">
+	        and equity_merchant_id=#{equityMerchantId}
+	     </if>
+	     <if test="organizationId != null">
+	        and organization_id=#{organizationId}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    equity_merchant_id,
+	    organization_id,
+	    audit_status
+	   from equity_merchant_organization
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     equity_merchant_id,
+	     organization_id,
+	     audit_status
+	   from equity_merchant_organization
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="equityMerchantId != null">
+	        and equity_merchant_id=#{equityMerchantId}
+	     </if>
+	     <if test="organizationId != null">
+	        and organization_id=#{organizationId}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     equity_merchant_id,
+	     organization_id,
+	     audit_status
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from equity_merchant_organization
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="equityMerchantId != null">
+	        and equity_merchant_id=#{equityMerchantId}
+	     </if>
+	     <if test="organizationId != null">
+	        and organization_id=#{organizationId}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

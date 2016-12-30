@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【商品关联文件表，如 商品图文详情、sku图片、视频等】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.goods.GoodsFileDao">
+
+	<resultMap id="goodsFileResultMap" type="com.bluemobi.po.goods.GoodsFile">
+		<id property="id" column="id" />
+       <result property="type" column="type" />
+       <result property="spuId" column="spu_id" />
+       <result property="propertyValueId" column="property_value_id" />
+       <result property="path" column="path" />
+       <result property="sortOrder" column="sort_order" />
+       <result property="status" column="status" />
+       <result property="isDel" column="is_del" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="goodsFileResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="goodsFileResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.goods.GoodsFile" useGeneratedKeys="true" keyProperty="id" >
+	   insert into goods_file (
+	     id,
+	     type,
+	     spu_id,
+	     property_value_id,
+	     path,
+	     sort_order,
+	     status,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{id},
+	     #{type},
+	     #{spuId},
+	     #{propertyValueId},
+	     #{path},
+	     #{sortOrder},
+	     #{status},
+	     #{isDel},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.goods.GoodsFile">
+		update goods_file
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="type != null">
+				type=#{type},
+			</if>
+			<if test="spuId != null">
+				spu_id=#{spuId},
+			</if>
+			<if test="propertyValueId != null">
+				property_value_id=#{propertyValueId},
+			</if>
+			<if test="path != null">
+				path=#{path},
+			</if>
+			<if test="sortOrder != null">
+				sort_order=#{sortOrder},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+			<if test="isDel != null">
+				is_del=#{isDel},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     goods_file 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="goodsFileResultMap">
+	   select 
+	    id,
+	    type,
+	    spu_id,
+	    property_value_id,
+	    path,
+	    sort_order,
+	    status,
+	    is_del,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from goods_file
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="goodsFileResultMap">
+	   select 
+	     id,
+	     type,
+	     spu_id,
+	     property_value_id,
+	     path,
+	     sort_order,
+	     status,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from goods_file
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="spuId != null">
+	        and spu_id=#{spuId}
+	     </if>
+	     <if test="propertyValueId != null">
+	        and property_value_id=#{propertyValueId}
+	     </if>
+	     <if test="path != null">
+	        and path=#{path}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    type,
+	    spu_id,
+	    property_value_id,
+	    path,
+	    sort_order,
+	    status,
+	    is_del,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from goods_file
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     type,
+	     spu_id,
+	     property_value_id,
+	     path,
+	     sort_order,
+	     status,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from goods_file
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="spuId != null">
+	        and spu_id=#{spuId}
+	     </if>
+	     <if test="propertyValueId != null">
+	        and property_value_id=#{propertyValueId}
+	     </if>
+	     <if test="path != null">
+	        and path=#{path}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     type,
+	     spu_id,
+	     property_value_id,
+	     path,
+	     sort_order,
+	     status,
+	     is_del,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from goods_file
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="spuId != null">
+	        and spu_id=#{spuId}
+	     </if>
+	     <if test="propertyValueId != null">
+	        and property_value_id=#{propertyValueId}
+	     </if>
+	     <if test="path != null">
+	        and path=#{path}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="isDel != null">
+	        and is_del=#{isDel}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

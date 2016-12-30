@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【商品订单明细表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.bts.BtsOrderItemsDao">
+
+	<resultMap id="btsOrderItemsResultMap" type="com.bluemobi.po.bts.BtsOrderItems">
+		<id property="id" column="id" />
+       <result property="orderChildNo" column="order_child_no" />
+       <result property="userId" column="user_id" />
+       <result property="remark" column="remark" />
+       <result property="merchantId" column="merchant_id" />
+       <result property="spuId" column="spu_id" />
+       <result property="skuId" column="sku_id" />
+       <result property="goodsName" column="goods_name" />
+       <result property="goodsPic" column="goods_pic" />
+       <result property="propertys" column="propertys" />
+       <result property="quantity" column="quantity" />
+       <result property="refundQuantity" column="refund_quantity" />
+       <result property="goodsOriginalPrice" column="goods_original_price" />
+       <result property="goodsPrice" column="goods_price" />
+       <result property="goodsAmount" column="goods_amount" />
+       <result property="pointPrice" column="point_price" />
+       <result property="pointAmount" column="point_amount" />
+       <result property="chargeRate" column="charge_rate" />
+       <result property="couponAmount" column="coupon_amount" />
+       <result property="platformCouponAmount" column="platform_coupon_amount" />
+       <result property="merchantCouponAmount" column="merchant_coupon_amount" />
+       <result property="discountAmount" column="discount_amount" />
+       <result property="freightAmount" column="freight_amount" />
+       <result property="payableAmount" column="payable_amount" />
+       <result property="payAmount" column="pay_amount" />
+       <result property="isComment" column="is_comment" />
+       <result property="ctime" column="ctime" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="btsOrderItemsResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="btsOrderItemsResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.bts.BtsOrderItems" useGeneratedKeys="true" keyProperty="id" >
+	   insert into bts_order_items (
+	     id,
+	     order_child_no,
+	     user_id,
+	     remark,
+	     merchant_id,
+	     spu_id,
+	     sku_id,
+	     goods_name,
+	     goods_pic,
+	     propertys,
+	     quantity,
+	     refund_quantity,
+	     goods_original_price,
+	     goods_price,
+	     goods_amount,
+	     point_price,
+	     point_amount,
+	     charge_rate,
+	     coupon_amount,
+	     platform_coupon_amount,
+	     merchant_coupon_amount,
+	     discount_amount,
+	     freight_amount,
+	     payable_amount,
+	     pay_amount,
+	     is_comment,
+	     ctime,
+	     mtime
+	   )values (
+	     #{id},
+	     #{orderChildNo},
+	     #{userId},
+	     #{remark},
+	     #{merchantId},
+	     #{spuId},
+	     #{skuId},
+	     #{goodsName},
+	     #{goodsPic},
+	     #{propertys},
+	     #{quantity},
+	     #{refundQuantity},
+	     #{goodsOriginalPrice},
+	     #{goodsPrice},
+	     #{goodsAmount},
+	     #{pointPrice},
+	     #{pointAmount},
+	     #{chargeRate},
+	     #{couponAmount},
+	     #{platformCouponAmount},
+	     #{merchantCouponAmount},
+	     #{discountAmount},
+	     #{freightAmount},
+	     #{payableAmount},
+	     #{payAmount},
+	     #{isComment},
+	     #{ctime},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.bts.BtsOrderItems">
+		update bts_order_items
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="orderChildNo != null">
+				order_child_no=#{orderChildNo},
+			</if>
+			<if test="userId != null">
+				user_id=#{userId},
+			</if>
+			<if test="remark != null">
+				remark=#{remark},
+			</if>
+			<if test="merchantId != null">
+				merchant_id=#{merchantId},
+			</if>
+			<if test="spuId != null">
+				spu_id=#{spuId},
+			</if>
+			<if test="skuId != null">
+				sku_id=#{skuId},
+			</if>
+			<if test="goodsName != null">
+				goods_name=#{goodsName},
+			</if>
+			<if test="goodsPic != null">
+				goods_pic=#{goodsPic},
+			</if>
+			<if test="propertys != null">
+				propertys=#{propertys},
+			</if>
+			<if test="quantity != null">
+				quantity=#{quantity},
+			</if>
+			<if test="refundQuantity != null">
+				refund_quantity=#{refundQuantity},
+			</if>
+			<if test="goodsOriginalPrice != null">
+				goods_original_price=#{goodsOriginalPrice},
+			</if>
+			<if test="goodsPrice != null">
+				goods_price=#{goodsPrice},
+			</if>
+			<if test="goodsAmount != null">
+				goods_amount=#{goodsAmount},
+			</if>
+			<if test="pointPrice != null">
+				point_price=#{pointPrice},
+			</if>
+			<if test="pointAmount != null">
+				point_amount=#{pointAmount},
+			</if>
+			<if test="chargeRate != null">
+				charge_rate=#{chargeRate},
+			</if>
+			<if test="couponAmount != null">
+				coupon_amount=#{couponAmount},
+			</if>
+			<if test="platformCouponAmount != null">
+				platform_coupon_amount=#{platformCouponAmount},
+			</if>
+			<if test="merchantCouponAmount != null">
+				merchant_coupon_amount=#{merchantCouponAmount},
+			</if>
+			<if test="discountAmount != null">
+				discount_amount=#{discountAmount},
+			</if>
+			<if test="freightAmount != null">
+				freight_amount=#{freightAmount},
+			</if>
+			<if test="payableAmount != null">
+				payable_amount=#{payableAmount},
+			</if>
+			<if test="payAmount != null">
+				pay_amount=#{payAmount},
+			</if>
+			<if test="isComment != null">
+				is_comment=#{isComment},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     bts_order_items 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="btsOrderItemsResultMap">
+	   select 
+	    id,
+	    order_child_no,
+	    user_id,
+	    remark,
+	    merchant_id,
+	    spu_id,
+	    sku_id,
+	    goods_name,
+	    goods_pic,
+	    propertys,
+	    quantity,
+	    refund_quantity,
+	    goods_original_price,
+	    goods_price,
+	    goods_amount,
+	    point_price,
+	    point_amount,
+	    charge_rate,
+	    coupon_amount,
+	    platform_coupon_amount,
+	    merchant_coupon_amount,
+	    discount_amount,
+	    freight_amount,
+	    payable_amount,
+	    pay_amount,
+	    is_comment,
+	    ctime,
+	    mtime
+	   from bts_order_items
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="btsOrderItemsResultMap">
+	   select 
+	     id,
+	     order_child_no,
+	     user_id,
+	     remark,
+	     merchant_id,
+	     spu_id,
+	     sku_id,
+	     goods_name,
+	     goods_pic,
+	     propertys,
+	     quantity,
+	     refund_quantity,
+	     goods_original_price,
+	     goods_price,
+	     goods_amount,
+	     point_price,
+	     point_amount,
+	     charge_rate,
+	     coupon_amount,
+	     platform_coupon_amount,
+	     merchant_coupon_amount,
+	     discount_amount,
+	     freight_amount,
+	     payable_amount,
+	     pay_amount,
+	     is_comment,
+	     ctime,
+	     mtime
+	   from bts_order_items
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="orderChildNo != null">
+	        and order_child_no=#{orderChildNo}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="remark != null">
+	        and remark=#{remark}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="spuId != null">
+	        and spu_id=#{spuId}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="goodsName != null">
+	        and goods_name=#{goodsName}
+	     </if>
+	     <if test="goodsPic != null">
+	        and goods_pic=#{goodsPic}
+	     </if>
+	     <if test="propertys != null">
+	        and propertys=#{propertys}
+	     </if>
+	     <if test="quantity != null">
+	        and quantity=#{quantity}
+	     </if>
+	     <if test="refundQuantity != null">
+	        and refund_quantity=#{refundQuantity}
+	     </if>
+	     <if test="goodsOriginalPrice != null">
+	        and goods_original_price=#{goodsOriginalPrice}
+	     </if>
+	     <if test="goodsPrice != null">
+	        and goods_price=#{goodsPrice}
+	     </if>
+	     <if test="goodsAmount != null">
+	        and goods_amount=#{goodsAmount}
+	     </if>
+	     <if test="pointPrice != null">
+	        and point_price=#{pointPrice}
+	     </if>
+	     <if test="pointAmount != null">
+	        and point_amount=#{pointAmount}
+	     </if>
+	     <if test="chargeRate != null">
+	        and charge_rate=#{chargeRate}
+	     </if>
+	     <if test="couponAmount != null">
+	        and coupon_amount=#{couponAmount}
+	     </if>
+	     <if test="platformCouponAmount != null">
+	        and platform_coupon_amount=#{platformCouponAmount}
+	     </if>
+	     <if test="merchantCouponAmount != null">
+	        and merchant_coupon_amount=#{merchantCouponAmount}
+	     </if>
+	     <if test="discountAmount != null">
+	        and discount_amount=#{discountAmount}
+	     </if>
+	     <if test="freightAmount != null">
+	        and freight_amount=#{freightAmount}
+	     </if>
+	     <if test="payableAmount != null">
+	        and payable_amount=#{payableAmount}
+	     </if>
+	     <if test="payAmount != null">
+	        and pay_amount=#{payAmount}
+	     </if>
+	     <if test="isComment != null">
+	        and is_comment=#{isComment}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    order_child_no,
+	    user_id,
+	    remark,
+	    merchant_id,
+	    spu_id,
+	    sku_id,
+	    goods_name,
+	    goods_pic,
+	    propertys,
+	    quantity,
+	    refund_quantity,
+	    goods_original_price,
+	    goods_price,
+	    goods_amount,
+	    point_price,
+	    point_amount,
+	    charge_rate,
+	    coupon_amount,
+	    platform_coupon_amount,
+	    merchant_coupon_amount,
+	    discount_amount,
+	    freight_amount,
+	    payable_amount,
+	    pay_amount,
+	    is_comment,
+	    ctime,
+	    mtime
+	   from bts_order_items
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     order_child_no,
+	     user_id,
+	     remark,
+	     merchant_id,
+	     spu_id,
+	     sku_id,
+	     goods_name,
+	     goods_pic,
+	     propertys,
+	     quantity,
+	     refund_quantity,
+	     goods_original_price,
+	     goods_price,
+	     goods_amount,
+	     point_price,
+	     point_amount,
+	     charge_rate,
+	     coupon_amount,
+	     platform_coupon_amount,
+	     merchant_coupon_amount,
+	     discount_amount,
+	     freight_amount,
+	     payable_amount,
+	     pay_amount,
+	     is_comment,
+	     ctime,
+	     mtime
+	   from bts_order_items
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="orderChildNo != null">
+	        and order_child_no=#{orderChildNo}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="remark != null">
+	        and remark=#{remark}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="spuId != null">
+	        and spu_id=#{spuId}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="goodsName != null">
+	        and goods_name=#{goodsName}
+	     </if>
+	     <if test="goodsPic != null">
+	        and goods_pic=#{goodsPic}
+	     </if>
+	     <if test="propertys != null">
+	        and propertys=#{propertys}
+	     </if>
+	     <if test="quantity != null">
+	        and quantity=#{quantity}
+	     </if>
+	     <if test="refundQuantity != null">
+	        and refund_quantity=#{refundQuantity}
+	     </if>
+	     <if test="goodsOriginalPrice != null">
+	        and goods_original_price=#{goodsOriginalPrice}
+	     </if>
+	     <if test="goodsPrice != null">
+	        and goods_price=#{goodsPrice}
+	     </if>
+	     <if test="goodsAmount != null">
+	        and goods_amount=#{goodsAmount}
+	     </if>
+	     <if test="pointPrice != null">
+	        and point_price=#{pointPrice}
+	     </if>
+	     <if test="pointAmount != null">
+	        and point_amount=#{pointAmount}
+	     </if>
+	     <if test="chargeRate != null">
+	        and charge_rate=#{chargeRate}
+	     </if>
+	     <if test="couponAmount != null">
+	        and coupon_amount=#{couponAmount}
+	     </if>
+	     <if test="platformCouponAmount != null">
+	        and platform_coupon_amount=#{platformCouponAmount}
+	     </if>
+	     <if test="merchantCouponAmount != null">
+	        and merchant_coupon_amount=#{merchantCouponAmount}
+	     </if>
+	     <if test="discountAmount != null">
+	        and discount_amount=#{discountAmount}
+	     </if>
+	     <if test="freightAmount != null">
+	        and freight_amount=#{freightAmount}
+	     </if>
+	     <if test="payableAmount != null">
+	        and payable_amount=#{payableAmount}
+	     </if>
+	     <if test="payAmount != null">
+	        and pay_amount=#{payAmount}
+	     </if>
+	     <if test="isComment != null">
+	        and is_comment=#{isComment}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     order_child_no,
+	     user_id,
+	     remark,
+	     merchant_id,
+	     spu_id,
+	     sku_id,
+	     goods_name,
+	     goods_pic,
+	     propertys,
+	     quantity,
+	     refund_quantity,
+	     goods_original_price,
+	     goods_price,
+	     goods_amount,
+	     point_price,
+	     point_amount,
+	     charge_rate,
+	     coupon_amount,
+	     platform_coupon_amount,
+	     merchant_coupon_amount,
+	     discount_amount,
+	     freight_amount,
+	     payable_amount,
+	     pay_amount,
+	     is_comment,
+	     ctime,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from bts_order_items
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="orderChildNo != null">
+	        and order_child_no=#{orderChildNo}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="remark != null">
+	        and remark=#{remark}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="spuId != null">
+	        and spu_id=#{spuId}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="goodsName != null">
+	        and goods_name=#{goodsName}
+	     </if>
+	     <if test="goodsPic != null">
+	        and goods_pic=#{goodsPic}
+	     </if>
+	     <if test="propertys != null">
+	        and propertys=#{propertys}
+	     </if>
+	     <if test="quantity != null">
+	        and quantity=#{quantity}
+	     </if>
+	     <if test="refundQuantity != null">
+	        and refund_quantity=#{refundQuantity}
+	     </if>
+	     <if test="goodsOriginalPrice != null">
+	        and goods_original_price=#{goodsOriginalPrice}
+	     </if>
+	     <if test="goodsPrice != null">
+	        and goods_price=#{goodsPrice}
+	     </if>
+	     <if test="goodsAmount != null">
+	        and goods_amount=#{goodsAmount}
+	     </if>
+	     <if test="pointPrice != null">
+	        and point_price=#{pointPrice}
+	     </if>
+	     <if test="pointAmount != null">
+	        and point_amount=#{pointAmount}
+	     </if>
+	     <if test="chargeRate != null">
+	        and charge_rate=#{chargeRate}
+	     </if>
+	     <if test="couponAmount != null">
+	        and coupon_amount=#{couponAmount}
+	     </if>
+	     <if test="platformCouponAmount != null">
+	        and platform_coupon_amount=#{platformCouponAmount}
+	     </if>
+	     <if test="merchantCouponAmount != null">
+	        and merchant_coupon_amount=#{merchantCouponAmount}
+	     </if>
+	     <if test="discountAmount != null">
+	        and discount_amount=#{discountAmount}
+	     </if>
+	     <if test="freightAmount != null">
+	        and freight_amount=#{freightAmount}
+	     </if>
+	     <if test="payableAmount != null">
+	        and payable_amount=#{payableAmount}
+	     </if>
+	     <if test="payAmount != null">
+	        and pay_amount=#{payAmount}
+	     </if>
+	     <if test="isComment != null">
+	        and is_comment=#{isComment}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+    <select id="selectItemBeforeCreateOrder" parameterType="map" resultMap="btsOrderItemsResultMap">
+    
+		select 
+		       spu.merchant_id, 
+		       spu.spu_id, 
+		       sku.sku_id, 
+		       spu.name goods_name, 
+		       sku.pics goods_pic, 
+		       sku.propertys, 
+		       c.quantity,
+		       sku.original_price goods_original_price,
+			   sku.price goods_price,
+			   sku.point_price,
+			   sku.charge_rate 
+		from bts_cart c
+		       INNER JOIN goods_sku sku on c.sku_id = sku.sku_id
+		       INNER JOIN goods_spu spu on sku.spu_id = spu.spu_id
+		where 
+		      c.user_id = #{userId}
+		      <if test="cartIds != null">
+	            <foreach collection="cartIds" item="cartId" open="and c.id in (" separator="," close=")">
+	                  #{cartId}  
+	            </foreach>
+              </if>
+		      order by spu.merchant_id
+		      
+    </select>
+    
+    <select id="selectItemBeforeCreateOrderBySkuId" parameterType="map" resultMap="btsOrderItemsResultMap">
+        
+        select 
+		       spu.merchant_id, 
+		       spu.spu_id, 
+		       sku.sku_id, 
+		       spu.name goods_name, 
+		       sku.pics goods_pic, 
+		       sku.propertys, 
+		       #{quantity} quantity,
+		       sku.original_price goods_original_price,
+			   sku.price goods_price,
+			   sku.point_price,
+			   sku.charge_rate 
+						
+		from goods_sku sku 
+			INNER JOIN goods_spu spu on sku.spu_id = spu.spu_id
+		where 
+        	sku.sku_id = #{skuId}
+	    
+    </select>
+    
+    
+    <insert id="insertBatch" parameterType="java.util.List">
+	   insert into bts_order_items (
+	     id,
+	     order_child_no,
+	     user_id,
+	     remark,
+	     merchant_id,
+	     spu_id,
+	     sku_id,
+	     goods_name,
+	     goods_pic,
+	     propertys,
+	     quantity,
+	     refund_quantity,
+	     goods_original_price,
+	     goods_price,
+	     goods_amount,
+	     point_price,
+	     point_amount,
+	     charge_rate,
+	     coupon_amount,
+	     platform_coupon_amount,
+	     merchant_coupon_amount,
+	     discount_amount,
+	     freight_amount,
+	     payable_amount,
+	     pay_amount,
+	     is_comment,
+	     ctime,
+	     mtime
+	   )values
+       <foreach collection="list" item="obj" index="index" separator=",">
+	    (
+	     #{obj.id},
+	     #{obj.orderChildNo},
+	     #{obj.userId},
+	     #{obj.remark},
+	     #{obj.merchantId},
+	     #{obj.spuId},
+	     #{obj.skuId},
+	     #{obj.goodsName},
+	     #{obj.goodsPic},
+	     #{obj.propertys},
+	     #{obj.quantity},
+	     #{obj.refundQuantity},
+	     #{obj.goodsOriginalPrice},
+	     #{obj.goodsPrice},
+	     #{obj.goodsAmount},
+	     #{obj.pointPrice},
+	     #{obj.pointAmount},
+	     #{obj.chargeRate},
+	     #{obj.couponAmount},
+	     #{obj.platformCouponAmount},
+	     #{obj.merchantCouponAmount},
+	     #{obj.discountAmount},
+	     #{obj.freightAmount},
+	     #{obj.payableAmount},
+	     #{obj.payAmount},
+	     #{obj.isComment},
+	     #{obj.ctime},
+	     #{obj.mtime}
+	   )
+       </foreach>
+    </insert>
+
+	
+</mapper> 

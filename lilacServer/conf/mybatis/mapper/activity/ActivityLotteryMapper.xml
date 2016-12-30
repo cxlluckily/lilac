@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【抽奖活动：积分抽奖，平台发起】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.activity.ActivityLotteryDao">
+
+	<resultMap id="activityLotteryResultMap" type="com.bluemobi.po.activity.ActivityLottery">
+		<id property="id" column="id" />
+       <result property="name" column="name" />
+       <result property="description" column="description" />
+       <result property="maxLotteryCount" column="max_lottery_count" />
+       <result property="count" column="count" />
+       <result property="remainCount" column="remain_count" />
+       <result property="settlementPrice" column="settlement_price" />
+       <result property="price" column="price" />
+       <result property="beginTime" column="begin_time" />
+       <result property="endTime" column="end_time" />
+       <result property="auditStatus" column="audit_status" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="activityLotteryResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="activityLotteryResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.activity.ActivityLottery" useGeneratedKeys="true" keyProperty="id" >
+	   insert into activity_lottery (
+	     id,
+	     name,
+	     description,
+	     max_lottery_count,
+	     count,
+	     remain_count,
+	     settlement_price,
+	     price,
+	     begin_time,
+	     end_time,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{id},
+	     #{name},
+	     #{description},
+	     #{maxLotteryCount},
+	     #{count},
+	     #{remainCount},
+	     #{settlementPrice},
+	     #{price},
+	     #{beginTime},
+	     #{endTime},
+	     #{auditStatus},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.activity.ActivityLottery">
+		update activity_lottery
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="name != null">
+				name=#{name},
+			</if>
+			<if test="description != null">
+				description=#{description},
+			</if>
+			<if test="maxLotteryCount != null">
+				max_lottery_count=#{maxLotteryCount},
+			</if>
+			<if test="count != null">
+				count=#{count},
+			</if>
+			<if test="remainCount != null">
+				remain_count=#{remainCount},
+			</if>
+			<if test="settlementPrice != null">
+				settlement_price=#{settlementPrice},
+			</if>
+			<if test="price != null">
+				price=#{price},
+			</if>
+			<if test="beginTime != null">
+				begin_time=#{beginTime},
+			</if>
+			<if test="endTime != null">
+				end_time=#{endTime},
+			</if>
+			<if test="auditStatus != null">
+				audit_status=#{auditStatus},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     activity_lottery 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="activityLotteryResultMap">
+	   select 
+	    id,
+	    name,
+	    description,
+	    max_lottery_count,
+	    count,
+	    remain_count,
+	    settlement_price,
+	    price,
+	    begin_time,
+	    end_time,
+	    audit_status,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from activity_lottery
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="activityLotteryResultMap">
+	   select 
+	     id,
+	     name,
+	     description,
+	     max_lottery_count,
+	     count,
+	     remain_count,
+	     settlement_price,
+	     price,
+	     begin_time,
+	     end_time,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from activity_lottery
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="maxLotteryCount != null">
+	        and max_lottery_count=#{maxLotteryCount}
+	     </if>
+	     <if test="count != null">
+	        and count=#{count}
+	     </if>
+	     <if test="remainCount != null">
+	        and remain_count=#{remainCount}
+	     </if>
+	     <if test="settlementPrice != null">
+	        and settlement_price=#{settlementPrice}
+	     </if>
+	     <if test="price != null">
+	        and price=#{price}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="newTime != null">
+                <![CDATA[
+                    and begin_time <= #{newTime} and end_time >= #{newTime} 
+                ]]>
+            </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    name,
+	    description,
+	    max_lottery_count,
+	    count,
+	    remain_count,
+	    settlement_price,
+	    price,
+	    begin_time,
+	    end_time,
+	    audit_status,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from activity_lottery
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     name,
+	     description,
+	     max_lottery_count,
+	     count,
+	     remain_count,
+	     settlement_price,
+	     price,
+	     begin_time,
+	     end_time,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from activity_lottery
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="maxLotteryCount != null">
+	        and max_lottery_count=#{maxLotteryCount}
+	     </if>
+	     <if test="count != null">
+	        and count=#{count}
+	     </if>
+	     <if test="remainCount != null">
+	        and remain_count=#{remainCount}
+	     </if>
+	     <if test="settlementPrice != null">
+	        and settlement_price=#{settlementPrice}
+	     </if>
+	     <if test="price != null">
+	        and price=#{price}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     name,
+	     description,
+	     max_lottery_count,
+	     count,
+	     remain_count,
+	     settlement_price,
+	     price,
+	     begin_time,
+	     end_time,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from activity_lottery
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="maxLotteryCount != null">
+	        and max_lottery_count=#{maxLotteryCount}
+	     </if>
+	     <if test="count != null">
+	        and count=#{count}
+	     </if>
+	     <if test="remainCount != null">
+	        and remain_count=#{remainCount}
+	     </if>
+	     <if test="settlementPrice != null">
+	        and settlement_price=#{settlementPrice}
+	     </if>
+	     <if test="price != null">
+	        and price=#{price}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+
+	<select id="timeCheck"  parameterType="map" resultType="java.lang.Integer">
+			select count(*) from activity_lottery al where al.id
+			NOT in  (
+			select aly.id
+			from activity_lottery aly
+			<![CDATA[
+			where aly.begin_time>#{endTime}
+			 or aly.end_time<#{beginTime}
+			) 
+			]]>
+	     <if test="id != null">
+	       and al.id!=#{id}
+	     </if>
+	</select>
+</mapper> 

@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【购物车表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-07
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.bts.BtsCartDao">
+
+	<resultMap id="btsCartResultMap" type="com.bluemobi.po.bts.BtsCart">
+		<id property="id" column="id" />
+       <result property="userId" column="user_id" />
+       <result property="skuId" column="sku_id" />
+       <result property="quantity" column="quantity" />
+       <result property="status" column="status" />
+       <result property="ctime" column="ctime" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="btsCartResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="btsCartResultMap"></resultMap>
+	
+	
+	<resultMap id="cartTOResultMap" type="com.bluemobi.to.CartTO">
+		<id property="cartId" column="cart_id" />
+		<result property="skuId" column="sku_id" />
+		<result property="quantity" column="quantity" />
+		<result property="status" column="status" />
+
+		<!-- <association property="goodsSku" column="sku_id" javaType="com.bluemobi.to.GoodsSkuTO">
+			<id property="skuId" column="sku_id" />
+	       <result property="spuId" column="spu_id" />
+	       <result property="name" column="name" />
+	       <result property="pics" column="pics" />
+	       <result property="isMoneyPay" column="is_money_pay" />
+	       <result property="price" column="price" />
+	       <result property="isPointPay" column="is_point_pay" />
+	       <result property="pointPrice" column="point_price" />
+	       <result property="originalPrice" column="original_price" />
+	       <result property="stock" column="stock" />
+	       <result property="maxBuyCount" column="max_buy_count" />
+	       <result property="propertys" column="propertys" />
+	       <result property="seckillBeginTime" column="seckill_begin_time" />
+	       <result property="seckillEndTime" column="seckill_end_time" />
+	       <result property="isSeckill" column="is_seckill" />
+	       
+	       <result property="grouponJoinUserCount" column="groupon_join_user_count" />
+	       <result property="grouponUserCount" column="groupon_user_count" />
+	       <result property="grouponBeginTime" column="groupon_begin_time" />
+	       <result property="grouponEndTime" column="groupon_end_time" />
+	       <result property="isJoinGroupon" column="is_join_groupon" />
+	       
+	       <result property="discountBeginTime" column="discount_begin_time" />
+	       <result property="discountEndTime" column="discount_end_time" />
+	       <result property="promotion" column="promotion" />
+		</association> -->
+
+	</resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.bts.BtsCart" useGeneratedKeys="true" keyProperty="id" >
+	   insert into bts_cart (
+	     id,
+	     user_id,
+	     sku_id,
+	     quantity,
+	     status,
+	     ctime,
+	     mtime
+	   )values (
+	     #{id},
+	     #{userId},
+	     #{skuId},
+	     #{quantity},
+	     #{status},
+	     #{ctime},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.bts.BtsCart">
+		update bts_cart
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="userId != null">
+				user_id=#{userId},
+			</if>
+			<if test="skuId != null">
+				sku_id=#{skuId},
+			</if>
+			<if test="quantity != null">
+				quantity=#{quantity},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+       <where>
+            id=#{id}
+         <if test="userId != null">
+            and user_id=#{userId}
+         </if>
+       </where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     bts_cart 
+       <where>
+            id=#{id}
+         <if test="userId != null">
+            and user_id=#{userId}
+         </if>
+       </where>
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="btsCartResultMap">
+	   select 
+	    id,
+	    user_id,
+	    sku_id,
+	    quantity,
+	    status,
+	    ctime,
+	    mtime
+	   from bts_cart
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="btsCartResultMap">
+	   select 
+	     id,
+	     user_id,
+	     sku_id,
+	     quantity,
+	     status,
+	     ctime,
+	     mtime
+	   from bts_cart
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="quantity != null">
+	        and quantity=#{quantity}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    user_id,
+	    sku_id,
+	    quantity,
+	    status,
+	    ctime,
+	    mtime
+	   from bts_cart
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     user_id,
+	     sku_id,
+	     quantity,
+	     status,
+	     ctime,
+	     mtime
+	   from bts_cart
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="quantity != null">
+	        and quantity=#{quantity}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     user_id,
+	     sku_id,
+	     quantity,
+	     status,
+	     ctime,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from bts_cart
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="quantity != null">
+	        and quantity=#{quantity}
+	     </if>
+	     <if test="status != null">
+	        and status=#{status}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+
+     <select id="selectCartTO" parameterType="map" resultMap="cartTOResultMap">
+         select
+	         c.id cart_id,
+	         c.sku_id,
+	         c.quantity,
+	         c.status
+  
+		  from bts_cart c
+			  inner join goods_sku sku on c.sku_id = sku.sku_id
+          where c.user_id = #{userId}
+	        and c.id = #{cartId}
+        order by c.ctime
+    </select> 
+   
+    <select id="selectCartTOList" parameterType="map" resultMap="cartTOResultMap">
+         select
+	         c.id cart_id,
+	         c.sku_id,
+	         c.quantity,
+	         c.status
+  
+		  from bts_cart c
+			  inner join goods_sku sku on c.sku_id = sku.sku_id
+          where c.user_id = #{userId}
+          <if test="cartId != null">
+	        and c.id = #{cartId}
+	     </if>
+        order by c.ctime
+    </select>
+    
+    <update id="updateCartsStatus" parameterType="map">
+        update bts_cart 
+            set 
+            	status=#{status},
+            	mtime=#{mtime}
+        where 
+            user_id = #{userId}
+        <if test="cartIds != null">
+            <foreach collection="cartIds" item="cartId" open="and id in (" separator="," close=")">
+                  #{cartId}  
+            </foreach>
+        </if>
+    </update>
+
+    <delete id="deleteCarts" parameterType="map">
+       delete from 
+            bts_cart 
+        where 
+            user_id = #{userId}
+        <if test="cartIds != null">
+            <foreach collection="cartIds" item="cartId" open="and id in (" separator="," close=")">
+                  #{cartId}  
+            </foreach>
+        </if>
+    </delete>
+
+	
+</mapper> 

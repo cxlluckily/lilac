@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【商户授权表品牌】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.merchant.MerchantBrandDao">
+
+	<resultMap id="merchantBrandResultMap" type="com.bluemobi.po.merchant.MerchantBrand">
+		<id property="id" column="id" />
+       <result property="merchantId" column="merchant_id" />
+       <result property="brandId" column="brand_id" />
+       <result property="beginTime" column="begin_time" />
+       <result property="endTime" column="end_time" />
+       <result property="pic" column="pic" />
+       <result property="auditStatus" column="audit_status" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="merchantBrandResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="merchantBrandResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.merchant.MerchantBrand" useGeneratedKeys="true" keyProperty="id" >
+	   insert into merchant_brand (
+	     id,
+	     merchant_id,
+	     brand_id,
+	     begin_time,
+	     end_time,
+	     pic,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{id},
+	     #{merchantId},
+	     #{brandId},
+	     #{beginTime},
+	     #{endTime},
+	     #{pic},
+	     #{auditStatus},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.merchant.MerchantBrand">
+		update merchant_brand
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="merchantId != null">
+				merchant_id=#{merchantId},
+			</if>
+			<if test="brandId != null">
+				brand_id=#{brandId},
+			</if>
+			<if test="beginTime != null">
+				begin_time=#{beginTime},
+			</if>
+			<if test="endTime != null">
+				end_time=#{endTime},
+			</if>
+			<if test="pic != null">
+				pic=#{pic},
+			</if>
+			<if test="auditStatus != null">
+				audit_status=#{auditStatus},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     merchant_brand 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="merchantBrandResultMap">
+	   select 
+	    id,
+	    merchant_id,
+	    brand_id,
+	    begin_time,
+	    end_time,
+	    pic,
+	    audit_status,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from merchant_brand
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="merchantBrandResultMap">
+	   select 
+	     id,
+	     merchant_id,
+	     brand_id,
+	     begin_time,
+	     end_time,
+	     pic,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from merchant_brand
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="brandId != null">
+	        and brand_id=#{brandId}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    merchant_id,
+	    brand_id,
+	    begin_time,
+	    end_time,
+	    pic,
+	    audit_status,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from merchant_brand
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     merchant_id,
+	     brand_id,
+	     begin_time,
+	     end_time,
+	     pic,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from merchant_brand
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="brandId != null">
+	        and brand_id=#{brandId}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     merchant_id,
+	     brand_id,
+	     begin_time,
+	     end_time,
+	     pic,
+	     audit_status,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from merchant_brand
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="brandId != null">
+	        and brand_id=#{brandId}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="pic != null">
+	        and pic=#{pic}
+	     </if>
+	     <if test="auditStatus != null">
+	        and audit_status=#{auditStatus}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

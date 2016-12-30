@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【用户搜索表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.user.UserSearchDao">
+
+	<resultMap id="userSearchResultMap" type="com.bluemobi.po.user.UserSearch">
+		<id property="id" column="id" />
+       <result property="userId" column="user_id" />
+       <result property="type" column="type" />
+       <result property="searchKey" column="search_key" />
+       <result property="ctime" column="ctime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="userSearchResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="userSearchResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.user.UserSearch" useGeneratedKeys="true" keyProperty="id" >
+	   insert into user_search (
+	     id,
+	     user_id,
+	     type,
+	     search_key,
+	     ctime
+	   )values (
+	     #{id},
+	     #{userId},
+	     #{type},
+	     #{searchKey},
+	     #{ctime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.user.UserSearch">
+		update user_search
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="userId != null">
+				user_id=#{userId},
+			</if>
+			<if test="type != null">
+				type=#{type},
+			</if>
+			<if test="searchKey != null">
+				search_key=#{searchKey},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     user_search 
+	   <where>
+	   		user_id=#{userId}
+	     <if test="id != null">
+	        and id=#{id}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="searchKey != null">
+	        and search_key=#{searchKey}
+	     </if>
+	   </where>
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="userSearchResultMap">
+	   select 
+	    id,
+	    user_id,
+	    type,
+	    search_key,
+	    ctime
+	   from user_search
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="userSearchResultMap">
+	   select 
+	     id,
+	     user_id,
+	     type,
+	     search_key,
+	     ctime
+	   from user_search
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="searchKey != null">
+	        and search_key=#{searchKey}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    user_id,
+	    type,
+	    search_key,
+	    ctime
+	   from user_search
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     user_id,
+	     type,
+	     search_key,
+	     ctime
+	   from user_search
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="searchKey != null">
+	        and search_key=#{searchKey}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     user_id,
+	     type,
+	     search_key,
+	     ctime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from user_search
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="searchKey != null">
+	        and search_key=#{searchKey}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</sql>
+	
+	<select id="selectSearchKey" parameterType="map" resultType="string">
+	   select 
+	    	distinct search_key
+	   from user_search
+	   where 
+	    	user_id=#{userId} 
+		<if test="type != null">
+	        and type=#{type}
+	     </if>
+	   order by ctime desc
+	   limit 10
+	</select>
+
+	
+</mapper> 

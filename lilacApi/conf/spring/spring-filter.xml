@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	
+	
+    <!-- 前端过滤器，过滤手机端请求 -->
+    <bean name="crossDomainFilter" class="com.bluemobi.filter.CrossDomainFilter">
+       <property name="domain">
+               <value>*</value>
+       </property>
+    </bean>
+	
+    <!-- 前端过滤器，过滤手机端请求 -->
+    <bean name="apiFilter" class="com.bluemobi.filter.APIFilter">
+       <property name="staticResourceSuffixList">
+           <list>
+               <value>css</value>
+               <value>js</value>
+               <value>gif</value>
+               <value>jpg</value>
+               <value>png</value>
+               <value>woff</value>
+               <value>ttf</value>
+               <value>eot</value>
+               <value>svg</value>
+               <value>otf</value>
+           </list>
+       </property>
+       <property name="visitUrlList">
+           <list>
+           	   <value>/pay/callback</value>     
+           
+			   <value>/api/home/*</value>       
+               <value>/api/user/*</value>
+               <value>/api/system/*</value>
+               <value>/api/message/*</value>
+               
+               <value>/api/goods/getGoodsCategory</value>
+               <value>/api/goods/getGoodsBrands</value>
+               <value>/api/goods/searchGoods</value>
+               <value>/api/goods/getGoods</value>
+               <value>/api/*</value>
+               <value>/api/comment/comment</value>
+                <value>/api/comment/getGoodsComments</value>
+           </list>
+       </property>
+       <property name="userOpenUrlList">
+           <list>
+               <!-- <value>/api/user</value> -->
+           </list>
+       </property>
+    </bean>
+	
+</beans>

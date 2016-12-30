@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【投诉表】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-11
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.bts.BtsOrderComplaintDao">
+
+	<resultMap id="btsOrderComplaintResultMap" type="com.bluemobi.po.bts.BtsOrderComplaint">
+		<id property="id" column="id" />
+       <result property="orderChildNo" column="order_child_no" />
+       <result property="type" column="type" />
+       <result property="userId" column="user_id" />
+       <result property="merchantId" column="merchant_id" />
+       <result property="reason" column="reason" />
+       <result property="pics" column="pics" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="btsOrderComplaintResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="btsOrderComplaintResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.bts.BtsOrderComplaint" useGeneratedKeys="true" keyProperty="id" >
+	   insert into bts_order_complaint (
+	     id,
+	     order_child_no,
+	     type,
+	     user_id,
+	     merchant_id,
+	     reason,
+	     pics,
+	     creator,
+	     ctime
+	   )values (
+	     #{id},
+	     #{orderChildNo},
+	     #{type},
+	     #{userId},
+	     #{merchantId},
+	     #{reason},
+	     #{pics},
+	     #{creator},
+	     #{ctime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.bts.BtsOrderComplaint">
+		update bts_order_complaint
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="orderChildNo != null">
+				order_child_no=#{orderChildNo},
+			</if>
+			<if test="type != null">
+				type=#{type},
+			</if>
+			<if test="userId != null">
+				user_id=#{userId},
+			</if>
+			<if test="merchantId != null">
+				merchant_id=#{merchantId},
+			</if>
+			<if test="reason != null">
+				reason=#{reason},
+			</if>
+			<if test="pics != null">
+				pics=#{pics},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     bts_order_complaint 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="btsOrderComplaintResultMap">
+	   select 
+	    id,
+	    order_child_no,
+	    type,
+	    user_id,
+	    merchant_id,
+	    reason,
+	    pics,
+	    creator,
+	    ctime
+	   from bts_order_complaint
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="btsOrderComplaintResultMap">
+	   select 
+	     id,
+	     order_child_no,
+	     type,
+	     user_id,
+	     merchant_id,
+	     reason,
+	     pics,
+	     creator,
+	     ctime
+	   from bts_order_complaint
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="orderChildNo != null">
+	        and order_child_no=#{orderChildNo}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="reason != null">
+	        and reason=#{reason}
+	     </if>
+	     <if test="pics != null">
+	        and pics=#{pics}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    order_child_no,
+	    type,
+	    user_id,
+	    merchant_id,
+	    reason,
+	    pics,
+	    creator,
+	    ctime
+	   from bts_order_complaint
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     order_child_no,
+	     type,
+	     user_id,
+	     merchant_id,
+	     reason,
+	     pics,
+	     creator,
+	     ctime
+	   from bts_order_complaint
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="orderChildNo != null">
+	        and order_child_no=#{orderChildNo}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="reason != null">
+	        and reason=#{reason}
+	     </if>
+	     <if test="pics != null">
+	        and pics=#{pics}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     order_child_no,
+	     type,
+	     user_id,
+	     merchant_id,
+	     reason,
+	     pics,
+	     creator,
+	     ctime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from bts_order_complaint
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="orderChildNo != null">
+	        and order_child_no=#{orderChildNo}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	     <if test="userId != null">
+	        and user_id=#{userId}
+	     </if>
+	     <if test="merchantId != null">
+	        and merchant_id=#{merchantId}
+	     </if>
+	     <if test="reason != null">
+	        and reason=#{reason}
+	     </if>
+	     <if test="pics != null">
+	        and pics=#{pics}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 

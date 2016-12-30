@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【限时折扣活动：本金购买，商户发起】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-11
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.activity.ActivityDiscountDao">
+
+	<resultMap id="activityDiscountResultMap" type="com.bluemobi.po.activity.ActivityDiscount">
+		<id property="id" column="id" />
+       <result property="name" column="name" />
+       <result property="skuId" column="sku_id" />
+       <result property="maxBuyCount" column="max_buy_count" />
+       <result property="price" column="price" />
+       <result property="sortOrder" column="sort_order" />
+       <result property="description" column="description" />
+       <result property="beginTime" column="begin_time" />
+       <result property="endTime" column="end_time" />
+       <result property="creator" column="creator" />
+       <result property="ctime" column="ctime" />
+       <result property="modifier" column="modifier" />
+       <result property="mtime" column="mtime" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="activityDiscountResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="activityDiscountResultMap"></resultMap>
+	
+	<resultMap id="discountTOMap" type="com.bluemobi.to.DiscountTO">
+		<id property="discountBeginTime" column="begin_time"/>
+		<result property="discountEndTime" column="end_time"/>
+	</resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.activity.ActivityDiscount" useGeneratedKeys="true" keyProperty="id" >
+	   insert into activity_discount (
+	     id,
+	     name,
+	     sku_id,
+	     max_buy_count,
+	     price,
+	     sort_order,
+	     description,
+	     begin_time,
+	     end_time,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   )values (
+	     #{id},
+	     #{name},
+	     #{skuId},
+	     #{maxBuyCount},
+	     #{price},
+	     #{sortOrder},
+	     #{description},
+	     #{beginTime},
+	     #{endTime},
+	     #{creator},
+	     #{ctime},
+	     #{modifier},
+	     #{mtime}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.activity.ActivityDiscount">
+		update activity_discount
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="name != null">
+				name=#{name},
+			</if>
+			<if test="skuId != null">
+				sku_id=#{skuId},
+			</if>
+			<if test="maxBuyCount != null">
+				max_buy_count=#{maxBuyCount},
+			</if>
+			<if test="price != null">
+				price=#{price},
+			</if>
+			<if test="sortOrder != null">
+				sort_order=#{sortOrder},
+			</if>
+			<if test="description != null">
+				description=#{description},
+			</if>
+			<if test="beginTime != null">
+				begin_time=#{beginTime},
+			</if>
+			<if test="endTime != null">
+				end_time=#{endTime},
+			</if>
+			<if test="creator != null">
+				creator=#{creator},
+			</if>
+			<if test="ctime != null">
+				ctime=#{ctime},
+			</if>
+			<if test="modifier != null">
+				modifier=#{modifier},
+			</if>
+			<if test="mtime != null">
+				mtime=#{mtime},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     activity_discount 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="activityDiscountResultMap">
+	   select 
+	    id,
+	    name,
+	    sku_id,
+	    max_buy_count,
+	    price,
+	    sort_order,
+	    description,
+	    begin_time,
+	    end_time,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from activity_discount
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="activityDiscountResultMap">
+	   select 
+	     id,
+	     name,
+	     sku_id,
+	     max_buy_count,
+	     price,
+	     sort_order,
+	     description,
+	     begin_time,
+	     end_time,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from activity_discount
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="maxBuyCount != null">
+	        and max_buy_count=#{maxBuyCount}
+	     </if>
+	     <if test="price != null">
+	        and price=#{price}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    name,
+	    sku_id,
+	    max_buy_count,
+	    price,
+	    sort_order,
+	    description,
+	    begin_time,
+	    end_time,
+	    creator,
+	    ctime,
+	    modifier,
+	    mtime
+	   from activity_discount
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     name,
+	     sku_id,
+	     max_buy_count,
+	     price,
+	     sort_order,
+	     description,
+	     begin_time,
+	     end_time,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	   from activity_discount
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="maxBuyCount != null">
+	        and max_buy_count=#{maxBuyCount}
+	     </if>
+	     <if test="price != null">
+	        and price=#{price}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     name,
+	     sku_id,
+	     max_buy_count,
+	     price,
+	     sort_order,
+	     description,
+	     begin_time,
+	     end_time,
+	     creator,
+	     ctime,
+	     modifier,
+	     mtime
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from activity_discount
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="skuId != null">
+	        and sku_id=#{skuId}
+	     </if>
+	     <if test="maxBuyCount != null">
+	        and max_buy_count=#{maxBuyCount}
+	     </if>
+	     <if test="price != null">
+	        and price=#{price}
+	     </if>
+	     <if test="sortOrder != null">
+	        and sort_order=#{sortOrder}
+	     </if>
+	     <if test="description != null">
+	        and description=#{description}
+	     </if>
+	     <if test="beginTime != null">
+	        and begin_time=#{beginTime}
+	     </if>
+	     <if test="endTime != null">
+	        and end_time=#{endTime}
+	     </if>
+	     <if test="creator != null">
+	        and creator=#{creator}
+	     </if>
+	     <if test="ctime != null">
+	        and ctime=#{ctime}
+	     </if>
+	     <if test="modifier != null">
+	        and modifier=#{modifier}
+	     </if>
+	     <if test="mtime != null">
+	        and mtime=#{mtime}
+	     </if>
+	   </where>
+	</sql>
+
+	<select id="selectActivityDiscountBySkuId" parameterType="int" resultMap="discountTOMap">
+		select
+			begin_time,
+			end_time
+		from
+			activity_discount
+		where
+			sku_id=#{skuId}
+			<![CDATA[and begin_time <= now() and end_time >= now()]]>
+	</select>
+	
+</mapper> 

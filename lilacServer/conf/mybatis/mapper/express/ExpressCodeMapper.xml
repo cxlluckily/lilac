@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+【物流公司编码】对象关系映射 配置 
+ @author AutoCode 309444359@qq.com
+ @date 2016-10
+ -->
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.bluemobi.dao.express.ExpressCodeDao">
+
+	<resultMap id="expressCodeResultMap" type="com.bluemobi.po.express.ExpressCode">
+		<id property="id" column="id" />
+       <result property="code" column="code" />
+       <result property="name" column="name" />
+       <result property="type" column="type" />
+	</resultMap>
+	<resultMap id="mapResultMap"  type="java.util.HashMap" extends="expressCodeResultMap"></resultMap>
+	<resultMap id="pageResultMap"  type="java.util.HashMap" extends="expressCodeResultMap"></resultMap>
+	
+	
+	<insert id="insert" parameterType="com.bluemobi.po.express.ExpressCode" useGeneratedKeys="true" keyProperty="id" >
+	   insert into express_code (
+	     id,
+	     code,
+	     name,
+	     type
+	   )values (
+	     #{id},
+	     #{code},
+	     #{name},
+	     #{type}
+	   )
+	</insert>
+
+	<update id="update" parameterType="com.bluemobi.po.express.ExpressCode">
+		update express_code
+		<set>
+			<if test="id != null">
+				id=#{id},
+			</if>
+			<if test="code != null">
+				code=#{code},
+			</if>
+			<if test="name != null">
+				name=#{name},
+			</if>
+			<if test="type != null">
+				type=#{type},
+			</if>
+		</set>
+		<where>
+			id=#{id} 
+		</where>
+	</update>
+
+	<delete id="delete" parameterType="map">
+	   delete from 
+	     express_code 
+	   where 
+	    id=#{id} 
+	</delete>
+
+	<select id="selectObject" parameterType="map" resultMap="expressCodeResultMap">
+	   select 
+	    id,
+	    code,
+	    name,
+	    type
+	   from express_code
+	   where 
+	    id=#{id} 
+	</select>
+	
+	<select id="selectObjectList" parameterType="map" resultMap="expressCodeResultMap">
+	   select 
+	     id,
+	     code,
+	     name,
+	     type
+	   from express_code
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="code != null">
+	        and code=#{code}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	   </where>
+	</select>
+
+	<select id="selectMap" parameterType="map" resultMap="mapResultMap">
+	   select 
+	    id,
+	    code,
+	    name,
+	    type
+	   from express_code
+	   where 
+	    id=#{id} 
+	</select>
+
+	<select id="selectMapList" parameterType="map" resultMap="mapResultMap">
+	   select 
+	     id,
+	     code,
+	     name,
+	     type
+	   from express_code
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="code != null">
+	        and code=#{code}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	   </where>
+	</select>
+	
+	<select id="page" parameterType="map" resultMap="pageResultMap">
+	   select 
+	     id,
+	     code,
+	     name,
+	     type
+	<include refid="pageCondition" />
+	limit #{offset},#{rows}
+	</select>
+
+	<select id="pageCount" parameterType="map" resultType="int">
+	   select count(1)
+	   <include refid="pageCondition" />
+	</select>
+
+	<sql id="pageCondition">
+	   from express_code
+	   <where>
+	     <if test="id != null">
+	        id=#{id}
+	     </if>
+	     <if test="code != null">
+	        and code=#{code}
+	     </if>
+	     <if test="name != null">
+	        and name=#{name}
+	     </if>
+	     <if test="type != null">
+	        and type=#{type}
+	     </if>
+	   </where>
+	</sql>
+
+	
+</mapper> 
